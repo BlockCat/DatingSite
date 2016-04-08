@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         At Dates you'll find your parnter in a matter of minutes.                        
                     </p>
                     <h3>
-                        Go to our exclusive test here &#8594;
+                        <a href="register">Go to our exclusive test here &#8594;</a>
                     </h3>
                 </div>                
             </div>
