@@ -1,0 +1,95 @@
+/*http://paletton.com/palette.php?uid=7000u0kiCFn8GVde7NVmtwSqXtg!*/
+body {
+    background-color: #FFBABA;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #670023;          
+    width: 100%;
+    height: 4em;    
+    color: #ddd;
+}
+.header button {
+    font-size: 1.5em;    
+    background: none;
+    background-color: #6F002F;
+    padding: 1em;    
+    color: white;
+    box-shadow: 3px 3px 10px #000;
+    border: none;    
+    height: 100%;    
+    float: right;
+}
+
+.header button:hover{        
+    background-color: #9B0343;
+}
+.wrapper {
+    position: relative;
+    min-height: 720px;
+    padding: 90px 0px 80px 0px;
+    z-index: 5;
+    margin: 0 auto;
+    max-width: 980px;
+    min-width: 306px;    
+}
+
+.flashy_wrapper, .text_wrapper{
+    position: relative;        
+    
+    
+}
+.flashy_wrapper {
+    width: 50%;
+    min-height: 10em;
+    padding: 3em;    
+    color: white;
+    text-shadow: 0px 0px 5px white;
+    box-shadow: 1px 1px 6px #222;  
+    background: linear-gradient(to bottom right, #B01100, #FF4633);
+    border-radius: 20px;
+    border-color: white;
+    border-width:4px
+    background-color: #ACEDED;
+}
+.text_wrapper {
+    margin: 2em;
+    width: 100%;
+    padding: 1em;
+    color: #502;
+    background: white;
+    box-shadow: 4px 4px 3px #333;    
+    border-radius: 20px 50px 50px 5px;
+    font-size: 1.3em;
+}
+
+.text_wrapper h2 {   
+    font-size: 1.5em;
+    background-color: #B01100;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.2) 0px 3px 3px;
+}
+
+
+
+#header_content {
+    
+    padding: 1em;
+}
+#main {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/background_3.jpg");
+    background-size: cover;
+    background-color: # FFAE6B;
+    text-align: center;
+}
+
+#info {
+    
+}
