@@ -85,12 +85,16 @@ a:hover {
     text-shadow: rgba(255,255,255,0.2) 0px 3px 3px;
 }
 
-
-
-#header_content {
-    
+#header_login {    
+    display: none;
+    height: 1em;    
     padding: 1em;
+    background-color: #FF0343;    
+    float: right;
 }
+.clicked {
+    background-color: #FF0343;
+}   
 #main {
     width: 100%;
     height: 100%;

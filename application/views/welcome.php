@@ -5,8 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
     <?php 
-        $this->load->helper('html');
+        $this->load->helper('html');        
         echo link_tag('css/main.css');
+        echo script_tag('js/jquery.js');
     ?>
 	<title>Welcome to Dates</title>	
 </head>
