@@ -5,9 +5,20 @@
     <div class="header">
         <div id="header_content">            
 <?php
-    if (isset($_SESSION['logged_in']) &&$_SESSION['logged_in'] == 1){
+    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1){
         echo "Logged in: ";        
-        echo $_SESSION['username'];
+        if (isset($_SESSION['username'])) echo $_SESSION['username'];
+?>
+            <button onclick="logout();">Log out!</button>
+            
+            <script>
+                function logout() {
+                    $.post("login/logout", function() {
+                        location.href = "./";
+                    });
+                }
+            </script>
+<?php
     } else {            
 ?>    
         
@@ -36,7 +47,7 @@
                 var username = $("#input_username").val();
                 var password = $("#input_password").val();
                 $("#error").html("Logging in...");
-                $.post("login/", {'username': username, 'password': password} ,function(data) {
+                $.post("login/loginUser", {'username': username, 'password': password} ,function(data) {
                     console.log(data.state);
                     if (data.state === "success") {
                         //You are now logged in.
