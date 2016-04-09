@@ -1,0 +1,48 @@
+CREATE TABLE UserProfile(
+	userID INT,
+	userEmail VARCHAR(255),
+	userPassword VARCHAR(255),
+	userNickname VARCHAR(50),
+	userFirstName VARCHAR(50),
+	userLastName VARCHAR(50),
+	userSex VARCHAR(10),
+	userBirthdate DATE,
+	userMinAgePref INT,
+	userMaxAgePref INT,
+	userSexPref VARCHAR(10),
+	userAdmin BOOLEAN,
+	userPersonality INT REFERENCES Personality(personalityID),
+	userPersonalityPref INT REFERENCES Personality(personalityID),	
+	PRIMARY KEY (userID)
+);
+
+CREATE TABLE UserLikes(
+	likes INT REFERENCES UserProfile(userID),
+	liked INT REFERENCES UserProfile(userID),
+	PRIMARY KEY (likes, liked)
+);
+
+CREATE TABLE Personality(
+	personalityID INT,
+	e INT,
+	n INT,
+	f INT,
+	j INT,
+	i INT,
+	s INT,
+	t INT,
+	p INT,
+	PRIMARY KEY (personalityID)
+);
+
+CREATE TABLE BrandPref(
+	user INT REFERENCES UserProfile(userID),
+	brand VARCHAR(50) REFERENCES Brands(brandName),
+	PRIMARY KEY(user, brand)
+);
+
+CREATE TABLE Brands(
+	brandName VARCHAR(50),
+	PRIMARY KEY(brandName)
+);
+
