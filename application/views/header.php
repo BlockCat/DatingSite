@@ -7,18 +7,7 @@
 <?php
     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1){
         echo "Logged in: ";        
-        if (isset($_SESSION['username'])) echo $_SESSION['username'];
-?>
-            <button onclick="logout();">Log out!</button>
-            
-            <script>
-                function logout() {
-                    $.post("login/logout", function() {
-                        location.href = "./";
-                    });
-                }
-            </script>
-<?php
+        echo $_SESSION['username'];
     } else {            
 ?>    
         
@@ -47,7 +36,7 @@
                 var username = $("#input_username").val();
                 var password = $("#input_password").val();
                 $("#error").html("Logging in...");
-                $.post("login/loginUser", {'username': username, 'password': password} ,function(data) {
+                $.post("login/", {'username': username, 'password': password} ,function(data) {
                     console.log(data.state);
                     if (data.state === "success") {
                         //You are now logged in.

@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h1>Find your perfect partner!</h1>
                     <p>
                         So you want to find the perfect partner?
-                        At Dates you'll find your parnter in a matter of minutes.                        
+                        At Dates you'll find your parnter in a matter of minutes.
+						<?php foreach ($brands as $brands_item): echo $brands_item['brandName'] . ', '; endforeach;?>
                     </p>
                     <h3>
                         <a href="register">Go to our exclusive test here &#8594;</a>
