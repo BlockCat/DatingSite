@@ -1,19 +1,11 @@
-/*http://paletton.com/palette.php?uid=7000u0kiCFn8GVde7NVmtwSqXtg!*/
+
 body {
     background-color: #FFBABA;
     margin: 0;
     padding: 0;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-a:hover {
-    font-size: 1.5em;
-    color: inherit;
-    text-decoration: none;
-}
+
 .header {
     background-color: #670023;          
     width: 100%;
@@ -47,8 +39,7 @@ a:hover {
 }
 
 .flashy_wrapper, .text_wrapper{
-    position: relative;        
-    
+    position: relative;            
     
 }
 .flashy_wrapper {
@@ -64,6 +55,17 @@ a:hover {
     border-width:4px;
     background-color: #ACEDED;
 }
+.flashy_wrapper a {
+    color: inherit;
+    text-decoration: none;
+}
+.flashy_wrapper a:hover {
+    font-size: 1.5em;
+    color: inherit;
+    text-decoration: none;
+}
+    
+
 .text_wrapper {
     margin: 2em;
     width: 100%;
@@ -85,16 +87,21 @@ a:hover {
     text-shadow: rgba(255,255,255,0.2) 0px 3px 3px;
 }
 
-#header_login {    
-    display: none;
-    height: 1em;    
-    padding: 1em;
-    background-color: #FF0343;    
-    float: right;
-}
 .clicked {
     background-color: #FF0343;
 }   
+.error {
+    color: #eee;    
+    background-color: #CE0A00;
+    padding: 3px;
+    float: left;
+    text-align: left;
+    border-radius: 10px 3px 10px 3px;
+    box-shadow: 3px 3px 3px #333;
+}
+#form .forlabel {
+     float: right;
+}
 #main {
     width: 100%;
     height: 100%;
@@ -107,13 +114,13 @@ a:hover {
 #info {
     
 }
-#register_form {    
+#form {    
     margin-left: 10%;
 }
-#register_form label {
+#form label {
     margin-right: 10px;
 }
-#register_form input {    
+#form input {    
     width: 100%;
     background-color: #fef;
     float: right;
@@ -122,13 +129,19 @@ a:hover {
     margin-left: 1em;
     
 }
-#register_form input[type=radio] {    
+#form input[type=radio] {    
     float:left;
     background-color: red;    
 }
+#form input[type=checkbox] {    
+    float:left;    
+}
 
-#register_form input[type=submit] {
+#form input[type=submit] {
     width: 100%;
+}
+#form label {
+   
 }
 
 
