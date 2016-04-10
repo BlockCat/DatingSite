@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Register extends CI_Controller {
 
@@ -18,6 +18,15 @@ class Register extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('Users_model');
+		$this->load->library('session');
+		$this->load->library('form_validation');
+	}
+	
 	public function index()
 	{
 		$this->load->view('header');

@@ -1,5 +1,4 @@
 <?php    
-    session_start(); 
 	defined('BASEPATH') OR exit('No direct script access allowed');	
 ?>
 <!DOCTYPE html>
@@ -15,7 +14,11 @@
 <body>	
     <div class="header">
         <div id="header_content"> 
-            <a href="./register"><button>Register now!</button></a>
-            <a href="./login"><button>Login now!</button></a>
+		<?php
+		if(!isset($_SESSION['loggedIn'])){			
+            echo '<a href="./register"><button>Register now!</button></a>';
+            echo '<a href="./login"><button>Login now!</button></a>';
+		}
+		?>
         </div>
     </div>

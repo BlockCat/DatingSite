@@ -1,32 +1,23 @@
-    <div id="container">
+	<div id="container">
         <div id="main"> 
             <div class="wrapper">
                 <div class="text_wrapper">
                     <h1>Log in: </h1>
-                    <form id="form">
+                    <form method="post" id="form" accept-charset="utf-8"/>
                         <table>
                             <tr>
-                                <td><label>Username:</label></td>
-                                <td colspan="2"><input type="text" name="username"></td>
+                                <td><label>Email:</label></td>
+                                <td colspan="2"><input type="text" id="email" placeholder="example@example.com" name="email"></td>
                             </tr>
                             <tr>
                                 <td><label>Password:</label></td>
-                                <td colspan="2"><input type="text" name="password"></td>
-                            </tr>                            
-                            <tr>
-                                <td>Remember me:</td>
-                                <td>                                    
-                                    <input type="checkbox" name="remember" value="remember">
-                                </td>                                
-                            </tr>                            
-                            <tr>
+                                <td colspan="2"><input type="text" id="password" placeholder="**********" name="password"></td>
+                            </tr>
+							<tr>
                                 <td colspan="3"><input type="submit" name="submit"></td>
                             </tr>
                         </table>
-                    </form>
-                    <p>
-                        Congratulations, you are one step closer to finding your partner.
-                    </p>                    
+                    </form>                   
                 </div>                
             </div>
         </div>        
