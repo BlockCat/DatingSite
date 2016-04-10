@@ -1,25 +1,22 @@
 
 body {
-    background-color: #FFBABA;
+    background-color: #EFEACC;
     margin: 0;
     padding: 0;
 }
 
-
 .header {
-    background-color: #670023;          
+    background-color: #ae3551;          
     width: 100%;
     height: 4em;    
-    color: #ddd;
 }
 .header button {
-    font-size: 1.5em;    
-    background: none;
-    background-color: #6F002F;
-    padding: 0.2em;    
-    color: white;
-    margin-left: 1em;
-    box-shadow: 3px 3px 10px #000;
+    font-size: 1.3em;   
+    padding: 0.2em, 0.5em, 0.2em, 0.5em;    
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #ae3551;
+    margin: 0.9em 0.7em 0px 0em;
     border: none;    
     height: 100%;    
     float: right;
@@ -27,9 +24,10 @@ body {
 
 .header button:hover{        
     background-color: #9B0343;
+    color: #ffffff;
 }
+
 .wrapper {
-    position: relative;
     min-height: 720px;
     padding: 90px 0px 80px 0px;
     z-index: 5;
@@ -38,110 +36,79 @@ body {
     min-width: 306px;    
 }
 
-.flashy_wrapper, .text_wrapper{
-    position: relative;            
-    
-}
 .flashy_wrapper {
-    width: 100%;
-    min-height: 10em;
     padding: 3em;    
     color: white;
-    text-shadow: 0px 0px 5px white;
+    text-shadow: 0px 0px 0.5px #EFEACC;
     box-shadow: 1px 1px 6px #222;  
-    background: linear-gradient(to bottom right, #B01100, #FF4633);
-    border-radius: 20px;
-    border-color: white;
-    border-width:4px;
-    background-color: #ACEDED;
+    background: linear-gradient(to bottom right, #ae3551, #752437);
+    border-radius: 30px;
 }
+
 .flashy_wrapper a {
     color: inherit;
     text-decoration: none;
 }
+
 .flashy_wrapper a:hover {
     font-size: 1.5em;
     color: inherit;
-    text-decoration: none;
+    text-shadow: 0px 0px 0.5px #EFEACC;
 }
     
 
 .text_wrapper {
     margin: 2em;
-    width: 100%;
     padding: 1em;
     color: #502;
-    background: white;
+    background-color: #e7dfb1;
     box-shadow: 4px 4px 3px #333;    
     border-radius: 20px 50px 50px 5px;
     font-size: 1.3em;
 }
 
-.text_wrapper h2 {   
-    font-size: 1.5em;
-    background-color: #B01100;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: rgba(255,255,255,0.2) 0px 3px 3px;
-}
-
-.clicked {
-    background-color: #FF0343;
-}   
 .error {
     color: #eee;    
-    background-color: #CE0A00;
+    background-color: #502;
     padding: 3px;
     float: left;
     text-align: left;
     border-radius: 10px 3px 10px 3px;
     box-shadow: 3px 3px 3px #333;
 }
-#form .forlabel {
-     float: right;
-}
+
 #main {
-    width: 100%;
-    height: 100%;
     background-image: url("../images/background_1.jpg");
     background-size: cover;
-    background-color: # FFAE6B;
+    background-color: #FFAE6B;
     text-align: center;
 }
 
-#info {
-    
+#form .forlabel {
+     float: right;
 }
+
 #form {    
     margin-left: 10%;
 }
+
 #form label {
-    margin-right: 10px;
+    margin-right: 1px;
 }
+
 #form input {    
-    width: 100%;
     background-color: #fef;
-    float: right;
     border-radius: 3px 10px 10px 10px;
     font-size: 1em;
-    margin-left: 1em;
-    
-}
-#form input[type=radio] {    
-    float:left;
-    background-color: red;    
-}
-#form input[type=checkbox] {    
-    float:left;    
+    margin-left: 1em;    
 }
 
 #form input[type=submit] {
     width: 100%;
 }
-#form label {
-   
+
+#loginform {
+	margin-left: 7em; 
 }
 
 

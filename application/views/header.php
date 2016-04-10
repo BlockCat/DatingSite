@@ -15,9 +15,11 @@
     <div class="header">
         <div id="header_content"> 
 		<?php
-		if(!isset($_SESSION['loggedIn'])){			
-            echo '<a href="./register"><button>Register now!</button></a>';
-            echo '<a href="./login"><button>Login now!</button></a>';
+		if(!isset($_SESSION['loggedIn'])){
+            echo '<a href="./login"><button>Sign in</button></a>';			
+            echo '<a href="./register"><button>Create account</button></a>';
+            echo '<a href="./"><button>Home</button></a>';
+
 		}
 		?>
         </div>
