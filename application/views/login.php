@@ -1,21 +1,3 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-    <?php 
-        $this->load->helper('html');
-        echo link_tag('css/main.css');
-        echo script_tag('js/jquery.js');
-    ?>
-	<title>Login</title>	
-</head>
-<body>
-    <?php
-        //load header
-        $this->view('header');
-    ?>
     <div id="container">
         <div id="main"> 
             <div class="wrapper">
@@ -49,6 +31,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>        
     </div>
-
 </body>
 </html>

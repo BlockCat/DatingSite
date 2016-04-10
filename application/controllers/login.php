@@ -19,31 +19,8 @@ class Login extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()
-	{        
+	{   
+		$this->load->view('header');	
         $this->load->view('login');
 	}
-    
-    public function loginUser() {
-        //If username is correct and such
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-            $_SESSION['logged_in'] = 1;
-            if (isset($_POST['username'])) $_SESSION['username'] = $_POST['username'];
-            $array = array('state' => 'success');
-        } else {
-            $array = array('state' => 'error');
-        }       
-        
-        $array = array('state' => 'success');
-        header('Content-Type: application/json');        
-		echo json_encode($array);
-    }
-    
-    public function logout() {
-        $_SESSION['logged_in'] = 0;
-        session_start();
-        session_destroy();
-            
-        echo 'Hi';
-    }
 }
