@@ -30,6 +30,9 @@ class Welcome extends CI_Controller {
 	{
 		$data['brands'] = $this->Users_model->get_brands();
 		$this->load->view('header');
-		$this->load->view('welcome', $data);
+		$this->load->view('matchfinder');
+		$this->load->view('info');
+		$this->load->view('footer');
+		
 	}
 }

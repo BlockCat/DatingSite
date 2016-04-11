@@ -1,20 +1,4 @@
-    <div id="container">
-        <div id="main"> 
-            <div class="wrapper">
-                <div class="flashy_wrapper">
-                    <h1>Find your perfect partner!</h1>
-                    <p>
-                        So you want to find the perfect partner?
-                        At Dates you'll find your parnter in a matter of minutes.
-						<?php foreach ($brands as $brands_item): echo $brands_item['brandName'] . ', '; endforeach;?>
-                    </p>
-                    <h3>
-                        <a href="register">Go to our exclusive test here &#8594;</a>
-                    </h3>
-                </div>                
-            </div>
-        </div>
-        <div id="info">
+<div id="info">
             <div class="wrapper">
                 <div class="text_wrapper">
                     <h2>Why us?</h2>
@@ -33,8 +17,4 @@
                     </p>
                 </div>
             </div>
-        </div>
-    </div>
-
-</body>
-</html>
+</div>
