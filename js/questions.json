@@ -1,0 +1,109 @@
+{ 
+    "EI": {
+        "q1": {
+            "a": "I prefer large amounts of people with great diversity",
+            "b": "I like to be with good friends",
+            "c": "I'm in between"
+        },
+        "q2": {
+            "a": "I usually act first, then think",
+            "b": "I usually think first, then act",
+            "c": "I'm in between"
+        },
+        "q3": {
+            "a": "I am quickly distracted, with less attention for a specific task",
+            "b": "I am focussed, with less attention for my surroundings",
+            "c": "I'm in between"
+        },
+        "q4": {
+            "a": "I can easily talk with people, and I like to hang out",
+            "b": "I am a good listener en more a private person",
+            "c": "I'm in between"
+        },
+        "q5": {
+            "a": "I am quickly distracted, with less attention for a specific task",
+            "b": "I am focussed, with less attention for my surroundings",
+            "c": "I'm in between"
+        }
+    },
+    "NS": {
+        "q6": {
+            "a": "I am quickly distracted, with less attention for a specific task",
+            "b": "I am focussed, with less attention for my surroundings",
+            "c": "I'm in between"  
+        },
+        "q7": {
+            "a": "Ik heb een groot inbeeldingsvermogen en heb een globaal overzicht van een project.",
+            "b": "Ik ben pragmatisch ingesteld en heb een gedetailleerd beeld van elke stap.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        "q8": {
+            "a": "Ik kijk naar de toekomst.",
+            "b": "Ik houd mijn blik op het heden gericht.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+
+        "q9": {
+            "a": "Ik houd van de veranderlijkheid in relaties en taken.",
+            "b": "Ik houd van de voorspelbaarheid in relaties en taken.",
+            "c": "Ik zit er eigenlijk tussenin."
+        }        
+    },
+    "TF": {
+        "q10": {
+            "a": "Ik overdenk een beslissing helemaal.",
+            "b": "Ik beslis met mijn gevoel.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        "q11": {
+            "a": "Ik werk het beste met een lijst plussen en minnen.",
+            "b": "Ik beslis op basis van de gevolgen voor mensen.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        "q12": {
+            "a": "Ik ben van nature kritisch.",
+            "b": "Ik maak het mensen graag naar de zin.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        "q13": {
+            "a": "Ik ben eerder eerlijk dan tactisch.",
+            "b": "Ik ben eerder tactisch dan eerlijk.",
+            "c": "Ik zit er eigenlijk tussenin."
+        }            
+    },
+    "JP": {
+        "q14": {
+            "a": "Ik houd van vertrouwde situaties.",
+            "b": "Ik houd van flexibele situaties.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        "q15": {
+            "a": "Ik plan alles, met een to-do lijstje in mijn hand.",
+            "b": "Ik wacht tot er meerdere ide&euml;en opborrelen en kies dan on-the-fly wat te doen.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        
+        "q16": {
+            "a": "Ik houd van het afronden van projecten.",
+            "b": "Ik houd van het opstarten van projecten.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        "q17": {
+            "a": "Ik ervaar stress door een gebrek aan planning en abrupte wijzigingen.",
+            "b": "Ik ervaar gedetailleerde plannen als benauwend en kijk uit naar veranderingen.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        "q18": {
+            "a": "Het is waarschijnlijker dat ik een doel bereik.",
+            "b": "Het is waarschijnlijker dat ik een kans zie.",
+            "c": "Ik zit er eigenlijk tussenin."
+        },
+        "q19": {
+            "a": "All play and no work maakt dat het project niet afkomt.",
+            "b": "All work and no play maakt je maar een saaie pief.",
+            "c": "Ik zit er eigenlijk tussenin."
+        }
+    }
+    
+    
+}

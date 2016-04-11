@@ -9,6 +9,7 @@ p {
 	margin: 0em;
 }
 
+
 .header {
     background-color: #ae3551;          
     width: 100%;
@@ -90,6 +91,33 @@ p {
 	box-shadow: 4px 4px 3px #333;    
     border-radius: 20px 50px 20px 5px;
 	margin: 0.5em 0.5em 0.5em 0.5em;
+}
+.question {    
+    margin: 1em;
+    font-style: italic;
+    padding: 1em;
+    display: block;
+}
+
+.question input[type=radio] {
+    display: none;
+}
+.question input:checked+p label{
+    font-size: 1.3em;
+    font-style: bold;
+    color: #f00;
+}
+.question input:not(:checked)+p label:hover{
+    font-size: 1.3em;
+    font-style: bold;
+}
+.question p {
+    position: relative;
+    margin-bottom: 1.3em;
+}
+.question p label{        
+    position: absolute;    
+    left: 0%;    
 }
 
 #profileviewer {
