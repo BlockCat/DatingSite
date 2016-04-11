@@ -5,6 +5,10 @@ body {
     padding: 0;
 }
 
+p {
+	margin: 0em;
+}
+
 .header {
     background-color: #ae3551;          
     width: 100%;
@@ -42,7 +46,7 @@ body {
     text-shadow: 0px 0px 0.5px #EFEACC;
     box-shadow: 1px 1px 6px #222;  
     background: linear-gradient(to bottom right, #ae3551, #752437);
-    border-radius: 30px;
+    border-radius: 1em 10em 10em 1em;
 }
 
 .flashy_wrapper a {
@@ -75,6 +79,22 @@ body {
     text-align: left;
     border-radius: 10px 3px 10px 3px;
     box-shadow: 3px 3px 3px #333;
+}
+
+.profile {
+	color: #502;
+	width: 20%;
+	display: inline-block;
+	background-color: #EFEACC; 
+	padding: 1em;
+	box-shadow: 4px 4px 3px #333;    
+    border-radius: 20px 50px 20px 5px;
+	margin: 0.5em 0.5em 0.5em 0.5em;
+}
+
+#profileviewer {
+	display: inline-block;
+	
 }
 
 #main {
