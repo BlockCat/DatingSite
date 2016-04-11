@@ -19,7 +19,9 @@
             echo '<a href="./login"><button>Sign in</button></a>';			
             echo '<a href="./register"><button>Create account</button></a>';
             echo '<a href="./"><button>Home</button></a>';
-
+		}
+		else{
+			echo '<a href="./signout"><button>Sign out</button></a>';
 		}
 		?>
         </div>
