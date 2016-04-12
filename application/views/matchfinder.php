@@ -7,7 +7,7 @@
 					<div class="profilethumbnail">
 					</div>
 					<div class="profileinfo">
-					<p id="nicknameprofile0"></p>
+					<a id="nicknameprofile0"></a>
 					<p id="sexprofile0"></p>
 					<p id="ageprofile0"></p>
 					<p id="personalityprofile0"></p>
@@ -19,7 +19,7 @@
 					<div class="profilethumbnail">
 					</div>
 					<div class="profileinfo">
-					<p id="nicknameprofile1"></p>
+					<a id="nicknameprofile1"></a>
 					<p id="sexprofile1"></p>
 					<p id="ageprofile1"></p>
 					<p id="personalityprofile1"></p>
@@ -31,7 +31,7 @@
 					<div class="profilethumbnail">
 					</div>
 					<div class="profileinfo">
-					<p id="nicknameprofile2"></p>
+					<a id="nicknameprofile2"></a>
 					<p id="sexprofile2"></p>
 					<p id="ageprofile2"></p>
 					<p id="personalityprofile2"></p>
@@ -43,7 +43,7 @@
 					<div class="profilethumbnail">
 					</div>
 					<div class="profileinfo">
-					<p id="nicknameprofile3"></p>
+					<a id="nicknameprofile3"></a>
 					<p id="sexprofile3"></p>
 					<p id="ageprofile3"></p>
 					<p id="personalityprofile3"></p>
@@ -55,7 +55,7 @@
 					<div class="profilethumbnail">
 					</div>
 					<div class="profileinfo">
-					<p id="nicknameprofile4"></p>
+					<a id="nicknameprofile4"></a>
 					<p id="sexprofile4"></p>
 					<p id="ageprofile4"></p>
 					<p id="personalityprofile4"></p>
@@ -67,7 +67,7 @@
 					<div class="profilethumbnail">
 					</div>
 					<div class="profileinfo">
-					<p id="nicknameprofile5"></p>
+					<a id="nicknameprofile5"></a>
 					<p id="sexprofile5"></p>
 					<p id="ageprofile5"></p>
 					<p id="personalityprofile5"></p>
@@ -87,13 +87,12 @@
 <script>
 	$(document).ready(function () {
 		$.get("./randomprofile", function (profiles){
-			console.log(profiles);
 			profiledata = JSON.parse(profiles);	
 			for (let nr = 0; nr < 6; nr++) {
 				$.get("./profilebrand", {'ID': profiledata[nr].userID}, function (brands){	
 					$.get("./profilepersonality", {'ID': profiledata[nr].userPersonality}, function (personalitytype){
-						console.log(nr);
 						$("#nicknameprofile" + String(nr)).html(profiledata[nr].userNickname);
+						$("#nicknameprofile" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);
 						$("#sexprofile" + String(nr)).html(profiledata[nr].userSex);
 						$("#ageprofile" + String(nr)).html(getAge(profiledata[nr].userBirthdate));
 						$("#personalityprofile" + String(nr)).html(getpersonality(personalitytype));
