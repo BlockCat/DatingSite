@@ -99,29 +99,33 @@ p {
 }
 
 .question input[type=radio] {
-    display: none;
+    appearance: none;
+    opacity: 0;
 }
 .question input:checked+p label{
     font-size: 1.3em;
     font-style: bold;
-    color: #f00;
+    color: #f00;    
 }
 .question input:not(:checked)+p label:hover{
     font-size: 1.3em;
-    font-style: bold;
+    font-style: bold;    
 }
 .question p {
     position: relative;
     margin-bottom: 1.3em;
+    
 }
-.question p label{        
+.question input + p label{        
     position: absolute;    
     left: 0%;    
 }
+#personalityTest div{
+    background-color: #FF9536;
+}
 
 #profileviewer {
-	display: inline-block;
-	
+	display: inline-block;	
 }
 
 #main {

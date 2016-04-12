@@ -63,6 +63,11 @@
                             </tr>
                         </table>
                     </form>
+                    <div id="personalityTest">
+                        <?php 
+                            $this->load->view('questions');
+                        ?>                    
+                    </div>
                     <p>
                         Congratulations, you are one step closer to finding your partner.
                     </p>                    

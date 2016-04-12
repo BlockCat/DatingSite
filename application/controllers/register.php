@@ -42,6 +42,65 @@ class Register extends CI_Controller {
     
     public function verifyquestions() 
     {
+        //EI
+        $E = 500;        
+        for ($i = 1; $i <= 5; $i++) {
+            $char = $_POST['q'.$i];
+            switch($char) {
+                case 'a':
+                    $E += 100;
+                    break;
+                case 'b':
+                    $E -= 100;                    
+            }
+        }
+        //NS
+        $N = 500;        
+        for ($i = 6; $i <= 9; $i++) {
+            $char = $_POST['q'.$i];
+            switch($char) {
+                case 'a':
+                    $N += 125;                 
+                    break;
+                case 'b':
+                    $N -= 125;                 
+            }
+        }
+        //TF
+        $T = 500;        
+        for ($i = 10; $i <= 13; $i++) {
+            $char = $_POST['q'.$i];
+            switch($char) {
+                case 'a':
+                    $T += 125;                    
+                    break;
+                case 'b':
+                    $T -= 125;                    
+            }
+        }
+        //JP
+        $J = 500;        
+        for ($i = 14; $i <= 19; $i++) {
+            $char = $_POST['q'.$i];
+            switch($char) {
+                case 'a':
+                    $J += 83;                    
+                    break;
+                case 'b':
+                    $J -= 83;                                
+            }
+        }
+        $data = array(
+            'E' => $E,
+            'N' => $N,
+            'T' => $T,
+            'J' => $J
+        );        
+        $this->load->view('questionsresult', $data);
         
+        $_SESSION['personality_E'] = $E;
+        $_SESSION['personality_N'] = $N;
+        $_SESSION['personality_T'] = $T;
+        $_SESSION['personality_J'] = $J;
     }
 }

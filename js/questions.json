@@ -21,8 +21,8 @@
             "c": "I'm in between"
         },
         "q5": {
-            "a": "I am quickly distracted, with less attention for a specific task",
-            "b": "I am focussed, with less attention for my surroundings",
+            "a": "As a host, I like to be in the center attraction",
+            "b": "As host, I like to keep quiet and make sure everything goes smoothly",
             "c": "I'm in between"
         }
     },
@@ -32,76 +32,78 @@
             "b": "I am focussed, with less attention for my surroundings",
             "c": "I'm in between"  
         },
-        "q7": {
-            "a": "Ik heb een groot inbeeldingsvermogen en heb een globaal overzicht van een project.",
-            "b": "Ik ben pragmatisch ingesteld en heb een gedetailleerd beeld van elke stap.",
-            "c": "Ik zit er eigenlijk tussenin."
+        "q7": {            
+            "a": "I have a great imagination and I keep a global view on a project.",
+            "b": "I like to keep a detailed description of each phase.",            
+            "c": "I'm in between"
         },
         "q8": {
-            "a": "Ik kijk naar de toekomst.",
-            "b": "Ik houd mijn blik op het heden gericht.",
-            "c": "Ik zit er eigenlijk tussenin."
+            "a": "I look towards the future.",
+            "b": "I try to learn from the past.",
+            "c": "I'm in between."
         },
 
         "q9": {
-            "a": "Ik houd van de veranderlijkheid in relaties en taken.",
-            "b": "Ik houd van de voorspelbaarheid in relaties en taken.",
-            "c": "Ik zit er eigenlijk tussenin."
+            
+            "a": "I like the change in relations and tasks.",
+            "b": "I like predictable relations and tasks.",
+            "c": "I'm in between."
         }        
     },
     "TF": {
         "q10": {
-            "a": "Ik overdenk een beslissing helemaal.",
-            "b": "Ik beslis met mijn gevoel.",
-            "c": "Ik zit er eigenlijk tussenin."
+            "a": "I think deeply about decisions.",
+            "b": "I decide on my emotions.",
+            "c": "I'm in between."
         },
         "q11": {
-            "a": "Ik werk het beste met een lijst plussen en minnen.",
-            "b": "Ik beslis op basis van de gevolgen voor mensen.",
-            "c": "Ik zit er eigenlijk tussenin."
+            "a": "I work best with a list of positives and negatives.",
+            "b": "I decide on consequenses for people.",
+            "c": "I'm in between."
         },
         "q12": {
-            "a": "Ik ben van nature kritisch.",
-            "b": "Ik maak het mensen graag naar de zin.",
-            "c": "Ik zit er eigenlijk tussenin."
+            "a": "I like to tell people what I think.",
+            "b": "I like to tell people what they want to hear.",
+            "c": "I'm in between"
         },
         "q13": {
-            "a": "Ik ben eerder eerlijk dan tactisch.",
-            "b": "Ik ben eerder tactisch dan eerlijk.",
-            "c": "Ik zit er eigenlijk tussenin."
+            "a": "I'd rather be honest than tactfull.",
+            "b": "I'd rather be tactfull than honest.",
+            "c": "I'm in between."
         }            
     },
     "JP": {
         "q14": {
-            "a": "Ik houd van vertrouwde situaties.",
-            "b": "Ik houd van flexibele situaties.",
-            "c": "Ik zit er eigenlijk tussenin."
+            "a": "I like familliar situations.",
+            "b": "I like flexible situations.",
+            "c": "I'm in between"
         },
-        "q15": {
-            "a": "Ik plan alles, met een to-do lijstje in mijn hand.",
-            "b": "Ik wacht tot er meerdere ide&euml;en opborrelen en kies dan on-the-fly wat te doen.",
-            "c": "Ik zit er eigenlijk tussenin."
+        "q15": {            
+            "a": "I plan everything with a to-do list.",
+            "b": "I wait for ideas, then decide what I have to do.",            
+            "c": "I'm in between"
         },
         
-        "q16": {
-            "a": "Ik houd van het afronden van projecten.",
-            "b": "Ik houd van het opstarten van projecten.",
-            "c": "Ik zit er eigenlijk tussenin."
+        "q16": {            
+            "a": "I like finishing projects.",
+            "b": "I like starting projects.",            
+            "c": "I'm in between."
         },
-        "q17": {
-            "a": "Ik ervaar stress door een gebrek aan planning en abrupte wijzigingen.",
-            "b": "Ik ervaar gedetailleerde plannen als benauwend en kijk uit naar veranderingen.",
-            "c": "Ik zit er eigenlijk tussenin."
+        "q17": {            
+            "a": "I attribute stress to a lack of planning and sudden changes",
+            "b": "Detailed plans are limiting creativity, and therefore cause stress.",            
+            "c": "I'm in between."
         },
-        "q18": {
-            "a": "Het is waarschijnlijker dat ik een doel bereik.",
+        "q18": {            
+            "a": "It's likely I reach a goal",
             "b": "Het is waarschijnlijker dat ik een kans zie.",
-            "c": "Ik zit er eigenlijk tussenin."
+            "b": "It's likely that I see a chance",
+            "c": "I'm in between."
         },
         "q19": {
-            "a": "All play and no work maakt dat het project niet afkomt.",
-            "b": "All work and no play maakt je maar een saaie pief.",
-            "c": "Ik zit er eigenlijk tussenin."
+            "a": "All play and no work makes a failed project.",
+            "b": "All work and no play is boring.",
+            "c": "I'm in between."
         }
     }
     
