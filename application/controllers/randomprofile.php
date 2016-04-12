@@ -1,7 +1,7 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+//defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class randomprofile extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -27,12 +27,13 @@ class Welcome extends CI_Controller {
 	}
 	
 	public function index()
-	{
-		$data['brands'] = $this->Users_model->get_all_brands();
-		$this->load->view('header');
-		$this->load->view('matchfinder');
-		$this->load->view('info');
-		$this->load->view('footer');		
+	{  
+		if(isset($_SESSION['loggedIn'])){
+			$profiles = $this->Users_model->get_random_profiles($_SESSION['userID']);
+		}
+		else{
+			$profiles = $this->Users_model->get_random_profiles(null);
+		}
+		echo json_encode($profiles);
 	}
-	 
 }

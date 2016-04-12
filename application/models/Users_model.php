@@ -5,7 +5,7 @@ class Users_model extends CI_Model {
 		$this->load->database();
 	}
 	
-	public function get_brands(){
+	public function get_all_brands(){
 		$query = $this->db->get('Brands');
 		return $query->result_array();
 	}
@@ -24,5 +24,28 @@ class Users_model extends CI_Model {
 		else{
 			return false;
 		}
+	}
+	
+	public function get_random_profiles($userID){	
+		$this->db->where('userID <>', $userID);
+		$this->db->limit(6);
+		$query = $this->db->get('UserProfile');
+		$result = $query->result_array();
+		shuffle ($result);		
+		return array_slice($result, 0, 6);
+	}
+	
+	public function get_personality($personalityID){
+		$this->db->where('personalityID', $personalityID);
+		$query = $this->db->get('Personality');
+		return $query->result_array();
+	}
+	
+	public function get_brands($userID){
+		$this->db->where('user', $userID);
+		$query = $this->db->get('BrandPref');
+		$shuffledarray = $query->result_array();
+		shuffle ($shuffledarray);
+		return $shuffledarray;
 	}
 }
