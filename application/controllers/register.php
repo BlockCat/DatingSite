@@ -32,4 +32,16 @@ class Register extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('register');
 	}
+    
+    public function questions() 
+    {
+        //Check if from the register
+        $this->load->view('header');
+        $this->load->view('questions');
+    }
+    
+    public function verifyquestions() 
+    {
+        
+    }
 }
