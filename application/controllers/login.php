@@ -58,10 +58,12 @@ class Login extends CI_Controller {
 				'userPersonalityPref' => $result['userPersonalityPref'],
 			);
 			$this->session->set_userdata($newdata);
+			$this->session->unset_userdata('triedlogin');
 			header('Location: http://localhost/DatingSite/');
 		}
 		else
-		{
+		{			
+			$this->session->set_userdata('triedlogin', true);
 			return false;
 		}		
 	}

@@ -10,7 +10,12 @@
 				<p id="brandsprofile"></p>
 				<p id="descriptionprofile"></p>
 			</div>
-		</div>			
+			<?php 
+			if(!isset($_SESSION['loggedIn'])){
+				echo "<h3><a href='./login'>Login to like this person and get to know him/her better!&#8594;</a></h3>";
+			}
+			?>
+		</div>		
 	</div>
 </div>
 <script>

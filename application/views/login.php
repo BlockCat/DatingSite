@@ -2,7 +2,14 @@
         <div id="main"> 
             <div class="wrapper">
                 <div class="text_wrapper">
-                    <h1>Log in: </h1>
+                    <?php 
+						if(isset($_SESSION['triedlogin'])){
+							echo "<h1>We could not validate you, try to login again:</h1>";
+						}
+						else{
+							echo "<h1>Log in:</h1>";
+						}
+					?>
                     <form method="post" id="form" accept-charset="utf-8"/>
                         <table id="loginform">
                             <tr>

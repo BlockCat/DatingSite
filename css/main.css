@@ -27,10 +27,29 @@ p {
     float: right;
 }
 
+.flashy_wrapper button:hover{        
+    background-color: #9B0343;
+    color: #ffffff;
+}
+
+.flashy_wrapper button {
+    font-size: 1.3em;   
+    padding: 0.2em, 0.5em, 0.2em, 0.5em;    
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #ae3551;
+    margin: 0.9em 0.7em 0px 0em;
+    border: none;    
+    height: 100%;    
+    float: center;
+}
+
 .header button:hover{        
     background-color: #9B0343;
     color: #ffffff;
 }
+
+
 
 .wrapper {
     min-height: 720px;

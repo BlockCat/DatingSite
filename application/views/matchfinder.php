@@ -1,7 +1,7 @@
 <div id="main"> 
 	<div class="wrapper">
 		<div class="flashy_wrapper">
-			<h1>Find your perfect partner!</h1>	
+			<h1>Find your perfect partner!</h1>
 			<div id="profileviewer">
 				<div class="profile">
 					<div class="profilethumbnail">
@@ -82,6 +82,7 @@
 					</div>
 				</div>
 			</div>
+			<button id="refresh">more</button>
 			<?php 
 			if(!isset($_SESSION['loggedIn'])){
 				echo "<h3><a href='register'>Go to our exclusive test here to find your soul partner &#8594;</a></h3>";
@@ -91,7 +92,16 @@
 	</div>
 </div>
 <script>
+	
 	$(document).ready(function () {
+		setprofiles();
+	});
+	
+	document.getElementById("refresh").addEventListener("click", function(){
+		setprofiles();
+	});
+	
+	function setprofiles(){
 		$.get("./randomprofile", function (profiles){
 			profiledata = JSON.parse(profiles);	
 			for (let nr = 0; nr < 6; nr++) {
@@ -111,7 +121,7 @@
 				});
 			}
 		});
-	});
+	}
 	
 	function getbrands(brands){
 		brandresult = '';
