@@ -5,6 +5,7 @@
 			<div id="profileviewer">
 				<div class="profile">
 					<div class="profilethumbnail">
+						<a id="link0"><img id="profilepic0" alt="profilepicture" height="150" width="150"></a>
 					</div>
 					<div class="profileinfo">
 					<a id="nicknameprofile0"></a>
@@ -17,6 +18,7 @@
 				</div>
 				<div class="profile">
 					<div class="profilethumbnail">
+						<a id="link1"><img id="profilepic1" alt="profilepicture" height="150" width="150"></a>
 					</div>
 					<div class="profileinfo">
 					<a id="nicknameprofile1"></a>
@@ -29,6 +31,7 @@
 				</div>
 				<div class="profile">
 					<div class="profilethumbnail">
+						<a id="link2"><img id="profilepic2" alt="profilepicture" height="150" width="150"></a>
 					</div>
 					<div class="profileinfo">
 					<a id="nicknameprofile2"></a>
@@ -41,6 +44,7 @@
 				</div>
 				<div class="profile">
 					<div class="profilethumbnail">
+						<a id="link3"><img id="profilepic3" alt="profilepicture" height="150" width="150"></a>
 					</div>
 					<div class="profileinfo">
 					<a id="nicknameprofile3"></a>
@@ -53,6 +57,7 @@
 				</div>
 				<div class="profile">
 					<div class="profilethumbnail">
+						<a id="link4"><img id="profilepic4" alt="profilepicture" height="150" width="150"></a>
 					</div>
 					<div class="profileinfo">
 					<a id="nicknameprofile4"></a>
@@ -65,6 +70,7 @@
 				</div>
 				<div class="profile">
 					<div class="profilethumbnail">
+						<a id="link5"><img id="profilepic5" alt="profilepicture" height="150" width="150"></a>
 					</div>
 					<div class="profileinfo">
 					<a id="nicknameprofile5"></a>
@@ -91,6 +97,9 @@
 			for (let nr = 0; nr < 6; nr++) {
 				$.get("./profilebrand", {'ID': profiledata[nr].userID}, function (brands){	
 					$.get("./profilepersonality", {'ID': profiledata[nr].userPersonality}, function (personalitytype){
+						//should be changed in thumbnail location
+						$("#profilepic"+ String(nr)).attr("src", "./images/profilepic/" + profiledata[nr].userID +".jpg")
+						$("#link" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);
 						$("#nicknameprofile" + String(nr)).html(profiledata[nr].userNickname);
 						$("#nicknameprofile" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);
 						$("#sexprofile" + String(nr)).html(profiledata[nr].userSex);

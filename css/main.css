@@ -120,6 +120,11 @@ p {
     position: absolute;    
     left: 0%;    
 }
+
+.profileinfo {
+	word-wrap: break-word;
+}
+
 #personalityTest div{
     background-color: #FF9536;
 }

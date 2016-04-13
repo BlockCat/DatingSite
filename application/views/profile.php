@@ -1,7 +1,8 @@
 <div id="main"> 
 	<div class="wrapper">
-		<div class="flashy_wrapper">
+		<div class="text_wrapper">
 			<div class="profileinfo">
+				<img id="profilepic" alt="profilepicture" height="400" width="400">
 				<p id="nicknameprofile"></p>
 				<p id="sexprofile"></p>
 				<p id="ageprofile"></p>
@@ -16,6 +17,7 @@
 	$(document).ready(function () {
 		$.get("./profilebrand", {'ID': <?php echo $userdata['userID']?>}, function (brands){	
 			$.get("./profilepersonality", {'ID': <?php echo $userdata['userPersonality']?>}, function (personalitytype){
+				$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata['userID']?>.jpg")
 				$("#nicknameprofile").html('<?php echo $userdata['userNickname']?>');
 				$("#sexprofile").html('<?php echo $userdata['userSex']?>');
 				$("#ageprofile").html(getAge('<?php echo $userdata['userBirthdate']?>'));
