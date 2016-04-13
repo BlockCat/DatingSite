@@ -108,7 +108,11 @@
 				$.get("./profilebrand", {'ID': profiledata[nr].userID}, function (brands){	
 					$.get("./profilepersonality", {'ID': profiledata[nr].userPersonality}, function (personalitytype){
 						//should be changed in thumbnail location
-						$("#profilepic"+ String(nr)).attr("src", "./images/profilepic/" + profiledata[nr].userID +".jpg")
+						<?php if(isset($_SESSION['loggedIn'])){?>
+							$("#profilepic"+ String(nr)).attr("src", "./images/profilepic/"+ profiledata[nr].userID +".jpg")					
+						<?php }else{?>
+							$("#profilepic"+ String(nr)).attr("src", "./images/profilepic/"+ profiledata[nr].userSex +"silhoutte.jpg")					
+						<?php } ?>
 						$("#link" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);
 						$("#nicknameprofile" + String(nr)).html(profiledata[nr].userNickname);
 						$("#nicknameprofile" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);

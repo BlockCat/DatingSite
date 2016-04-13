@@ -22,7 +22,11 @@
 	$(document).ready(function () {
 		$.get("./profilebrand", {'ID': <?php echo $userdata['userID']?>}, function (brands){	
 			$.get("./profilepersonality", {'ID': <?php echo $userdata['userPersonality']?>}, function (personalitytype){
-				$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata['userID']?>.jpg")
+				<?php if(isset($_SESSION['loggedIn'])){?>
+						$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata["userID"]?>.jpg")					
+				<?php }else{?>
+						$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata["userSex"]?>silhoutte.jpg")					
+				<?php } ?>
 				$("#nicknameprofile").html('<?php echo $userdata['userNickname']?>');
 				$("#sexprofile").html('<?php echo $userdata['userSex']?>');
 				$("#ageprofile").html(getAge('<?php echo $userdata['userBirthdate']?>'));
