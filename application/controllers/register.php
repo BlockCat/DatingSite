@@ -32,6 +32,12 @@ class Register extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('register');
 	}
+
+    public function register() {
+        $username = $_POST['username'];
+        $firstname = $_POST['firstname'];
+        $secondname = $_POST['firstname'];
+    }
     
     public function questions() 
     {
@@ -95,12 +101,16 @@ class Register extends CI_Controller {
             'N' => $N,
             'T' => $T,
             'J' => $J
-        );        
-        $this->load->view('questionsresult', $data);
-        
-        $_SESSION['personality_E'] = $E;
-        $_SESSION['personality_N'] = $N;
-        $_SESSION['personality_T'] = $T;
-        $_SESSION['personality_J'] = $J;
+        );
+
+        $array = array(
+            'E' => $E,
+            'N' => $N,
+            'T' => $T,
+            'J' => $J,
+            'html' => $this->load->view('questionsresult', $data, true));
+
+        header('Content-Type: application/json');
+        echo json_encode($array);
     }
 }
