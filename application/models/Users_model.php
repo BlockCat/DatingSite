@@ -81,7 +81,6 @@ class Users_model extends CI_Model {
 	
 	public function get_random_profiles($userID){	
 		$this->db->where('userID <>', $userID);
-		$this->db->limit(6);
 		$query = $this->db->get('UserProfile');
 		$result = $query->result_array();
 		shuffle ($result);		
