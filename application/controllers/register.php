@@ -62,10 +62,7 @@ class Register extends CI_Controller {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $gender = $_POST['gender'];
-        $E = $_POST['E'];
-        $N = $_POST['N'];
-        $T = $_POST['T'];
-        $J = $_POST['J'];
+        $personality_array = $this->verifyquestions();
     }
     
     private function questions()
@@ -134,10 +131,7 @@ class Register extends CI_Controller {
             'E' => $E,
             'N' => $N,
             'T' => $T,
-            'J' => $J,
-            'html' => $this->load->view('questionsresult', $data, true));
-
-        header('Content-Type: application/json');
-        echo json_encode($array);
+            'J' => $J);
+        return $array;
     }
 }

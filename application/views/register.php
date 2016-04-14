@@ -66,15 +66,17 @@
                                 <td><label class="error"><?php echo form_error('attraction'); ?></label></td>
                             </tr>                             
                             <tr>
-                                <td colspan="3"><input type="submit" name="submit"></td>
+
                             </tr>
                         </table>
-                    </form>
                     <div id="personalityTest">
                         <?php
                             $this->load->view('questions');
                         ?>
                     </div>
+                    <input type="submit" name="submit">
+                    </form>
+
                     <p>
                         Congratulations, you are one step closer to finding your partner.
                     </p>                    
