@@ -72,7 +72,7 @@
                     </form>
                     <div id="personalityTest">
                         <?php
-                            //$this->load->view('questions');
+                            $this->load->view('questions');
                         ?>
                     </div>
                     <p>

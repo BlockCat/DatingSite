@@ -1,6 +1,3 @@
-        <div id="container">
-            <div id="main">
-                <div class="wrapper">
                     <div class="text_wrapper">
                         <h1>Do the personality test!</h1>
                         <p>By searching your personality type we can give you better results by giving people that match your personality.</p>
@@ -12,12 +9,7 @@
                         <p>
                         </p>
                     </div>
-                </div>
-            </div>
-        </div>
 
-    </body>
-</html>
 
 <?php
     function loadQuestions() 
