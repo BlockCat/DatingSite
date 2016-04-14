@@ -47,7 +47,7 @@
 <?php
     function loadQuestions() 
     {        
-        $string = file_get_contents(base_url()."/js/questions.json");
+        $string = file_get_contents("./js/questions.json");
         $json_a = json_decode($string, true );        
         foreach ($json_a as $category => $questions) 
         {
