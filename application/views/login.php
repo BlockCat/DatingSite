@@ -14,7 +14,7 @@
                         <table id="loginform">
                             <tr>
                                 <td><label class="forlabel">Email:</label></td>
-								<td colspan="2"><input type="text" id="email" placeholder="example@example.com" name="email"></td>                                <td><div class="error"><?php echo form_error('email')?></div></td>
+								<td colspan="2"><input type="text" id="email" placeholder="example@example.com" name="email"></td>
                             </tr>
                             <tr>
                                 <td><label class="forlabel">Password:</label></td>
