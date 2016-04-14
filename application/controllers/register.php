@@ -30,19 +30,46 @@ class Register extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('header');
-		$this->load->view('register');
+
+        $this->form_validation->set_message('min_length', 'The %s should be at least %d characters.');
+        $this->form_validation->set_message('max_length', 'The %s should be at most %d characters.');
+        $this->form_validation->set_message('required', '%s is required.');
+        $this->form_validation->set_message('matches', '%s should match %s.');
+
+        $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[4]|max_length[20]|alpha_numeric');
+        $this->form_validation->set_rules('firstname', 'First name', 'trim|required|alpha_numeric|prep_for_form');
+        $this->form_validation->set_rules('lastname', 'Last name', 'trim|required|alpha_numeric|prep_for_form');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[UserProfile.userEmail]');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|matches[passwordconfirmation]');
+        $this->form_validation->set_rules('passwordconfirmation', 'Password confirmation', 'trim|required');
+        $this->form_validation->set_rules('profilepicture', 'Profile picture');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
+        $this->form_validation->set_rules('attraction', 'Attraction', 'required');
+        if ($this->load->form_validation->run() == FALSE) {
+            $this->load->view('register');
+        } else {
+            $data = array('post_data' => $this->input->post());
+            $this->questions();
+        }
+
 	}
 
-    public function register() {
+    public function registerUser() {
+        $errors = array();
         $username = $_POST['username'];
         $firstname = $_POST['firstname'];
-        $secondname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $gender = $_POST['gender'];
+        $E = $_POST['E'];
+        $N = $_POST['N'];
+        $T = $_POST['T'];
+        $J = $_POST['J'];
     }
     
-    public function questions() 
+    private function questions()
     {
-        //Check if from the register
-        $this->load->view('header');
         $this->load->view('questions');
     }
     

@@ -1,48 +1,23 @@
-<div class="text_wrapper">
-    <h1>Do the personality test!</h1>
-    <p>By searching your personality type we can give you better results by giving people that match your personality.</p>
-    <p>Select your answers by clicking the corresponing text.</p>
-    <form id="question_form" method="post" action="./verifyquestions">
-        <?php loadQuestions();?>
-        <input type="submit" value="Submit personality test">
-    </form>
-    <p>        
-    </p>                    
-</div>                
-<script> 
-    $(document).ready(function(){
-        $("#question_form").submit(function(event) {
-            $("#personalityTest").hide(200);            
-            $.post("register/verifyquestions", $("#question_form").serialize(), function(data) {
-                console.log(data);
-                $("<input>").attr({
-                    "type": "hidden",
-                    "name": "E",
-                    "value": data.E
-                }).appendTo($("#form"));
-                $("<input>").attr({
-                    "type": "hidden",
-                    "name": "N",
-                    "value": data.N
-                }).appendTo($("#form"));
-                $("<input>").attr({
-                    "type": "hidden",
-                    "name": "T",
-                    "value": data.T
-                }).appendTo($("#form"));
-                $("<input>").attr({
-                    "type": "hidden",
-                    "name": "J",
-                    "value": data.J
-                }).appendTo($("#form"));
-                $("#personalityTest").html(data.html);
-                $("#personalityTest").show(200);
-            });
-            event.preventDefault();
-        });
-    });
-</script>
-            
+        <div id="container">
+            <div id="main">
+                <div class="wrapper">
+                    <div class="text_wrapper">
+                        <h1>Do the personality test!</h1>
+                        <p>By searching your personality type we can give you better results by giving people that match your personality.</p>
+                        <p>Select your answers by clicking the corresponing text.</p>
+                        <form id="question_form" method="post" action="./verifyquestions">
+                            <?php loadQuestions();?>
+                            <input type="submit" value="Submit personality test">
+                        </form>
+                        <p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
 
 <?php
     function loadQuestions() 

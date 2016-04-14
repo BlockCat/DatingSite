@@ -1,8 +1,8 @@
 CREATE TABLE UserProfile(
 	userID INT,
-	userEmail VARCHAR(255),
+	userEmail VARCHAR(255) UNIQUE,
 	userPassword VARCHAR(255),
-	userNickname VARCHAR(50),
+	userNickname VARCHAR(50) UNIQUE,
 	userFirstName VARCHAR(50),
 	userLastName VARCHAR(50),
 	userSex VARCHAR(10),

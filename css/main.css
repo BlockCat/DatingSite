@@ -91,13 +91,16 @@ p {
 }
 
 .error {
-    color: #eee;    
+    color: #eee;
     background-color: #502;
     padding: 3px;
     float: left;
     text-align: left;
     border-radius: 10px 3px 10px 3px;
     box-shadow: 3px 3px 3px #333;
+}
+.error:empty {
+    display: none;
 }
 
 .profile {
