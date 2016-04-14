@@ -20,6 +20,23 @@ class Users_model extends CI_Model {
 			return false;
 		}
 	}
+
+	public function register_user($userdata, $userpersonality, $prefPersonality) {
+		$this->db->insert('UserProfile', $userdata);
+		$userId = $this->db->insert_id();
+
+		$this->db->insert('Personality', $userpersonality);
+		$personalityId = $this->db->insert_id();
+
+		$this->db->insert('Personality', $prefPersonality);
+		$prefPersonality = $this->db->insert_id();
+
+		$this->db->where('userID', $userId);
+		$this->db->update('UserProfile', array(
+			'userPersonality' => $personalityId,
+			'userPersonalityPref' => $prefPersonality));
+
+	}
 	
 	public function edit_user($ID, $email, $pass, $nickname, $firstname, $lastname, $sex, 
 	$birth, $min, $max, $sexpref, $admin, $desc, $pers, $perspref, $brands){

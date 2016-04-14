@@ -29,12 +29,18 @@ class Register extends CI_Controller {
 	
 	public function index()
 	{
+        if ($this->session->userdata('loggedIn') == true) {
+            //header('/');
+            //Redirect to other page here.
+            //return;
+        }
 		$this->load->view('header');
 
         $this->form_validation->set_message('min_length', 'The %s should be at least %d characters.');
         $this->form_validation->set_message('max_length', 'The %s should be at most %d characters.');
         $this->form_validation->set_message('required', '%s is required.');
         $this->form_validation->set_message('matches', '%s should match %s.');
+        $this->form_validation->set_message('greater_than', 'The %s should be greater than %d');
 
         $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[4]|max_length[20]|alpha_numeric');
         $this->form_validation->set_rules('firstname', 'First name', 'trim|required|alpha_numeric|prep_for_form');
@@ -42,34 +48,72 @@ class Register extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[UserProfile.userEmail]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|matches[passwordconfirmation]');
         $this->form_validation->set_rules('passwordconfirmation', 'Password confirmation', 'trim|required');
+        $this->form_validation->set_rules('date', "Birthdate", 'required|regex_match[/[0-9]{4}-[0-9]{2}-[0-9]{2}/]');
+        $this->form_validation->set_rules('minAge', "minimum age", 'required|greater_than[17]');
+        $this->form_validation->set_rules('maxAge', "maximum age", 'required|less_than[105]');
+        $this->form_validation->set_rules('description', 'min_length[100]');
         $this->form_validation->set_rules('profilepicture', 'Profile picture');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('attraction', 'Attraction', 'required');
         if ($this->load->form_validation->run() == FALSE) {
             $this->load->view('register');
         } else {
-            $data = array('post_data' => $this->input->post());
-            $this->questions();
+            $this->registerUser();
         }
 
 	}
 
     public function registerUser() {
-        $errors = array();
-        $username = $_POST['username'];
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $gender = $_POST['gender'];
+        $username = $this->input->post('username');
+        $firstname = $this->input->post('firstname');
+        $lastname = $this->input->post('lastname');
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $birthdate = $this->input->post('date');
+        $description = $this->input->post('description');
+        $gender = $this->input->post('gender');
+        $attraction = $this->input->post('attraction');
+        $minAge = $this->input->post('minAge');
+        $maxAge = $this->input->post('maxAge');
         $personality_array = $this->verifyquestions();
+
+        if (count($attraction) == 1) {
+            $attraction = $attraction[0]; //Attracted to gender m or v.
+        }  else {
+            $attraction = 'b'; //Attracted to both: b.
+        }
+
+        $prefPresonality = array(
+            'e' => $personality_array['i'],
+            'i' => $personality_array['e'],
+            'n' => $personality_array['s'],
+            's' => $personality_array['n'],
+            't' => $personality_array['f'],
+            'f' => $personality_array['t'],
+            'j' => $personality_array['p'],
+            'p' => $personality_array['j']
+        );
+
+        //We have to store the user personality first...
+        $data = array(
+            'userID' => NULL,
+            'userEmail' => $email,
+            'userNickname' => $username,
+            'userPassword' => $password,
+            'userFirstName' => $firstname,
+            'userLastName' => $lastname,
+            'userSex' => $gender,
+            'userBirthdate' => $birthdate,
+            'userMinAgePref' => $minAge,
+            'userMaxAgePref' => $maxAge,
+            'userSexPref' => $attraction,
+            'userAdmin' => false,
+            'userDescription' => $description
+        );
+        $this->load->model('Users_model');
+        $this->Users_model->register_user($data, $personality_array, $prefPresonality);
     }
-    
-    private function questions()
-    {
-        $this->load->view('questions');
-    }
-    
+
     public function verifyquestions() 
     {
         //EI
@@ -121,17 +165,16 @@ class Register extends CI_Controller {
             }
         }
         $data = array(
-            'E' => $E,
-            'N' => $N,
-            'T' => $T,
-            'J' => $J
+            'personalityID' => NULL,
+            'e' => $E,
+            'i' => (1000 - $E),
+            'n' => $N,
+            's' => (1000 - $N),
+            't' => $T,
+            'f' => (1000 - $T),
+            'j' => $J,
+            'p' => (1000 - $J)
         );
-
-        $array = array(
-            'E' => $E,
-            'N' => $N,
-            'T' => $T,
-            'J' => $J);
-        return $array;
+        return $data;
     }
 }

@@ -41,14 +41,19 @@
                                 <td><label class="error"><?php echo form_error('profilepicture'); ?></label></td>
                             </tr>
                             <tr>
+                                <td><label class="forlabel">Birthdate:</label></td>
+                                <td colspan="2"><input type="date" name="date" value="<?php echo set_value('date'); ?>"></td>
+                                <td><label class="error"><?php echo form_error('date'); ?></label></td>
+                            </tr>
+                            <tr>
                                 <td>I am:</td>
                                 <td>                                    
-                                    <input id="male" type="radio" name="gender" value="male" <?php echo set_radio('gender', 'male', TRUE);?>>
+                                    <input id="male" type="radio" name="gender" value="m" <?php echo set_radio('gender', 'm', TRUE);?>>
                                     <label for="male">Male </label>
                                    
                                 </td>
                                 <td>
-                                    <input id="female" type="radio" name="gender" value="female" <?php echo set_radio('gender', 'female');?> >
+                                    <input id="female" type="radio" name="gender" value="v" <?php echo set_radio('gender', 'v');?> >
                                     <label for="female">Female </label>
                                 </td>
                             </tr> 
@@ -66,6 +71,21 @@
                                 <td><label class="error"><?php echo form_error('attraction'); ?></label></td>
                             </tr>                             
                             <tr>
+                            <tr>
+                                <td><label class="forlabel">Minimum age preference:</label></td>
+                                <td colspan="2"><input type="number" name="minAge" value="<?php echo set_value('minAge', 18); ?>"></td>
+                                <td><label class="error"><?php echo form_error('minAge'); ?></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="forlabel">Maximum age preference:</label></td>
+                                <td colspan="2"><input type="number" name="maxAge" value="<?php echo set_value('maxAge', 99); ?>"></td>
+                                <td><label class="error"><?php echo form_error('maxAge'); ?></label></td>
+                            </tr>
+                            <tr>
+                                <td><label class="forlabel">Description:</label></td>
+                                <td colspan="2" rowspan="4"><textarea cols="40" rows="4" type="text" name="description" placeholder="Write a description about yourself, this should have at least 100 characters" value="<?php echo set_value('description'); ?>"></textarea></td>
+                                <td><label class="error"><?php echo form_error('description'); ?></label></td>
+                            </tr>
 
                             </tr>
                         </table>
