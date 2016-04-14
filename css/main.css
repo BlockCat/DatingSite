@@ -144,15 +144,21 @@ p {
 	word-wrap: break-word;
 }
 
-.text_wrapper input {    
+.text_wrapper input {  
+	display: block;
     background-color: #fef;
     border-radius: 3px 10px 10px 10px;
     font-size: 1em;
-    margin-left: 10em; 
-	display: block;	
+    margin-right: auto; 
 	margin-left: auto;
-    margin-right: auto;	
 }
+
+.text_wrapper .forlabel {
+	display: block;
+	margin-right: auto; 
+	margin-left: auto;
+}
+
 
 
 #personalityTest div{
