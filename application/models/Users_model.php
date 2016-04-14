@@ -1,15 +1,10 @@
 <?php
 class Users_model extends CI_Model {
 	
-	public function __construct(){
+	public function __construct()
+	{
 		$this->load->database();
 	}
-	
-	public function get_all_brands(){
-		$query = $this->db->get('Brands');
-		return $query->result_array();
-	}
-	
 	public function authenticate_login($email, $password){
 		$this->db->select('*');
 		$this->db->from('UserProfile');
@@ -25,7 +20,6 @@ class Users_model extends CI_Model {
 			return false;
 		}
 	}
-	
 	
 	public function get_certain_profile($userID){	
 		$this->db->where('userID', $userID);
@@ -47,13 +41,5 @@ class Users_model extends CI_Model {
 		$this->db->where('personalityID', $personalityID);
 		$query = $this->db->get('Personality');
 		return $query->result_array();
-	}
-	
-	public function get_brands($userID){
-		$this->db->where('user', $userID);
-		$query = $this->db->get('BrandPref');
-		$shuffledarray = $query->result_array();
-		shuffle ($shuffledarray);
-		return $shuffledarray;
 	}
 }

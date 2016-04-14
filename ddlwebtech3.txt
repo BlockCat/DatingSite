@@ -11,6 +11,7 @@ CREATE TABLE UserProfile(
 	userMaxAgePref INT,
 	userSexPref VARCHAR(10),
 	userAdmin BOOLEAN,
+	userDescription TEXT,
 	userPersonality INT REFERENCES Personality(personalityID),
 	userPersonalityPref INT REFERENCES Personality(personalityID),	
 	PRIMARY KEY (userID)

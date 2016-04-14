@@ -1,0 +1,58 @@
+INSERT INTO Personality(personalityID, e, n, f, j, i, s, t, p) VALUES (1, 50, 50, 50, 50, 50, 50, 50, 50);
+INSERT INTO Personality(personalityID, e, n, f, j, i, s, t, p) VALUES (2, 40, 50, 50, 50, 60, 50, 50, 50);
+INSERT INTO Personality(personalityID, e, n, f, j, i, s, t, p) VALUES (3, 40, 50, 70, 50, 60, 50, 30, 50);
+INSERT INTO Personality(personalityID, e, n, f, j, i, s, t, p) VALUES (4, 40, 44, 70, 50, 60, 56, 30, 50);
+INSERT INTO Personality(personalityID, e, n, f, j, i, s, t, p) VALUES (5, 40, 44, 70, 31, 60, 56, 30, 69);
+INSERT INTO Personality(personalityID, e, n, f, j, i, s, t, p) VALUES (6, 71, 44, 70, 31, 29, 56, 30, 69);
+INSERT INTO Personality(personalityID, e, n, f, j, i, s, t, p) VALUES (7, 71, 44, 33, 31, 29, 56, 67, 69);
+
+INSERT INTO UserProfile(userID, userEmail, userPassword, userNickname, userFirstName, userLastName, 
+userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref)
+VALUES (1, "a@a.aa", "123", "pido", "ari", "saadon", "v", "1996-01-01", 18, 24, "m", 0, "hihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihahohihaho", 2,1);
+
+INSERT INTO UserProfile(userID, userEmail, userPassword, userNickname, userFirstName, userLastName, 
+userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref)
+VALUES (2, "b@a.aa", "123", "zino", "ari", "saadon", "m", "1996-01-01", 18, 24, "v", 0,"hihaho", 1,1);
+
+INSERT INTO UserProfile(userID, userEmail, userPassword, userNickname, userFirstName, userLastName, 
+userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref)
+VALUES (3, "c@a.aa", "123", "mino", "ari", "saadon", "m", "1996-01-01", 18, 24, "m", 0,"hihaho", 5,1);
+
+INSERT INTO UserProfile(userID, userEmail, userPassword, userNickname, userFirstName, userLastName, 
+userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref)
+VALUES (4, "d@a.aa", "123", "gino", "ari", "saadon", "v", "1996-01-01", 18, 24, "v", 0,"hihaho", 7,1);
+
+INSERT INTO UserProfile(userID, userEmail, userPassword, userNickname, userFirstName, userLastName, 
+userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref)
+VALUES (5, "e@a.aa", "123", "wino", "ari", "saadon", "m", "1996-01-01", 18, 24, "v", 0,"hihaho", 6,1);
+
+INSERT INTO UserProfile(userID, userEmail, userPassword, userNickname, userFirstName, userLastName, 
+userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref)
+VALUES (6, "f@a.aa", "123", "kino", "ari", "saadon", "v", "1996-01-01", 18, 24, "m", 0,"hihaho", 3,1);
+
+INSERT INTO UserProfile(userID, userEmail, userPassword, userNickname, userFirstName, userLastName, 
+userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref)
+VALUES (7, "g@a.aa", "123", "vido", "ari", "saadon", "m", "1996-01-01", 18, 24, "v", 0,"hihaho", 4,1);
+
+INSERT INTO UserProfile(userID, userEmail, userPassword, userNickname, userFirstName, userLastName, 
+userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref)
+VALUES (8, "h@a.aa", "123", "gido", "ari", "saadon", "m", "1996-01-01", 18, 24, "m", 0,"hihaho", 7,1);
+
+INSERT INTO Brands(brandName) VALUES ("nike");
+INSERT INTO Brands(brandName) VALUES ("adidas");
+INSERT INTO Brands(brandName) VALUES ("puma");
+INSERT INTO Brands(brandName) VALUES ("reebok");
+INSERT INTO Brands(brandName) VALUES ("le coq sportif");
+INSERT INTO Brands(brandName) VALUES ("lacoste");
+INSERT INTO Brands(brandName) VALUES ("hugo boss");
+INSERT INTO Brands(brandName) VALUES ("champion");
+INSERT INTO Brands(brandName) VALUES ("primark");
+
+INSERT INTO BrandPref(user, brand) VALUES (1, "puma");
+INSERT INTO BrandPref(user, brand) VALUES (2, "primark");
+INSERT INTO BrandPref(user, brand) VALUES (3, "lacoste");
+INSERT INTO BrandPref(user, brand) VALUES (4, "primark");
+INSERT INTO BrandPref(user, brand) VALUES (5, "reebok");
+INSERT INTO BrandPref(user, brand) VALUES (6, "primark");
+INSERT INTO BrandPref(user, brand) VALUES (7, "nike");
+INSERT INTO BrandPref(user, brand) VALUES (8, "primark");
