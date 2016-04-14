@@ -29,26 +29,14 @@ class Login extends CI_Controller {
 	
 	public function index()
 	{
-		$this->form_validation->set_message('valid_email', "Invalid email");
-		$this->form_validation->set_message('authenticate_login', "We could not log you in, please try again.");
-
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-		$this->form_validation->set_rules('password', 'Password', 'required|md5');
-
-		$this->load->view('header');
-		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('login', array('triedlogin' => false));
-		} else {
-			if ($this->authenticate_login() == false) {
-				$this->load->view('login', array('triedlogin' => true));
-			}
-		}
-
-
+		$this->form_validation->set_rules('email', 'Email', 'callback_authenticate_login');
+ 		$this->form_validation->run();
+ 		$this->load->view('header');	
+        $this->load->view('login');
 	}
 	
 	//no input validation yet!!!
-	public function authenticate_login(){
+	public function authenticate_login($email){
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		$result = $this->Users_model->authenticate_login($email, $password)[0];
@@ -72,10 +60,10 @@ class Login extends CI_Controller {
 			$this->session->set_userdata($newdata);
 			$this->session->unset_userdata('triedlogin');
 			header('Location: http://localhost/DatingSite/');
-			return true;
 		}
 		else
 		{
+			$this->session->set_userdata('triedlogin', true);
 			return false;
 		}		
 	}

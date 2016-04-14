@@ -15,7 +15,7 @@
     <div class="header">
         <div id="header_content"> 
 		<?php
-		if($this->session->userdata('loggedIn')){
+		if(!isset($_SESSION['loggedIn'])){
             echo '<a href="./login"><button>Sign in</button></a>';			
             echo '<a href="./register"><button>Create account</button></a>';
             echo '<a href="./"><button>Home</button></a>';
