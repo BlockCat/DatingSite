@@ -156,13 +156,19 @@ p {
 	margin-left: auto;
 }
 
+
+
 .text_wrapper .forlabel {
 	display: block;
 	margin-right: auto; 
 	margin-left: auto;
 }
 
-
+.textareauser {
+	background-color: #fef;
+    border-radius: 3px 10px 10px 10px;
+    font-size: 1em;
+}
 
 #personalityTest div{
     background-color: #FF9536;

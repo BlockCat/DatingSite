@@ -24,12 +24,39 @@ class profilepage extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Users_model');
 		$this->load->library('session');
+		$this->load->library('form_validation');
 	}
 	
 	public function index()
 	{  
+		$this->form_validation->set_rules('nickname', 'Nickname', 'callback_overwrite_user');
+		$this->form_validation->run();
 		$data['userdata'] = $this->Users_model->get_certain_profile($this->input->get('ID'))[0];
 		$this->load->view('header');
 		$this->load->view('profile', $data);
 	}
+	
+	public function overwrite_user($nickname)
+	{	
+		$nickname = $this->input->post('nickname');
+		$first = $this->input->post('firstname');
+		$last = $this->input->post('lastname');
+		$sex = $this->input->post('sex');
+		$date = $this->input->post('date');
+		$sexpref = $this->input->post('sexpref');
+		$min = $this->input->post('min');
+		$max = $this->input->post('max');
+		$brands = $this->input->post('brands');
+		$email = $this->input->post('email');
+		$description = $this->input->post('description');
+		$pass = $this->input->post('password');
+
+		$tempbrand = explode(", ", $brands);
+		
+		$this->Users_model->edit_user($_SESSION['userID'], $email, $pass, $nickname,
+		$first, $last, $sex, $date, $min, $max, $sexpref, $_SESSION['userAdmin'], $description, 
+		$_SESSION['userPersonality'], $_SESSION['userPersonalityPref'], $tempbrand);
+		
+	}
+	
 }

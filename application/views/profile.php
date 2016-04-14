@@ -7,49 +7,54 @@
 				<?php if(isset($_SESSION['loggedIn'])){?>
 					<?php if($_SESSION['userID'] == $userdata['userID']){?>
 						<!--if the profile is our own account-->
-						<label class="forlabel">Nickname:</label>
-						<input class="attribute" type="text" id="nicknameprofile">
-						<br>
-						<label class="forlabel">Firstname:</label>
-						<input class="attribute" type="text" id="firstnameprofile">
-						<br>
-						<label class="forlabel">Lastname:</label>
-						<input class="attribute" type="text" id="lastnameprofile">
-						<br>
-						<label class="forlabel">Personality:</label>
-						<p class="attribute" id="personalityprofile"></p>
-						<br>
-						<label class="forlabel">Personality pref:</label>
-						<p class="attribute" id="personalitypref"></p>
-						<br>
-						<label class="forlabel">Sex:</label>
-						<input class="attribute" type="text" id="sexprofile">
-						<br>
-						<label class="forlabel">Date of birth:</label>
-						<input class="attribute" type="text" id="ageprofile">
-						<br>
-						<label class="forlabel">Sexual pref:</label>
-						<input class="attribute" type="text" id="sexpref">
-						<br>
-						<label class="forlabel">Minimal age pref:</label>
-						<input class="attribute" type="text" id="minagepref">
-						<br>
-						<label class="forlabel">Maximium age pref:</label>
-						<input class="attribute" type="text" id="maxagepref">
-						<br>
-						<label class="forlabel">Description:</label>
-						<input class="attribute" type="text" id="descriptionprofile">
-						<br>
-						<label class="forlabel">Brands:</label>
-						<input class="attribute" type="text" id="brandsprofile">
-						<br>
-						<label class="forlabel">Email:</label>
-						<input class="attribute" type="text" id="emailprofile">
-						<br>
-						<label class="forlabel">password:</label>
-						<input class="attribute" type="text" id="passwordprofile">
-						<br>
-						<input type="submit" name="submit">
+						<form method="post" accept-charset="utf-8"/>
+							<label class="forlabel">Nickname:</label>
+							<input name="nickname" type="text" id="nicknameprofile">
+							<br>
+							<label class="forlabel">Firstname:</label>
+							<input name="firstname" type="text" id="firstnameprofile">
+							<br>
+							<label class="forlabel">Lastname:</label>
+							<input name="lastname" type="text" id="lastnameprofile">
+							<br>
+							<label class="forlabel">Personality:</label>
+							<p id="personalityprofile"></p>
+							<br>
+							<label class="forlabel">Personality pref:</label>
+							<p id="personalitypref"></p>
+							<br>
+							<label class="forlabel">Sex:</label>
+							<input name="sex" type="text" id="sexprofile">
+							<br>
+							<label class="forlabel">Date of birth:</label>
+							<input name="date" type="text" id="ageprofile">
+							<br>
+							<label class="forlabel">Sexual pref:</label>
+							<input name="sexpref" type="text" id="sexpref">
+							<br>
+							<label class="forlabel">Minimal age pref:</label>
+							<input name="min" type="text" id="minagepref">
+							<br>
+							<label class="forlabel">Maximium age pref:</label>
+							<input name="max" type="text" id="maxagepref">
+							<br>						
+							<label class="forlabel">Brands:</label>
+							<textarea name="brands" rows="8" cols="50" class="textareauser" id="brandsprofile">
+							</textarea>
+							<br>
+							<label class="forlabel">Email:</label>
+							<input name="email" type="text" id="emailprofile">
+							<br>
+							<label class="forlabel">Description:</label>
+							<textarea name="description" rows="8" cols="50" class="textareauser" id="descriptionuser">
+							</textarea>
+							<br>
+							<label class="forlabel">password:</label>
+							<input name="password" type="text" id="passwordprofile">
+							<br>
+							<input type="submit" name="submit">
+	                    </form>                   
+
 					<?php }else{?>
 						<!--is different from the list below this one, because this one should also contain email & name if there is a mutual like-->
 						<p id="nicknameprofile"></p>
@@ -114,8 +119,8 @@
 					$("#personalityprofile").html(getpersonality(personalitytype));
 					$("#sexpref").attr('value','<?php echo $userdata['userSexPref']?>');
 					$("#personalitypref").html(getpersonality(personalitypref));
-					$("#brandsprofile").attr('value',getbrands(brands));
-					$("#descriptionprofile").attr('value','<?php echo $userdata['userDescription']?>');
+					$("#brandsprofile").html(getbrands(brands));
+					$("#descriptionuser").html('<?php echo $userdata['userDescription']?>');
 					$("#minagepref").attr('value','<?php echo $userdata['userMinAgePref']?>');
 					$("#maxagepref").attr('value','<?php echo $userdata['userMaxAgePref']?>');
 					$("#emailprofile").attr('value','<?php echo $userdata['userEmail']?>');
@@ -149,10 +154,10 @@
 	}
 	
 	function getbrands(brands){
-		brandresult = '';
 		branddata = JSON.parse(brands);
-		for (index = 0; index < branddata.length; index++) {
-			brandresult += branddata[index].brand + ', ';
+		brandresult = branddata[0].brand;
+		for (index = 1; index < branddata.length; index++) {
+			brandresult += ', ' + branddata[index].brand;
 		}
 		return brandresult;
 	}

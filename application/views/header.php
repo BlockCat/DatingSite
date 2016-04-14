@@ -22,6 +22,8 @@
 		}
 		else{
 			echo '<a href="./signout"><button>Sign out</button></a>';
+            echo '<a href="./profilepage?ID='.$_SESSION["userID"].'"><button>My profile</button></a>';
+            echo '<a href="./"><button>Home</button></a>';
 		}
 		?>
         </div>
