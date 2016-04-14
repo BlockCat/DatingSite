@@ -22,13 +22,13 @@ class profilebrand extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Users_model');
+		$this->load->model('Brand_Model');
 		$this->load->library('session');
 	}
 	
 	public function index()
 	{  
-		$personality = $this->Users_model->get_brands($this->input->get('ID'));
+		$personality = $this->Brand_Model->get_brands($this->input->get('ID'));
 		echo json_encode($personality);
 	}
 }

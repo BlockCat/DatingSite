@@ -28,7 +28,6 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		$data['brands'] = $this->Users_model->get_all_brands();
 		$this->load->view('header');
 		$this->load->view('matchfinder');
 		$this->load->view('info');
