@@ -22,6 +22,8 @@ class Users_model extends CI_Model {
 	}
 
 	public function register_user($userdata, $userpersonality, $prefPersonality, $brands) {
+
+		$this->db->trans_begin(); //Begin transaction, so if something goes wrong we can roll back.
 		$this->db->insert('UserProfile', $userdata);
 		$userId = $this->db->insert_id();
 
@@ -43,8 +45,16 @@ class Users_model extends CI_Model {
 				'brand' => 	$brand
 			);
 			$this->db->insert('BrandPref', $newbrand);
-
 		}
+
+		if ($this->db->trans_status() === false) { //If the transaction went wrong, roll back return false.
+			$this->db->trans_rollback();
+			return false;
+		} else {
+			$this->db->trans_commit();
+			return true;
+		}
+
 	}
 	
 	public function edit_user($ID, $email, $pass, $nickname, $firstname, $lastname, $sex, 

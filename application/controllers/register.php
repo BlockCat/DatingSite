@@ -26,6 +26,7 @@ class Register extends CI_Controller {
         $this->load->model('Brand_Model');
 		$this->load->library('session');
 		$this->load->library('form_validation');
+        $this->load->database();
 	}
 	
 	public function index()
@@ -67,7 +68,29 @@ class Register extends CI_Controller {
             $this->load->view('register', array('brands' => $brandView, 'questions' => $questionsView));
 
         } else {
-            $this->registerUser();
+            if ($this->registerUser()) {
+                //Success
+                $email = $this->input->post('email');
+                $password = $this->input->post('password');
+                $result = $this->Users_model->authenticate_login($email, $password)[0];
+                if($result){
+                    $newdata = array(
+                        'loggedIn' => true,
+                        'userID' =>	$result['userID'],
+                        'userAdmin' => $result['userAdmin'],
+                        'userPersonality' => $result['userPersonality'],
+                        'userPersonalityPref' => $result['userPersonalityPref'],
+                    );
+                    $this->session->set_userdata($newdata);
+                    header('Location: http://localhost/DatingSite/profilepage/upload');
+                } else {
+                    header('Location: http://localhost/DatingSite/login/');
+                }
+            } else {
+                $brandView = $this->load->view('brands_register', array('brands' => $this->Brand_Model->get_all_brands()), true);
+                $questionsView = $this->load->view('questions', '', true);
+                $this->load->view('register', array('brands' => $brandView, 'questions' => $questionsView));
+            }
 
             //header('Location: http://localhost/DatingSite/');
         }
@@ -95,8 +118,6 @@ class Register extends CI_Controller {
         }  else {
             $attraction = 'b'; //Attracted to both: b.
         }
-
-        echo print_r($brands);
 
         $prefPresonality = array(
             'e' => $personality_array['i'],
@@ -126,7 +147,7 @@ class Register extends CI_Controller {
             'userDescription' => $description
         );
         $this->load->model('Users_model');
-        $this->Users_model->register_user($data, $personality_array, $prefPresonality, $brands);
+        return $this->Users_model->register_user($data, $personality_array, $prefPresonality, $brands);
     }
 
     public function verifyquestions() 
