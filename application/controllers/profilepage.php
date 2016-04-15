@@ -25,6 +25,7 @@ class profilepage extends CI_Controller {
 		$this->load->model('Users_model');
 		$this->load->library('session');
 		$this->load->library('form_validation');
+		$this->load->helper('url');
 	}
 	
 	public function index()
@@ -56,7 +57,80 @@ class profilepage extends CI_Controller {
 		$this->Users_model->edit_user($_SESSION['userID'], $email, $pass, $nickname,
 		$first, $last, $sex, $date, $min, $max, $sexpref, $_SESSION['userAdmin'], $description, 
 		$_SESSION['userPersonality'], $_SESSION['userPersonalityPref'], $tempbrand);
-		
 	}
-	
+
+	public function upload() {
+
+		if($this->session->userdata('loggedIn')) {
+
+
+			$userId = $this->session->userdata('userID');
+			$image_source = base_url("images/profilepic/" . $userId . ".jpg");
+
+			//Check if size exists.
+			if (@getimagesize($image_source)) {
+				$image_source = $image_source;
+			} else {
+				$image_source = base_url("/images/profilepic/msilhoutte.jpg");
+			}
+			//--------------
+
+			$data = array(
+				'imgsrc' => $image_source
+			);
+
+			$this->load->view('header');
+
+			//Form validation.
+			$this->form_validation->set_message('do_upload', 'Your image is not the correct size or its type is not allowed');
+			$this->form_validation->set_rules('userfile', 'Image to upload', 'callback_do_upload');
+
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('upload', $data);
+			} else {
+				//Successfull upload...
+				redirect(base_url('profilepage?ID='.$userId));
+			}
+		} else {
+			redirect(base_url());
+		}
+	}
+
+	public function do_upload()
+	{
+		if ($this->session->userdata('loggedIn')) {
+			$userId = $this->session->userdata('userID');
+			//Upload configuration
+			$config['file_name'] = $userId . '.jpg';
+			$config['upload_path'] = './images/profilepic/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size'] = 500;
+			$config['max_width'] = 513;
+			$config['max_height'] = 513;
+			$config['overwrite'] = true;
+
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload()) {
+				//Failure
+				$errors = $this->upload->display_errors();
+				return false;
+				//redirect(base_url('profilepage/upload'));
+			} else {
+				//Success?
+
+				$image['source_image'] = $this->upload->upload_path . $this->upload->file_name;
+				$image['create_thumb'] = true;
+				$image['new_image'] = './images/profilepic/';
+				$image['quality'] = 50;
+				$image['width'] = 256;
+				$image['height'] = 256;
+
+				$this->load->library('image_lib', $image);
+				$this->image_lib->resize();
+				return true;
+			}
+		}
+		return false;
+	}
 }
