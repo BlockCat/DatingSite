@@ -168,6 +168,31 @@ p {
     font-size: 1em;
 }
 
+#like {
+	margin-bottom: 1em;
+    font-size: 1.3em;   
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #ae3551;
+    border: none;    
+    height: 100%;    
+}
+
+#like:hover{        
+    background-color: #9B0343;
+    color: #ffffff;
+}
+
+#liked {
+	margin-bottom: 1em;
+    font-size: 1.3em;   
+    border-radius: 5px;
+    background-color: #9B0343;
+    color: #ffffff;
+    border: none;    
+    height: 100%;    
+}
+
 #personalityTest div{
     background-color: #FF9536;
 }

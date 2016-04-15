@@ -90,6 +90,48 @@ class Users_model extends CI_Model {
 		}
 	}
 	
+	public function set_liked($user, $profile){
+		$like = array(
+			'likes' =>	$user,
+			'liked' => 	$profile
+		);
+		
+		$this->db->insert('UserLikes', $like);
+		return $like;
+		
+	}
+	
+	public function get_relation($user, $profile){
+		$this->db->select('*');
+		$this->db->from('UserLikes');
+		$this->db->where('likes', $user);
+		$this->db->where('liked', $profile);		
+		$given = $this->db->get();
+		
+		$this->db->select('*');
+		$this->db->from('UserLikes');
+		$this->db->where('likes', $profile);
+		$this->db->where('liked', $user);		
+		$received = $this->db->get();
+		
+		if(count($given->result_array()) == 1){
+			if(count($received->result_array()) == 1){
+				return 'm';
+			}
+			else{
+				return "g";
+			}
+		}
+		else{
+			if($received->num_rows() == 1){
+				return "r";
+			}
+			else{
+				return "n";
+			}
+		}
+	}	
+	
 	
 	public function get_certain_profile($userID){	
 		$this->db->where('userID', $userID);
