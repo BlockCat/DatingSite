@@ -21,7 +21,7 @@ class Users_model extends CI_Model {
 		}
 	}
 
-	public function register_user($userdata, $userpersonality, $prefPersonality) {
+	public function register_user($userdata, $userpersonality, $prefPersonality, $brands) {
 		$this->db->insert('UserProfile', $userdata);
 		$userId = $this->db->insert_id();
 
@@ -36,6 +36,15 @@ class Users_model extends CI_Model {
 			'userPersonality' => $personalityId,
 			'userPersonalityPref' => $prefPersonality));
 
+
+		foreach($brands as $id => $brand){
+			$newbrand = array(
+				'user' =>	$userId,
+				'brand' => 	$brand
+			);
+			$this->db->insert('BrandPref', $newbrand);
+
+		}
 	}
 	
 	public function edit_user($ID, $email, $pass, $nickname, $firstname, $lastname, $sex, 

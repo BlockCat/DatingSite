@@ -23,6 +23,7 @@ class Register extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Users_model');
+        $this->load->model('Brand_Model');
 		$this->load->library('session');
 		$this->load->library('form_validation');
 	}
@@ -35,6 +36,7 @@ class Register extends CI_Controller {
             //Redirect to other page here.
             //return;
         }
+
 		$this->load->view('header');
 
         $this->form_validation->set_message('min_length', 'The %s should be at least %d characters.');
@@ -47,6 +49,7 @@ class Register extends CI_Controller {
         $this->form_validation->set_rules('firstname', 'First name', 'trim|required|alpha_numeric|prep_for_form');
         $this->form_validation->set_rules('lastname', 'Last name', 'trim|required|alpha_numeric|prep_for_form');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[UserProfile.userEmail]');
+        //$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|matches[passwordconfirmation]');
         $this->form_validation->set_rules('passwordconfirmation', 'Password confirmation', 'trim|required');
         $this->form_validation->set_rules('date', "Birthdate", 'required|regex_match[/[0-9]{4}-[0-9]{2}-[0-9]{2}/]');
@@ -56,11 +59,17 @@ class Register extends CI_Controller {
         $this->form_validation->set_rules('profilepicture', 'Profile picture');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('attraction', 'Attraction', 'required');
+        $this->form_validation->set_rules('brandslist[]', 'Brands', 'required');
         if ($this->load->form_validation->run() == FALSE) {
-            $this->load->view('register');
+
+            $brandView = $this->load->view('brands_register', array('brands' => $this->Brand_Model->get_all_brands()), true);
+            $questionsView = $this->load->view('questions', '', true);
+            $this->load->view('register', array('brands' => $brandView, 'questions' => $questionsView));
+
         } else {
             $this->registerUser();
-			header('Location: http://localhost/DatingSite/');
+
+            //header('Location: http://localhost/DatingSite/');
         }
 
 	}
@@ -77,6 +86,8 @@ class Register extends CI_Controller {
         $attraction = $this->input->post('attraction');
         $minAge = $this->input->post('minAge');
         $maxAge = $this->input->post('maxAge');
+        $brands = $this->input->post('brandslist');
+
         $personality_array = $this->verifyquestions();
 
         if (count($attraction) == 1) {
@@ -84,6 +95,8 @@ class Register extends CI_Controller {
         }  else {
             $attraction = 'b'; //Attracted to both: b.
         }
+
+        echo print_r($brands);
 
         $prefPresonality = array(
             'e' => $personality_array['i'],
@@ -113,7 +126,7 @@ class Register extends CI_Controller {
             'userDescription' => $description
         );
         $this->load->model('Users_model');
-        $this->Users_model->register_user($data, $personality_array, $prefPresonality);
+        $this->Users_model->register_user($data, $personality_array, $prefPresonality, $brands);
     }
 
     public function verifyquestions() 

@@ -83,17 +83,24 @@
                             </tr>
                             <tr>
                                 <td><label class="forlabel">Description:</label></td>
-                                <td colspan="2" rowspan="4"><textarea cols="40" rows="4" type="text" name="description" placeholder="Write a description about yourself, this should have at least 100 characters" value="<?php echo set_value('description'); ?>"></textarea></td>
+                                <td colspan="2" rowspan="4">
+                                    <textarea cols="40" rows="4" type="text" name="description" placeholder="Write a description about yourself, this should have at least 100 characters"><?php echo set_value('description'); ?></textarea></td>
                                 <td><label class="error"><?php echo form_error('description'); ?></label></td>
                             </tr>
 
                             </tr>
                         </table>
-                    <div id="personalityTest">
+                    <div id="brandsTest">
                         <?php
-                            $this->load->view('questions');
+                        echo $brands;
                         ?>
                     </div>
+                    <div id="personalityTest">
+                        <?php
+                            echo $questions;
+                        ?>
+                    </div>
+
                     <input type="submit" name="submit">
                     </form>
 
