@@ -30,6 +30,7 @@ class Register extends CI_Controller {
 	public function index()
 	{
         if ($this->session->userdata('loggedIn') == true) {
+			header('Location: http://localhost/DatingSite/');
             //header('/');
             //Redirect to other page here.
             //return;
@@ -59,6 +60,7 @@ class Register extends CI_Controller {
             $this->load->view('register');
         } else {
             $this->registerUser();
+			header('Location: http://localhost/DatingSite/');
         }
 
 	}
