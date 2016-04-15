@@ -57,6 +57,7 @@
 
 					<?php }else{?>
 						<!--is different from the list below this one, because this one should also contain email & name if there is a mutual like-->
+						<button id="like">Like</button>
 						<p id="nicknameprofile"></p>
 						<p id="sexprofile"></p>
 					 	<p id="ageprofile"></p>
@@ -99,7 +100,29 @@
 		<?php }else{?>
 			setprofile();
 		<?php } ?>
+		
+		$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
+		'profileID':<?php echo $userdata['userID']?>}, function (likeRelation){
+			console.log(likeRelation);
+			//n= none, g= given, r= received, m=mutual
+			if(likeRelation == "n" || likeRelation == "r"){			
+				$("#like").click(function(){
+					$.get("./liker", {'userID':<?php echo $_SESSION['userID']?>,
+					'profileID':<?php echo $userdata['userID']?>}, function (){
+						$("#like").unbind('click');
+						$("#like").attr('id', 'liked');
+						$("#liked").html('Liked');
+					});
+				});
+			}else{
+				$("#like").attr('id', 'liked');
+				$("#liked").html('Liked');
+			}
+			
+		});
 	});
+	
+	
 	
 	
 	function setuser(){
@@ -163,7 +186,6 @@
 	}
 	
 	function getpersonality(personalitydata) {
-		console.log(personalitydata);
 		result = '';
 		person = JSON.parse(personalitydata)[0];
 		if(parseInt(person.e) >= parseInt(person.i)){
