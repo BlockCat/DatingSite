@@ -82,19 +82,12 @@ class profilepage extends CI_Controller {
 	public function upload() {
 
 		if($this->session->userdata('loggedIn')) {
-
+			$this->load->helper('user');
 
 			$userId = $this->session->userdata('userID');
 			$image_source = base_url("images/profilepic/" . $userId . ".jpg");
-
-			//Check if size exists.
-			if (@getimagesize($image_source)) {
-				$image_source = $image_source;
-			} else {
-				$image_source = base_url("/images/profilepic/msilhoutte.jpg");
-			}
-			//--------------
-
+			$image_source = get_profile_image_src($userId);
+			
 			$data = array(
 				'imgsrc' => $image_source
 			);
@@ -143,8 +136,8 @@ class profilepage extends CI_Controller {
 				$image['create_thumb'] = true;
 				$image['new_image'] = './images/profilepic/';
 				$image['quality'] = 50;
-				$image['width'] = 256;
-				$image['height'] = 256;
+				$image['width'] = 200;
+				$image['height'] = 200;
 
 				$this->load->library('image_lib', $image);
 				$this->image_lib->resize();
