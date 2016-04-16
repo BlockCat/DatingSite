@@ -104,8 +104,6 @@ if(!function_exists('get_profile_image')) {
             }
         }
 
-
-
         return $image_source;
     }
 }
