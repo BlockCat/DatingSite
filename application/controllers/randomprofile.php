@@ -42,6 +42,8 @@ class randomprofile extends CI_Controller {
 		foreach($profiles as $key => $value) {
 			$profiles[$key]['image'] = get_profile_image_src($value['userID'], $hide, true);
 		}
+
+		header('Content-Type: application/json');
 		echo json_encode($profiles);
 	}
 }

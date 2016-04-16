@@ -7,10 +7,9 @@
             $this->load->helper('url');
             $this->load->helper('user');
             $this->load->model('Brand_Model');
+            $this->load->model('Users_model');
             $this->load->library('session');
             $this->load->library('form_validation');
-            $this->load->model('Users_model');
-
         }
 
         public function index() {
@@ -54,16 +53,61 @@
         }
 
         private function search_profiles() {
-            $gender = $this->input->post('gender');
-            $preference = $this->input->post('preference');
-            $ageMin =$this->input->post('minage');
-            $ageMax = $this->input->post('maxage');
-            $e = $this->input->post('e');
-            $n = $this->input->post('n');
-            $t = $this->input->post('t');
-            $f = $this->input->post('f');
-            $brands = $this->input->post('brands');
-            $this->load->view('searchresults');
+            $data['gender'] = $this->input->post('gender');
+            $data['preference'] = $this->input->post('preference');
+            $data['ageMin'] =$this->input->post('minage');
+            $data['ageMax'] = $this->input->post('maxage');
+            $data['e'] = $this->input->post('e');
+            $data['n'] = $this->input->post('n');
+            $data['t'] = $this->input->post('t');
+            $data['f'] = $this->input->post('f');
+            $data['brands'] = $this->input->post('brands');
+
+            $this->load->view('searchresults', $data);
+        }
+
+        public function get_profiles() {
+            $gender = $this->input->get('gender');
+            $pref = $this->input->get('preference');
+
+            if (!$pref || count($pref) > 1)
+                $pref = 'b';
+            else
+                $pref = $pref[0];
+
+
+            $amin = $this->input->get('minage', true);
+            if (!$amin) $amin = 0;
+
+            $amax = $this->input->get('maxage', true);
+            if (!$amax) $amax = 99;
+
+            $e = $this->input->get('e');
+            $n = $this->input->get('n');
+            $t = $this->input->get('t');
+            $f = $this->input->get('f');
+            $brands = $this->input->get('brands');
+            $result = $this->Users_model->search_users($gender, $pref, $amin, $amax);
+
+//            echo print_r($result);
+
+            foreach($result as $key => $value) {
+                //echo print_r($value);
+                $result[$key]['image'] = get_profile_image_src($value['userID'], false, true);
+                $result[$key]['personality'] = get_pretty_personality($value['userID']);
+            }
+
+            //$this->cmp($result[0], $result[1]);
+            //usort($result, "cmp");
+
+            header('Content-Type: application/json');
+            echo json_encode($result);
+        }
+
+        private function cmp($user1, $user2) {
+
+            //echo print_r($user1['userID']);
+
         }
 
 

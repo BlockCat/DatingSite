@@ -108,3 +108,17 @@ if(!function_exists('get_profile_image')) {
     }
 }
 
+if (!function_exists('get_pretty_personality')) {
+    function get_pretty_personality($userId) {
+        $controller = get_instance();
+        $controller->load->model('Users_model');
+
+        $personality = $controller->Users_model->get_personality($userId)[0];
+
+        $e = (($personality['e'] >= 50) ? 'e: '.$personality['e']/10 : 'i: '.$personality['i']/10).'%';
+        $n = (($personality['n'] >= 50) ? 'n: '.$personality['n']/10 : 's: '.$personality['s']/10).'%';
+        $t = (($personality['t'] >= 50) ? 't: '.$personality['t']/10 : 'f: '.$personality['f']/10).'%';
+        $j = (($personality['j'] >= 50) ? 'j: '.$personality['j']/10 : 'p: '.$personality['p']/10).'%';
+        return $e.", ".$n.", ".$t.", ". $j;
+    }
+}

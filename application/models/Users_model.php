@@ -175,4 +175,27 @@ class Users_model extends CI_Model {
 		$query = $this->db->get('Personality');
 		return $query->result_array();
 	}
+
+	public function search_users($gender, $pref, $amin, $amax) {
+		//Gender of the one searching, the people displayed should like his gender too.
+		//where dates between today - minage and today - maxage
+
+		$datemin = new DateTime();
+		$datemax = new DateTime();
+		$datemin = $datemin->modify("-{$amin} year")->format('Y-m-d');
+		$datemax = $datemax->modify("-{$amax} year")->format('Y-m-d');
+
+		$this->db->select('userID, userNickname, userSex, userBirthdate, userPersonality, userDescription');
+		$this->db->where('userBirthdate <', $datemin);
+		$this->db->where('userBirthdate >', $datemax);
+		$this->db->where_in('userSexPref', array('b', $gender));
+
+		if ($pref == 'v') {
+			$this->db->where('userSex', 'v');
+		} else if ($pref == 'm') {
+			$this->db->where('userSex', 'm');
+		}
+		return $this->db->get('Userprofile')->result_array();
+
+	}
 }
