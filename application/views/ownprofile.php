@@ -2,7 +2,6 @@
 	<div id="main"> 
 		<div class="wrapper">
 			<div class="text_wrapper">
-				<h1>Find your perfect partner!</h1>
 					<?php echo form_open('register', array('id' => 'form'));?>
 					<table>
 						<tr>
