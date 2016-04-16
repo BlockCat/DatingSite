@@ -26,7 +26,7 @@ class Register extends CI_Controller {
         $this->load->model('Brand_Model');
 		$this->load->library('session');
 		$this->load->library('form_validation');
-        $this->load->database();
+
 	}
 	
 	public function index()
@@ -38,6 +38,8 @@ class Register extends CI_Controller {
             //return;
         }
 
+        $this->load->database();
+
 		$this->load->view('header');
 
         $this->form_validation->set_message('min_length', 'The %s should be at least %d characters.');
@@ -45,15 +47,18 @@ class Register extends CI_Controller {
         $this->form_validation->set_message('required', '%s is required.');
         $this->form_validation->set_message('matches', '%s should match %s.');
         $this->form_validation->set_message('greater_than', 'The %s should be greater than %d');
+        $this->form_validation->set_message('date_valid', 'The %s is invalid');
+        $this->form_validation->set_message('date_older_than_18', 'You must be older than 18 to use this site');
+        $this->form_validation->set_message('is_unique_email', '%s already exists');
 
         $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[4]|max_length[20]|alpha_numeric');
         $this->form_validation->set_rules('firstname', 'First name', 'trim|required|alpha_numeric|prep_for_form');
         $this->form_validation->set_rules('lastname', 'Last name', 'trim|required|alpha_numeric|prep_for_form');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[UserProfile.userEmail]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_is_unique_email');
         //$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|matches[passwordconfirmation]');
         $this->form_validation->set_rules('passwordconfirmation', 'Password confirmation', 'trim|required');
-        $this->form_validation->set_rules('date', "Birthdate", 'required|regex_match[/[0-9]{4}-[0-9]{2}-[0-9]{2}/]');
+        $this->form_validation->set_rules('date', "birthdate", 'required|callback_date_valid|callback_date_older_than_18');
         $this->form_validation->set_rules('minAge', "minimum age", 'required|greater_than[17]');
         $this->form_validation->set_rules('maxAge', "maximum age", 'required|less_than[105]');
         $this->form_validation->set_rules('description', 'min_length[100]');
@@ -94,10 +99,29 @@ class Register extends CI_Controller {
 
             //header('Location: http://localhost/DatingSite/');
         }
-
 	}
 
-    public function registerUser() {
+    public function is_unique_email($email) {
+        $this->load->model('Users_model');
+        return !$this->Users_model->email_exists($email);
+    }
+
+    public  function date_valid($date) {
+        $date = date_parse($date);
+        return $date['error_count'] == 0;
+    }
+
+    public function date_older_than_18($date) {
+        if (!$this->date_valid($date)) return true; //Because we don't want to show this error in that case, the date invalid is already shown then.
+
+        $date = new DateTime($date);
+        $today = new DateTime();
+        $diff = $date->diff($today)->y;
+
+        return $diff >= 18 && $today > $date;
+    }
+
+    private function registerUser() {
         $username = $this->input->post('username');
         $firstname = $this->input->post('firstname');
         $lastname = $this->input->post('lastname');
