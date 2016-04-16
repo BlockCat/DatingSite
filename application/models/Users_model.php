@@ -184,7 +184,7 @@ class Users_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function search_users($gender, $pref, $amin, $amax) {
+	public function search_users($page, $gender, $pref, $amin, $amax) {
 		//Gender of the one searching, the people displayed should like his gender too.
 		//where dates between today - minage and today - maxage
 
@@ -203,6 +203,8 @@ class Users_model extends CI_Model {
 		} else if ($pref == 'm') {
 			$this->db->where('userSex', 'm');
 		}
+
+		$this->db->limit($page * 12, ($page + 1) * 12);
 		return $this->db->get('Userprofile')->result_array();
 
 	}

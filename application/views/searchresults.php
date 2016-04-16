@@ -19,18 +19,29 @@
                 </div>
                 <?php }?>
             </div>
+            <button onclick="nextpage">More </button>
         </div>
     </div>
 
     <script>
         $(document).ready(function () {
-            $.get("<?php echo base_url('search/get_profiles') ?>", $("#form").serialize(), function(data) {
-                console.log(data);
+            loadpage(0);
+        });
+
+        function nextpage() {
+            loadpage(page++);
+        }
+
+        var page = 1;
+        //For future scrolling down while searching dynamically loading etc...
+        function loadpage(page) {
+            var formarray = $("#form").serialize() + "&page="+page;
+            $.get("<?php echo base_url('search/get_profiles') ?>", formarray, function(data) {
                 for (var i = 0; i < 12 && i < data.length; i++) {
                     create_profile(data[i]);
                 }
             });
-        });
+        }
 
         function create_profile(data) {
             var profile = $("<div/>", {

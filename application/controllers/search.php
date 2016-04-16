@@ -77,17 +77,23 @@
 
 
             $amin = $this->input->get('minage', true);
-            if (!$amin) $amin = 0;
+
 
             $amax = $this->input->get('maxage', true);
-            if (!$amax) $amax = 99;
+
 
             $e = $this->input->get('e');
             $n = $this->input->get('n');
             $t = $this->input->get('t');
             $f = $this->input->get('f');
             $brands = $this->input->get('brands');
-            $result = $this->Users_model->search_users($gender, $pref, $amin, $amax);
+            $page = $this->input->get('page');
+
+            if (!$amin) $amin = 0;
+            if (!$amax) $amax = 99;
+            if (!$page) $page = 0;
+
+            $result = $this->Users_model->search_users($page, $gender, $pref, $amin, $amax);
 
 //            echo print_r($result);
 
