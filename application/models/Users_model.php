@@ -149,7 +149,8 @@ class Users_model extends CI_Model {
 		return $result;
 	}
 	
-	public function get_random_profiles($userID){	
+	public function get_random_profiles($userID){
+		$this->db->select('userid, usernickname, userSex, userbirthdate, userDescription, userPersonality');
 		$this->db->where('userID <>', $userID);
 		$query = $this->db->get('UserProfile');
 		$result = $query->result_array();
