@@ -26,7 +26,7 @@
 		}
 		else{
             $signoutUrl = base_url('signout');
-            $profileUrl = base_url('profilepage?ID='.$_SESSION["userID"]);
+            $profileUrl = base_url('ownprofilepage');
             $homeUrl = base_url('/');
 			echo "<a href='$signoutUrl'><button>Sign out</button></a>";
             echo  "<a href='$profileUrl'><button>My profile</button></a>";
