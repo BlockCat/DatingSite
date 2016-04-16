@@ -23,6 +23,7 @@ class profilepage extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Users_model');
+        $this->load->model('Brand_Model');
 		$this->load->library('session');
 		$this->load->library('form_validation');
 		$this->load->helper('url');
@@ -63,6 +64,7 @@ class profilepage extends CI_Controller {
 			
 			$this->load->view('header');
 			$data['userdata'] = $resultarray[0];
+			$data['brands']= $brandView = $this->load->view('brands_register', array('brands' => $this->Brand_Model->get_all_brands()), true);
 			$this->load->view('profile', $data);
 
 			
