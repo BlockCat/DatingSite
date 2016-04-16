@@ -139,10 +139,10 @@
 
 					});
 				});
-		<?php }}?>
-					
-	});
-	
+			<?php } ?>
+		<?php } ?>			
+	});	
+
 	
 	
 	function getpersonality(personalitydata) {
