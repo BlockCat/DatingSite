@@ -96,34 +96,33 @@
 				setuser();
 			<?php }else{?>
 				setprofile();
+				$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
+				'profileID':<?php echo $userdata['userID']?>}, function (likeRelation){
+					console.log(likeRelation);
+					//n= none, g= given, r= received, m=mutual
+					if(likeRelation == "n" || likeRelation == "r"){			
+						$("#like").click(function(){
+							$.get("./liker", {'userID':<?php echo $_SESSION['userID']?>,
+							'profileID':<?php echo $userdata['userID']?>}, function (){
+								$("#like").unbind('click');
+								$("#like").attr('id', 'liked');
+								$("#liked").html('Liked');
+							});
+						});
+					}else{
+						$("#like").attr('id', 'liked');
+						$("#liked").html('Liked');
+					}					
+				});
 			<?php } ?>			
 		<?php }else{?>
 			setprofile();
 		<?php } ?>
 		
-		$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
-		'profileID':<?php echo $userdata['userID']?>}, function (likeRelation){
-			console.log(likeRelation);
-			//n= none, g= given, r= received, m=mutual
-			if(likeRelation == "n" || likeRelation == "r"){			
-				$("#like").click(function(){
-					$.get("./liker", {'userID':<?php echo $_SESSION['userID']?>,
-					'profileID':<?php echo $userdata['userID']?>}, function (){
-						$("#like").unbind('click');
-						$("#like").attr('id', 'liked');
-						$("#liked").html('Liked');
-					});
-				});
-			}else{
-				$("#like").attr('id', 'liked');
-				$("#liked").html('Liked');
-			}
-			
-		});
+		
 	});
 	
-	
-	
+		
 	
 	function setuser(){
 		$.get("./profilebrand", {'ID': <?php echo $userdata['userID']?>}, function (brands){	
