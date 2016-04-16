@@ -127,6 +127,7 @@
 				'profileID':<?php echo $userdata['userID']?>}, function (likeRelation){
 					console.log(likeRelation);
 					//n= none, g= given, r= received, m=mutual
+					if(likeRelation == "m"){	
 						$("#emailprofile").html('<?php echo $userdata['userEmail']?>');
 						$("#firstnameprofile").html('<?php echo $userdata['userFirstName']?>');
 						$("#lastnameprofile").html('<?php echo $userdata['userLastName']?>');
