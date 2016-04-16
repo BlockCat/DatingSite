@@ -24,15 +24,23 @@ class randomprofile extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Users_model');
 		$this->load->library('session');
+		$this->load->helper('url');
+		$this->load->helper('user');
+
 	}
 	
 	public function index()
 	{  
 		if(isset($_SESSION['loggedIn'])){
+			$hide = false;
 			$profiles = $this->Users_model->get_random_profiles($_SESSION['userID']);
 		}
 		else{
+			$hide = true;
 			$profiles = $this->Users_model->get_random_profiles(null);
+		}
+		foreach($profiles as $key => $value) {
+			$profiles[$key]['image'] = get_profile_image_src($value['userID'], $hide, true);
 		}
 		echo json_encode($profiles);
 	}
