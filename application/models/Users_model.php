@@ -197,7 +197,7 @@ class Users_model extends CI_Model {
 		$this->db->select('userID, userNickname, userSex, userBirthdate, userPersonality, userDescription');
 		$this->db->where('userBirthdate <', $datemin);
 		$this->db->where('userBirthdate >', $datemax);
-		$this->db->where_in('userSexPref', array('b', $gender));
+//		$this->db->where_in('userSexPref', array('b', $gender));
 
 		if ($pref == 'v') {
 			$this->db->where('userSex', 'v');
@@ -205,7 +205,8 @@ class Users_model extends CI_Model {
 			$this->db->where('userSex', 'm');
 		}
 
-		$this->db->limit($page * 12, ($page + 1) * 12);
+		$this->db->offset($page * 12);
+		$this->db->limit(12);
 		return $this->db->get('Userprofile')->result_array();
 
 	}
