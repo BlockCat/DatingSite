@@ -99,7 +99,7 @@ class ownprofilepage extends CI_Controller {
         return $diff >= 18 && $today > $date;
     }
 
-    private function registerUser() {
+    private function editUser() {
         $username = $this->input->post('username');
         $firstname = $this->input->post('firstname');
         $lastname = $this->input->post('lastname');

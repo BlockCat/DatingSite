@@ -76,11 +76,12 @@ class Users_model extends CI_Model {
 				'userPersonality' => $pers,
 				'userPersonalityPref' => $perspref
 		);
+		$this->db->trans_begin(); //Begin transaction, so if something goes wrong we can roll back.
+
 		
 		$this->db->replace('UserProfile', $data);
 		
-		$this->db->delete('BrandPref', array('user' => $ID));
-		
+		$this->db->delete('BrandPref', array('user' => $ID));		
 		foreach($brands as $brand){
 			$newbrand = array(
 				'user' =>	$ID,
