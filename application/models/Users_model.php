@@ -88,6 +88,14 @@ class Users_model extends CI_Model {
 			);
 			$this->db->insert('BrandPref', $newbrand);
 		}
+		
+		if ($this->db->trans_status() === false) { //If the transaction went wrong, roll back return false.
+			$this->db->trans_rollback();
+			return false;
+		} else {
+			$this->db->trans_commit();
+			return true;
+		}
 	}
 	
 	public function set_liked($user, $profile){

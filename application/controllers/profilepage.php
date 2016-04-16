@@ -25,26 +25,17 @@ class profilepage extends CI_Controller {
 		$this->load->model('Users_model');
         $this->load->model('Brand_Model');
 		$this->load->library('session');
-		$this->load->library('form_validation');
 		$this->load->helper('url');
 	}
 	
 	public function index()
 	{
-		if($this->session->userdata('loggedIn') && !$this->input->get('ID'))//If logged in but no user Id is given..
-		{
-			$url = base_url('/profilepage?ID='.$this->session->userdata('userID'));
-			redirect($url); //Just set the user id to the logged in user.
-		} else if (!$this->input->get('ID')) //If the user is not logged in and no input is given... 404?
+		if (!$this->input->get('ID') || $this->input->get('ID') == $this->session->userdata('userID')) //If the user is not logged in and no input is given... 404?
 		{
 			redirect(base_url('404'));
 		}
 
 		//Check if user exists.
-
-
-		$this->form_validation->set_rules('nickname', 'Nickname', 'callback_overwrite_user');
-		$this->form_validation->run();
 
 		$resultarray = $this->Users_model->get_certain_profile($this->input->get('ID'));
 
@@ -56,44 +47,21 @@ class profilepage extends CI_Controller {
 			
 			//if logged in
 			if(isset($_SESSION['loggedIn'])){
-				if($this->Users_model->get_relation($this->session->userdata('userID'), $this->input->get('ID'))  == "m"
-				|| $this->session->userdata('userID') == $this->input->get('ID')){ //if there is a mutual like or its the users own profile
+				//if there is a mutual like
+				if($this->Users_model->get_relation($this->session->userdata('userID'), $this->input->get('ID'))  == "m"){ 
 					$resultarray = $this->Users_model->get_sensitive_profile($this->input->get('ID'));//send sensitive info
 				}
 			}
 			
 			$this->load->view('header');
 			$data['userdata'] = $resultarray[0];
-			$data['brands']= $brandView = $this->load->view('brands_register', array('brands' => $this->Brand_Model->get_all_brands()), true);
 			$this->load->view('profile', $data);
-
 			
 		} else { //If there is no user with this id.
 			redirect(base_url('404'));
 		}
 	}
 	
-	public function overwrite_user($nickname)
-	{	
-		$nickname = $this->input->post('nickname');
-		$first = $this->input->post('firstname');
-		$last = $this->input->post('lastname');
-		$sex = $this->input->post('sex');
-		$date = $this->input->post('date');
-		$sexpref = $this->input->post('sexpref');
-		$min = $this->input->post('min');
-		$max = $this->input->post('max');
-		$brands = $this->input->post('brands');
-		$email = $this->input->post('email');
-		$description = $this->input->post('description');
-		$pass = $this->input->post('password');
-
-		$tempbrand = explode(", ", $brands);
-		
-		$this->Users_model->edit_user($_SESSION['userID'], $email, $pass, $nickname,
-		$first, $last, $sex, $date, $min, $max, $sexpref, $_SESSION['userAdmin'], $description, 
-		$_SESSION['userPersonality'], $_SESSION['userPersonalityPref'], $tempbrand);
-	}
 
 	public function upload() {
 
@@ -118,7 +86,7 @@ class profilepage extends CI_Controller {
 				$this->load->view('upload', $data);
 			} else {
 				//Successfull upload...
-				redirect(base_url('profilepage?ID='.$userId));
+				redirect(base_url());
 			}
 		} else {
 			redirect(base_url());
