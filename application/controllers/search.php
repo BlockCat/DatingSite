@@ -26,6 +26,8 @@
 
 
                 $data['brands'] = $this->Brand_Model->get_all_brands();
+                $data['selectedBrands'] = $this->Brand_Model->get_brands($this->session->userdata("userID"));
+
                 $data['gender'] = $userdata['userSex'];
                 $data['sexpref'] = $userdata['userSexPref'];
                 $data['minage'] = $userdata['userMinAgePref'];
