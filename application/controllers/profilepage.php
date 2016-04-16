@@ -26,6 +26,7 @@ class profilepage extends CI_Controller {
         $this->load->model('Brand_Model');
 		$this->load->library('session');
 		$this->load->helper('url');
+		$this->load->helper('user');
 	}
 	
 	public function index()
@@ -52,7 +53,8 @@ class profilepage extends CI_Controller {
 					$resultarray = $this->Users_model->get_sensitive_profile($this->input->get('ID'));//send sensitive info
 				}
 			}
-			
+			$resultarray[0]['image'] = get_profile_image_src($this->input->get('ID'),$this->session->userdata('loggedIn') == true, true);
+
 			$this->load->view('header');
 			$data['userdata'] = $resultarray[0];
 			$this->load->view('profile', $data);

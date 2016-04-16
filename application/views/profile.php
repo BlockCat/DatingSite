@@ -80,11 +80,8 @@
 		$.get("./profilebrand", {'ID': <?php echo $userdata['userID']?>}, function (brands){	
 			$.get("./profilepersonality", {'ID': <?php echo $userdata['userPersonality']?>}, function (personalitytype){
 				$.get("./profilepersonality", {'ID': <?php echo $userdata['userPersonalityPref']?>}, function (personalitypref){				
-					<?php if(isset($_SESSION['loggedIn'])){?>
-							$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata["userID"]?>.jpg")					
-					<?php }else{?>
-							$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata["userSex"]?>silhoutte.jpg")					
-					<?php } ?>
+
+					$("#profilepic").attr("src", "<?php echo $userdata["image"]; ?>");
 					$("#nicknameprofile").html('<?php echo $userdata['userNickname']?>');
 					$("#sexprofile").html('<?php echo $userdata['userSex']?>');
 					$("#ageprofile").html('<?php echo $userdata['userBirthdate']?>');
