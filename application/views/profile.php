@@ -59,6 +59,9 @@
 						<!--is different from the list below this one, because this one should also contain email & name if there is a mutual like-->
 						<button id="like">Like</button>
 						<p id="nicknameprofile"></p>
+						<p id="firstnameprofile"></p>
+						<p id="lastnameprofile"></p>
+						<p id="emailprofile"></p>
 						<p id="sexprofile"></p>
 					 	<p id="ageprofile"></p>
 						<p id="personalityprofile"></p>
@@ -124,6 +127,10 @@
 				'profileID':<?php echo $userdata['userID']?>}, function (likeRelation){
 					console.log(likeRelation);
 					//n= none, g= given, r= received, m=mutual
+						$("#emailprofile").html('<?php echo $userdata['userEmail']?>');
+						$("#firstnameprofile").html('<?php echo $userdata['userFirstName']?>');
+						$("#lastnameprofile").html('<?php echo $userdata['userLastName']?>');
+					}
 					if(likeRelation == "n" || likeRelation == "r"){			
 						$("#like").click(function(){
 							$.get("./liker", {'userID':<?php echo $_SESSION['userID']?>,

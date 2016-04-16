@@ -47,7 +47,11 @@ class profilepage extends CI_Controller {
 
 		$resultarray = $this->Users_model->get_certain_profile($this->input->get('ID'));
 
-		if($resultarray) { //If there is a user with the ID...			
+		if($resultarray) { //If there is a user with the ID...	
+			$resultarray[0]['userEmail'] = "";
+			$resultarray[0]['userFirstName'] = "";
+			$resultarray[0]['userLastName'] = "";
+			
 			
 			//if logged in
 			if(isset($_SESSION['loggedIn'])){
