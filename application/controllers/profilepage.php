@@ -48,8 +48,11 @@ class profilepage extends CI_Controller {
 		$resultarray = $this->Users_model->get_certain_profile($this->input->get('ID'));
 
 		if($resultarray) { //If there is a user with the ID...			
+			
 			//if logged in
 			if(isset($_SESSION['loggedIn'])){
+				if($this->Users_model->get_relation($this->session->userdata('userID'), $this->input->get('ID'))  == "m"
+				|| $this->session->userdata('userID') == $this->input->get('ID')){ //if there is a mutual like or its the users own profile
 					$resultarray = $this->Users_model->get_sensitive_profile($this->input->get('ID'));//send sensitive info
 				}
 			}

@@ -143,6 +143,7 @@ class Users_model extends CI_Model {
 	
 	
 	public function get_certain_profile($userID){	
+		$this->db->select('userID, userNickname, userSex, userBirthdate, userMinAgePref, 
 		userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref');
 		$this->db->where('userID', $userID);
 		$query = $this->db->get('UserProfile');
