@@ -93,7 +93,31 @@
 	$(document).ready(function () {
 		<?php if(isset($_SESSION['loggedIn'])){?>
 			<?php if($_SESSION['userID'] == $userdata['userID']){?>
-				setuser();
+				$.get("./profilebrand", {'ID': <?php echo $userdata['userID']?>}, function (brands){	
+			$.get("./profilepersonality", {'ID': <?php echo $userdata['userPersonality']?>}, function (personalitytype){
+				$.get("./profilepersonality", {'ID': <?php echo $userdata['userPersonalityPref']?>}, function (personalitypref){				
+					<?php if(isset($_SESSION['loggedIn'])){?>
+							$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata["userID"]?>.jpg")					
+					<?php }else{?>
+							$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata["userSex"]?>silhoutte.jpg")					
+					<?php } ?>
+					$("#nicknameprofile").attr('value', '<?php echo $userdata['userNickname']?>');
+					$("#firstnameprofile").attr('value', '<?php echo $userdata['userFirstName']?>');
+					$("#lastnameprofile").attr('value', '<?php echo $userdata['userLastName']?>');
+					$("#sexprofile").attr('value','<?php echo $userdata['userSex']?>');
+					$("#ageprofile").attr('value','<?php echo $userdata['userBirthdate']?>');
+					$("#personalityprofile").html(getpersonality(personalitytype));
+					$("#sexpref").attr('value','<?php echo $userdata['userSexPref']?>');
+					$("#personalitypref").html(getpersonality(personalitypref));
+					$("#brandsprofile").html(getbrands(brands));
+					$("#descriptionuser").html('<?php echo $userdata['userDescription']?>');
+					$("#minagepref").attr('value','<?php echo $userdata['userMinAgePref']?>');
+					$("#maxagepref").attr('value','<?php echo $userdata['userMaxAgePref']?>');
+					$("#emailprofile").attr('value','<?php echo $userdata['userEmail']?>');
+					$("#passwordprofile").attr('placeholder', 'new password');
+				});
+			});	
+		});
 			<?php }else{?>
 				setprofile();
 				$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
@@ -121,36 +145,6 @@
 		
 		
 	});
-	
-		
-	
-	function setuser(){
-		$.get("./profilebrand", {'ID': <?php echo $userdata['userID']?>}, function (brands){	
-			$.get("./profilepersonality", {'ID': <?php echo $userdata['userPersonality']?>}, function (personalitytype){
-				$.get("./profilepersonality", {'ID': <?php echo $userdata['userPersonalityPref']?>}, function (personalitypref){				
-					<?php if(isset($_SESSION['loggedIn'])){?>
-							$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata["userID"]?>.jpg")					
-					<?php }else{?>
-							$("#profilepic").attr("src", "./images/profilepic/<?php echo $userdata["userSex"]?>silhoutte.jpg")					
-					<?php } ?>
-					$("#nicknameprofile").attr('value', '<?php echo $userdata['userNickname']?>');
-					$("#firstnameprofile").attr('value', '<?php echo $userdata['userFirstName']?>');
-					$("#lastnameprofile").attr('value', '<?php echo $userdata['userLastName']?>');
-					$("#sexprofile").attr('value','<?php echo $userdata['userSex']?>');
-					$("#ageprofile").attr('value','<?php echo $userdata['userBirthdate']?>');
-					$("#personalityprofile").html(getpersonality(personalitytype));
-					$("#sexpref").attr('value','<?php echo $userdata['userSexPref']?>');
-					$("#personalitypref").html(getpersonality(personalitypref));
-					$("#brandsprofile").html(getbrands(brands));
-					$("#descriptionuser").html('<?php echo $userdata['userDescription']?>');
-					$("#minagepref").attr('value','<?php echo $userdata['userMinAgePref']?>');
-					$("#maxagepref").attr('value','<?php echo $userdata['userMaxAgePref']?>');
-					$("#emailprofile").attr('value','<?php echo $userdata['userEmail']?>');
-					$("#passwordprofile").attr('placeholder', 'new password');
-				});
-			});	
-		});
-	}
 	
 	function setprofile(){
 		$.get("./profilebrand", {'ID': <?php echo $userdata['userID']?>}, function (brands){	

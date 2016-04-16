@@ -143,6 +143,16 @@ class Users_model extends CI_Model {
 	
 	
 	public function get_certain_profile($userID){	
+		userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref');
+		$this->db->where('userID', $userID);
+		$query = $this->db->get('UserProfile');
+		$result = $query->result_array();
+		return $result;
+	}
+	
+	public function get_sensitive_profile($userID){	
+		$this->db->select('userID, userEmail, userNickname, userFirstName, userLastName, 
+		userSex, userBirthdate, userMinAgePref, userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref');
 		$this->db->where('userID', $userID);
 		$query = $this->db->get('UserProfile');
 		$result = $query->result_array();
@@ -151,6 +161,8 @@ class Users_model extends CI_Model {
 	
 	public function get_random_profiles($userID){	
 		$this->db->where('userID <>', $userID);
+		$this->db->select('userID, userNickname, userSex, userBirthdate, userMaxAgePref, 
+		userMaxAgePref, userSexPref, userAdmin, userDescription, userPersonality, userPersonalityPref');
 		$query = $this->db->get('UserProfile');
 		$result = $query->result_array();
 		shuffle ($result);		

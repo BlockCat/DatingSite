@@ -47,14 +47,21 @@ class profilepage extends CI_Controller {
 
 		$resultarray = $this->Users_model->get_certain_profile($this->input->get('ID'));
 
-		if($resultarray) { //If there is a user with the ID...
-			$data['userdata'] = $resultarray[0];
+		if($resultarray) { //If there is a user with the ID...			
+			//if logged in
+			if(isset($_SESSION['loggedIn'])){
+					$resultarray = $this->Users_model->get_sensitive_profile($this->input->get('ID'));//send sensitive info
+				}
+			}
+			
 			$this->load->view('header');
+			$data['userdata'] = $resultarray[0];
 			$this->load->view('profile', $data);
+
+			
 		} else { //If there is no user with this id.
 			redirect(base_url('404'));
 		}
-
 	}
 	
 	public function overwrite_user($nickname)
