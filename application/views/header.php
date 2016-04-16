@@ -7,6 +7,7 @@
 	<meta charset="utf-8">
 	<?php 
         $this->load->helper('html');
+        $this->load->helper('url');
         echo link_tag('css/main.css');
         echo script_tag('js/jquery.js');
     ?>
@@ -16,14 +17,20 @@
         <div id="header_content"> 
 		<?php
 		if(!isset($_SESSION['loggedIn'])){
-            echo '<a href="./login"><button>Sign in</button></a>';			
-            echo '<a href="./register"><button>Create account</button></a>';
-            echo '<a href="./"><button>Home</button></a>';
+            $loginUrl = base_url('login');
+            $registerUrl = base_url('register');
+            $homeUrl = base_url('/');
+            echo "<a href='$loginUrl'><button>Sign in</button></a>";
+            echo "<a href='$registerUrl'><button>Create account</button></a>";
+            echo "<a href='$homeUrl'><button>Home</button></a>";
 		}
 		else{
-			echo '<a href="./signout"><button>Sign out</button></a>';
-            echo '<a href="./profilepage?ID='.$_SESSION["userID"].'"><button>My profile</button></a>';
-            echo '<a href="./"><button>Home</button></a>';
+            $signoutUrl = base_url('signout');
+            $profileUrl = base_url('profilepage?ID='.$_SESSION["userID"]);
+            $homeUrl = base_url('/');
+			echo "<a href='$signoutUrl'><button>Sign out</button></a>";
+            echo  "<a href='$profileUrl'><button>My profile</button></a>";
+            echo "<a href='$homeUrl'><button>Home</button></a>";
 		}
 		?>
         </div>
