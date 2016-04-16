@@ -2,7 +2,7 @@
 	<div id="main"> 
 		<div class="wrapper">
 			<div class="text_wrapper">
-					<?php echo form_open('register', array('id' => 'form'));?>
+					<?php echo form_open('ownprofile', array('id' => 'form'));?>
 					<table>
 						<tr>
 							<td><label class="forlabel">Username:</label></td>
