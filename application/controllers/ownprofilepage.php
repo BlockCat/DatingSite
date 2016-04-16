@@ -124,9 +124,7 @@ class ownprofilepage extends CI_Controller {
 		
         $this->load->model('Users_model');
         return $this->Users_model->edit_user($this->session->userdata('userID'), $email, $password,
-		$username, $firstname, $lastname, $gender, $birthdate, $minAge, $maxAge, $attraction, olddata['userAdmin'],
-		$description, $olddata['userPersonality'], $olddata['userPersonalityPref'], $brands);
+            $username, $firstname, $lastname, $gender, $birthdate, $minAge, $maxAge, $attraction, $olddata['userAdmin'],
+		    $description, $olddata['userPersonality'], $olddata['userPersonalityPref'], $brands);
     }
-
-    
 }

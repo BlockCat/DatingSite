@@ -2,7 +2,7 @@
     <div >
         <div class="text_wrapper">
             <div id="profileviewer">
-                <?php for ($i = 0; $i < 12; $i++) {?>
+                <?php for ($i = 0; $i < 4; $i++) {?>
                 <div class="profile">
                     <div class="profilethumbnail">
                         <a id="link<?php echo $i?>"><img id="profilepic<?php echo $i?>" alt="profilepicture" height="150" width="150"></a>
@@ -27,18 +27,33 @@
             $.get("<?php echo base_url('search/get_profiles') ?>", $("#form").serialize(), function(data) {
                 console.log(data);
                 for (var i = 0; i < 12 && i < data.length; i++) {
-                    $("#profilepic" + i).attr('src', data[i].image);
-                    $("#nicknameprofile" + i).html(data[i].userNickname);
-                    $("#sexprofile" + i).html(data[i].userSex);
-                    $("#ageprofile" + i).html(data[i].userBirthdate);
-                    $("#personalityprofile" + i).html(data[i].personality);
-                    $("#descriptionprofile" + i).html(data[i].userDescription.slice(0, 50));
+                    create_profile(data[i]);
                 }
             });
         });
 
         function create_profile(data) {
+            var profile = $("<div/>", {
+               class: 'profile'
+            });
 
+
+            var img = $("<div class=\"profilethumbnail\"><a><img src=\""+ data.image +"\" alt=\"profilepicture\" height=\"150\" width=\"150\"></a></div>");
+            profile.append(img);
+
+            var info = $("<div/>", {
+                class: "profileinfo"
+            });
+
+            info.append($("<p>" + data.userNickname + "</p>"));
+            info.append($("<p>" + data.userSex + "</p>"));
+            info.append($("<p>" + data.userBirthdate + "</p>"));
+            info.append($("<p>" + data.personality + "</p>"));
+            info.append($("<p>" + data.userDescription.slice(0, 50) + "</p>"));
+
+            profile.append(info);
+
+            $("#profileviewer").append(profile);
         }
 
     </script>

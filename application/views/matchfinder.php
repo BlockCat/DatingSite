@@ -103,7 +103,7 @@
 	
 	function setprofiles(){
 		$.get("./randomprofile", function (profiles){
-			profiledata = JSON.parse(profiles);	
+			profiledata = profiles;//JSON.parse(profiles);
 			for (let nr = 0; nr < 6; nr++) {
 				$.get("./profilebrand", {'ID': profiledata[nr].userID}, function (brands){	
 					$.get("./profilepersonality", {'ID': profiledata[nr].userPersonality}, function (personalitytype){
