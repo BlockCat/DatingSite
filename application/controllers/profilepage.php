@@ -69,9 +69,8 @@ class profilepage extends CI_Controller {
 
 		if($this->session->userdata('loggedIn')) {
 			$this->load->helper('user');
-
+			$this->load->library('form_validation');
 			$userId = $this->session->userdata('userID');
-			$image_source = base_url("images/profilepic/" . $userId . ".jpg");
 			$image_source = get_profile_image_src($userId);
 			
 			$data = array(
