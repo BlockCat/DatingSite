@@ -41,16 +41,19 @@ class Login extends CI_Controller {
 		$this->form_validation->set_message('valid_email', '%s is not a valid');
 
 		$this->load->view('header'); //Load the header view.
-		if($this->form_validation->run() === false) { //The input failed the requirements.
+		if($this->form_validation->run() === false)  //The input failed the requirements.
+		{
 			$this->load->view('login');
-		} else { //The input is valid.
+		} else //The input is valid.
+		{
 
 			//Set the second set of rules, namely to see if the login information
 			$this->form_validation->set_rules('submit', '', 'callback_authenticate_login');
 			$this->form_validation->set_message('authenticate_login', "We could not validate you, try to login again.");
 
-			//We do it like this so we won't need to check the database if the input is wrong.
-			if($this->form_validation->run() === false) {//If we can't login, display the login view and the error.
+			//We do this so malicious people can't constantly make requests to log in and create slow I/O
+			if($this->form_validation->run() === false) //If we can't login, display the login view and the error.
+			{
 				$this->load->view('login');
 			} else {
 				redirect(base_url('/')); //Redirect to the base_url(controller/function);
@@ -59,13 +62,16 @@ class Login extends CI_Controller {
 
 
 	}
-	
+
 	//no input validation yet!!!
 	public function authenticate_login(){
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
-		$result = $this->Users_model->authenticate_login($email, $password)[0];
-		if($result){	
+
+		$queryResult = $this->Users_model->authenticate_login($email, $password); //Authenticate returns an array or false,
+
+		if($queryResult){ //Check if the queryResult gives an array
+			$result = $queryResult[0]; //Get the user from the query result.
 			$newdata = array(
 				'loggedIn' => true,
 				'userID' =>	$result['userID'],

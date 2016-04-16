@@ -100,6 +100,15 @@ class Users_model extends CI_Model {
 		return $like;
 		
 	}
+
+	public function email_exists($email) {
+		$this->db->select('*');
+		$this->db->from('UserProfile');
+		$this->db->where('userEmail', $email);
+
+		$query = $this->db->get();
+		return $query->num_rows() >= 1;
+	}
 	
 	public function get_relation($user, $profile){
 		$this->db->select('*');

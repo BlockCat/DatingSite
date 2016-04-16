@@ -36,11 +36,6 @@
                                 <td><label class="error"><?php echo form_error('passwordconfirmation'); ?></label></td>
                             </tr>
                             <tr>
-                                <td><label class="forlabel">Profile picture:</label></td>
-                                <td colspan="2"><input type="file" name="profilepicture" ></td>
-                                <td><label class="error"><?php echo form_error('profilepicture'); ?></label></td>
-                            </tr>
-                            <tr>
                                 <td><label class="forlabel">Birthdate:</label></td>
                                 <td colspan="2"><input type="date" name="date" value="<?php echo set_value('date'); ?>"></td>
                                 <td><label class="error"><?php echo form_error('date'); ?></label></td>

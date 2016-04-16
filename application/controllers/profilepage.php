@@ -29,12 +29,32 @@ class profilepage extends CI_Controller {
 	}
 	
 	public function index()
-	{  
+	{
+		if($this->session->userdata('loggedIn') && !$this->input->get('ID'))//If logged in but no user Id is given..
+		{
+			$url = base_url('/profilepage?ID='.$this->session->userdata('userID'));
+			redirect($url); //Just set the user id to the logged in user.
+		} else if (!$this->input->get('ID')) //If the user is not logged in and no input is given... 404?
+		{
+			redirect(base_url('404'));
+		}
+
+		//Check if user exists.
+
+
 		$this->form_validation->set_rules('nickname', 'Nickname', 'callback_overwrite_user');
 		$this->form_validation->run();
-		$data['userdata'] = $this->Users_model->get_certain_profile($this->input->get('ID'))[0];
-		$this->load->view('header');
-		$this->load->view('profile', $data);
+
+		$resultarray = $this->Users_model->get_certain_profile($this->input->get('ID'));
+
+		if($resultarray) { //If there is a user with the ID...
+			$data['userdata'] = $resultarray[0];
+			$this->load->view('header');
+			$this->load->view('profile', $data);
+		} else { //If there is no user with this id.
+			redirect(base_url('404'));
+		}
+
 	}
 	
 	public function overwrite_user($nickname)
