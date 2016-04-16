@@ -84,12 +84,9 @@
     }
 
     if(!function_exists('get_profile_image')) {
-        function get_profile_image_src($userId, $hide = false, $thumb = false) {
-
-
-            $image_source = base_url("images/profilepic/" . $userId . ($thumb ? "_thumb" : "").".jpg");
-
-            if (@getimagesize($image_source) && !$hide) {
+        function get_profile_image_src($userId) {
+            $image_source = base_url("images/profilepic/" . $userId . ".jpg");
+            if (@getimagesize($image_source)) {
                 $image_source = $image_source;
             } else {
                 $controller = get_instance();
@@ -98,9 +95,9 @@
                 $userdata = $controller->Users_model->get_certain_profile($userId);
 
                 if ($userdata) {
-                    $image_source = base_url("/images/profilepic/{$userdata[0]['userSex']}silhoutte".($thumb ? "_thumb" : "").".jpg");
+                    $image_source = base_url("/images/profilepic/{$userdata[0]['userSex']}silhoutte.jpg");
                 } else {
-                    $image_source = base_url("/images/profilepic/msilhoutte.".($thumb ? "_thumb" : "")."jpg");
+                    $image_source = base_url("/images/profilepic/msilhoutte.jpg");
                 }
             }
 
