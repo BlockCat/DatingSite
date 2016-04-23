@@ -8,7 +8,10 @@
                         <input type="file" id="profileinput" name="userfile" >
                         <input type="submit" name="submit">
                     </form>
-                    <button><a>Back to my profile</a></button>
+                    <?php 
+						$profileUrl = base_url('ownprofilepage');
+						echo  "<a href='$profileUrl'><button>My profile</button></a>";
+					?>
                 </div>
             </div>
         </div>

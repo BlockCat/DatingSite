@@ -10,11 +10,11 @@
 					<p class = description>Nickname:</p>
 					<p id="nicknameprofile"></p>
 					<p class = description>Firstname:</p>
-					<p id="firstnameprofile"></p>
+					<p id="firstnameprofile">only shown if mutual like</p>
 					<p class = description>Lastname:</p>
-					<p id="lastnameprofile"></p>
+					<p id="lastnameprofile">only shown if mutual like</p>
 					<p class = description>Email:</p>
-					<p id="emailprofile"></p>
+					<p id="emailprofile">only shown if mutual like</p>
 					<p class = description>Gender:</p>
 					<p id="sexprofile"></p>
 					<p class = description>Birthdate:</p>

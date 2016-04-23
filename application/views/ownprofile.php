@@ -54,12 +54,12 @@
 						<tr>
 							<td>I like:</td>
 							<td>                                    
-								<input id="male" type="checkbox" name="attraction" value="male" <?php echo set_checkbox('attraction', 'male');?>>
+								<input id="male" type="checkbox" name="attraction" value="m" <?php echo set_checkbox('attraction', 'm');?>>
 								<label for="male">Males </label>
 							   
 							</td>
 							<td>
-								<input id="female" type="checkbox" name="attraction" value="female" <?php echo set_checkbox('attraction', 'female');?>>
+								<input id="female" type="checkbox" name="attraction" value="v" <?php echo set_checkbox('attraction', 'v');?>>
 								<label for="female">Females </label>
 							</td>
 							<td><label class="error"><?php echo form_error('attraction'); ?></label></td>
@@ -127,13 +127,15 @@
 						}
 						
 						var $radios2 = $('input:checkbox[name=attraction]');
+						$("#descriptionuser").html('<?php echo $userdata['userSexPref']?>');
+
 						if("<?php echo $userdata['userSexPref']?>" === "m") {
-							$radios2.filter('[value=male]').prop('checked', true);
-						}else if("<?php echo $userdata['userSexPref']?>" === "f"){
-							$radios2.filter('[value=female]').prop('checked', true);
+							$radios2.filter('[value=m]').prop('checked', true);
+						}else if("<?php echo $userdata['userSexPref']?>" === "v"){
+							$radios2.filter('[value=v]').prop('checked', true);
 						}else{
-							$radios2.filter('[value=male]').prop('checked', true);
-							$radios2.filter('[value=female]').prop('checked', true);
+							$radios2.filter('[value=m]').prop('checked', true);
+							$radios2.filter('[value=v]').prop('checked', true);
 						}
 
 					});
