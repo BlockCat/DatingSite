@@ -65,6 +65,14 @@
 							<td><label class="error"><?php echo form_error('attraction'); ?></label></td>
 						</tr>                             
 						<tr>
+						
+						<tr>
+							<td><label class="forlabel">Personality:</label></td>
+							<td colspan="2"><p id="personalityprofile"></p></td>
+						</tr>
+						<tr>
+							<td><label class="forlabel">Personality preference:</label></td>
+							<td colspan="2"><p id="personalitypref"></p></td></tr>
 						<tr>
 							<td><label class="forlabel">Minimum age preference:</label></td>
 							<td colspan="2"><input id="minap" type="number" name="minAge"></td>
@@ -74,7 +82,7 @@
 							<td><label class="forlabel">Maximum age preference:</label></td>
 							<td colspan="2"><input id="maxap" type="number" name="maxAge"></td>
 							<td><label class="error"><?php echo form_error('maxAge'); ?></label></td>
-						</tr>
+						</tr>						
 						<tr>
 							<td><label class="forlabel">Description:</label></td>
 							<td colspan="2" rowspan="4">
@@ -119,6 +127,9 @@
 						$("#maxap").attr('value','<?php echo set_value('maxAge', $userdata['userMaxAgePref'])?>');
 						$("#dateprofile").attr('value','<?php echo set_value('date', $userdata['userBirthdate'])?>');
 						
+						$("#personalitypref").html(getpersonality(personalitytype));
+						$("#personalityprofile").html(getpersonality(personalitypref));
+
 						var $radios = $('input:radio[name=gender]');
 						if("<?php echo $userdata['userSex']?>" === "m") {
 							$radios.filter('[value=m]').prop('checked', true);
