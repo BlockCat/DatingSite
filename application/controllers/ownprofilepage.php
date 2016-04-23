@@ -26,7 +26,6 @@ class ownprofilepage extends CI_Controller {
         $this->load->model('Brand_Model');
 		$this->load->library('session');
 		$this->load->library('form_validation');
-
 	}
 	
 	public function index()
@@ -70,7 +69,7 @@ class ownprofilepage extends CI_Controller {
 		else 
 		{
             if ($this->editUser()) {
-                header('Location: http://localhost/DatingSite/');                
+                header('Location: http://localhost/DatingSite/ownprofilepage');                
             } else {
                 $brandView = $this->load->view('brands_register', array('brands' => $this->Brand_Model->get_all_brands()), true);
 				$userdata = $this->Users_model->get_sensitive_profile($this->session->userdata('userID'));
@@ -80,8 +79,14 @@ class ownprofilepage extends CI_Controller {
 	}
 
     public function is_unique_email($email) {
-        $this->load->model('Users_model');
-        return !$this->Users_model->email_exists($email);
+        $userdata = $this->Users_model->get_sensitive_profile($this->session->userdata('userID'))[0];
+		if($email = $userdata['userEmail']){
+			return true;
+		}
+		else{
+			$this->load->model('Users_model');
+			return !$this->Users_model->email_exists($email);
+		}
     }
 
     public  function date_valid($date) {
