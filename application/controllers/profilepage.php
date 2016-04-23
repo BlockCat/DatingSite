@@ -31,9 +31,12 @@ class profilepage extends CI_Controller {
 	
 	public function index()
 	{
-		if (!$this->input->get('ID') || $this->input->get('ID') == $this->session->userdata('userID')) //If the user is not logged in and no input is given... 404?
+		if (!$this->input->get('ID')) //If the user is not logged in and no input is given... 404?
 		{
 			redirect(base_url('404'));
+		}
+		if ($this->input->get('ID') == $this->session->userdata('userID')) {
+			redirect(base_url('ownprofilepage'));
 		}
 
 		//Check if user exists.
@@ -53,7 +56,7 @@ class profilepage extends CI_Controller {
 					$resultarray = $this->Users_model->get_sensitive_profile($this->input->get('ID'));//send sensitive info
 				}
 			}
-			$resultarray[0]['image'] = get_profile_image_src($this->input->get('ID'),$this->session->userdata('loggedIn') == true, true);
+			$resultarray[0]['image'] = get_profile_image_src($this->input->get('ID'),!$this->session->userdata('loggedIn'), true);
 
 			$this->load->view('header');
 			$data['userdata'] = $resultarray[0];
@@ -63,7 +66,6 @@ class profilepage extends CI_Controller {
 			redirect(base_url('404'));
 		}
 	}
-	
 
 	public function upload() {
 
