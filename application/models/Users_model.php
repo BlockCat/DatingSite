@@ -204,9 +204,6 @@ class Users_model extends CI_Model {
 		} else if ($pref == 'm') {
 			$this->db->where('userSex', 'm');
 		}
-
-		$this->db->offset($page * 12);
-		$this->db->limit(12);
 		return $this->db->get('Userprofile')->result_array();
 
 	}

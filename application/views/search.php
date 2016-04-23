@@ -17,6 +17,7 @@
                 <table id="brandTable" cellspacing="0" cellpadding="0">
                     <?php loadBrands($brands, $selectedBrands);?>
                 </table>
+                <input type="hidden" value="0" name="page" id="page">
                 <input type="submit">
 
             </form>

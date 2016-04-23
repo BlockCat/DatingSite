@@ -41,6 +41,7 @@ if(! function_exists('user_personality_distance')) {
 
 if(! function_exists('personality_difference')) {
     function personality_difference($personality1, $personality2) {
+        $difference = array();
         foreach($personality1 as $char => $value) {
             if ($char=='personalityID') continue;
             $p1 = $personality1[$char];
