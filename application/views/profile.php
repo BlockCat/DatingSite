@@ -7,36 +7,57 @@
 				<?php if(isset($_SESSION['loggedIn'])){?>
 					<!--is different from the list below this one, because this one should also contain email & name if there is a mutual like-->
 					<button id="like">Like</button>
+					<p class = description>Nickname:</p>
 					<p id="nicknameprofile"></p>
+					<p class = description>Firstname:</p>
 					<p id="firstnameprofile"></p>
+					<p class = description>Lastname:</p>
 					<p id="lastnameprofile"></p>
+					<p class = description>Email:</p>
 					<p id="emailprofile"></p>
+					<p class = description>Gender:</p>
 					<p id="sexprofile"></p>
+					<p class = description>Birthdate:</p>
 					<p id="ageprofile"></p>
+					<p class = description>Personality:</p>
 					<p id="personalityprofile"></p>
+					<p class = description>sexual preference:</p>
 					<p id="sexpref"></p>
+					<p class = description>age preference:</p>
 					<p id="agepref"></p>
+					<p class = description>personality preference:</p>
 					<p id="personalitypref"></p>
+					<p class = description>Description:</p>
 					<p id="descriptionprofile"></p>
+					<p class = description>Brands:</p>
 					<p id="brandsprofile"></p>
 				<!--when the user is not logged in-->					
 				<?php }else{?>
+					<?php 
+						if(!isset($_SESSION['loggedIn'])){
+							echo "<h3><a href='./login'>Login to like this person and get to know him/her better!&#8594;</a></h3>";
+						}
+					?>
+					<p class = description>Nickname:</p>
 					<p id="nicknameprofile"></p>
+					<p class = description>Gender:</p>
 					<p id="sexprofile"></p>
+					<p class = description>Birthdate:</p>
 					<p id="ageprofile"></p>
+					<p class = description>Personality:</p>
 					<p id="personalityprofile"></p>
+					<p class = description>sexual preference:</p>
 					<p id="sexpref"></p>
+					<p class = description>age preference:</p>
 					<p id="agepref"></p>
+					<p class = description>personality preference:</p>
 					<p id="personalitypref"></p>
+					<p class = description>Description:</p>
 					<p id="descriptionprofile"></p>
+					<p class = description>Brands:</p>
 					<p id="brandsprofile"></p>
 				<?php } ?>
-			</div>
-			<?php 
-			if(!isset($_SESSION['loggedIn'])){
-				echo "<h3><a href='./login'>Login to like this person and get to know him/her better!&#8594;</a></h3>";
-			}
-			?>
+			</div>			
 		</div>		
 	</div>
 </div>
