@@ -27,6 +27,10 @@ p {
     float: right;
 }
 
+.description {
+	font-weight: bold;
+}
+
 .flashy_wrapper button:hover{        
     background-color: #9B0343;
     color: #ffffff;

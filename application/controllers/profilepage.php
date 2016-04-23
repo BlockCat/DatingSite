@@ -56,7 +56,7 @@ class profilepage extends CI_Controller {
 					$resultarray = $this->Users_model->get_sensitive_profile($this->input->get('ID'));//send sensitive info
 				}
 			}
-			$resultarray[0]['image'] = get_profile_image_src($this->input->get('ID'),!$this->session->userdata('loggedIn'), true);
+			$resultarray[0]['image'] = get_profile_image_src($this->input->get('ID'),!$this->session->userdata('loggedIn'), false);
 
 			$this->load->view('header');
 			$data['userdata'] = $resultarray[0];

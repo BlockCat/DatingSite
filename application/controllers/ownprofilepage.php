@@ -58,11 +58,11 @@ class ownprofilepage extends CI_Controller {
         $this->form_validation->set_rules('maxAge', "maximum age", 'required|less_than[105]');
         $this->form_validation->set_rules('description', 'min_length[100]');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
-        $this->form_validation->set_rules('attraction', 'Attraction', 'required');
+        $this->form_validation->set_rules('attraction[]', 'Attraction', 'required');
         $this->form_validation->set_rules('brandslist[]', 'Brands', 'required');
 		
         if ($this->load->form_validation->run() == FALSE) {
-            $brandView = $this->load->view('brands_register', array('brands' => $this->Brand_Model->get_all_brands()), true);
+            $brandView = $this->load->view('brands_profile', array('brands' => $this->Brand_Model->get_all_brands()), true);
             $userdata = $this->Users_model->get_sensitive_profile($this->session->userdata('userID'));
             $this->load->view('ownprofile', array('brands' => $brandView, 'userdata' => $userdata[0]));
         }

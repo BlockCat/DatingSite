@@ -54,17 +54,25 @@
 						<tr>
 							<td>I like:</td>
 							<td>                                    
-								<input id="male" type="checkbox" name="attraction" value="male" <?php echo set_checkbox('attraction', 'male');?>>
+								<input id="male" class="extra" type="checkbox" name="attraction[]" value="m" <?php echo set_checkbox('attraction[]', 'm');?>>
 								<label for="male">Males </label>
 							   
 							</td>
 							<td>
-								<input id="female" type="checkbox" name="attraction" value="female" <?php echo set_checkbox('attraction', 'female');?>>
+								<input id="female" class="extra" type="checkbox" name="attraction[]" value="v" <?php echo set_checkbox('attraction[]', 'v');?>>
 								<label for="female">Females </label>
 							</td>
 							<td><label class="error"><?php echo form_error('attraction'); ?></label></td>
 						</tr>                             
 						<tr>
+						
+						<tr>
+							<td><label class="forlabel">Personality:</label></td>
+							<td colspan="2"><p id="personalityprofile"></p></td>
+						</tr>
+						<tr>
+							<td><label class="forlabel">Personality preference:</label></td>
+							<td colspan="2"><p id="personalitypref"></p></td></tr>
 						<tr>
 							<td><label class="forlabel">Minimum age preference:</label></td>
 							<td colspan="2"><input id="minap" type="number" name="minAge"></td>
@@ -74,7 +82,7 @@
 							<td><label class="forlabel">Maximum age preference:</label></td>
 							<td colspan="2"><input id="maxap" type="number" name="maxAge"></td>
 							<td><label class="error"><?php echo form_error('maxAge'); ?></label></td>
-						</tr>
+						</tr>						
 						<tr>
 							<td><label class="forlabel">Description:</label></td>
 							<td colspan="2" rowspan="4">
@@ -119,6 +127,9 @@
 						$("#maxap").attr('value','<?php echo set_value('maxAge', $userdata['userMaxAgePref'])?>');
 						$("#dateprofile").attr('value','<?php echo set_value('date', $userdata['userBirthdate'])?>');
 						
+						$("#personalitypref").html(getpersonality(personalitytype));
+						$("#personalityprofile").html(getpersonality(personalitypref));
+
 						var $radios = $('input:radio[name=gender]');
 						if("<?php echo $userdata['userSex']?>" === "m") {
 							$radios.filter('[value=m]').prop('checked', true);
@@ -126,14 +137,15 @@
 							$radios.filter('[value=v]').prop('checked', true);
 						}
 						
-						var $radios2 = $('input:checkbox[name=attraction]');
+						var $radios2 = $('input:checkbox[class=extra]');
+
 						if("<?php echo $userdata['userSexPref']?>" === "m") {
-							$radios2.filter('[value=male]').prop('checked', true);
-						}else if("<?php echo $userdata['userSexPref']?>" === "f"){
-							$radios2.filter('[value=female]').prop('checked', true);
+							$radios2.filter('[value=m]').prop('checked', true);
+						}else if("<?php echo $userdata['userSexPref']?>" === "v"){
+							$radios2.filter('[value=v]').prop('checked', true);
 						}else{
-							$radios2.filter('[value=male]').prop('checked', true);
-							$radios2.filter('[value=female]').prop('checked', true);
+							$radios2.filter('[value=m]').prop('checked', true);
+							$radios2.filter('[value=v]').prop('checked', true);
 						}
 
 					});
