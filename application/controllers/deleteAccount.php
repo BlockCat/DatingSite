@@ -1,6 +1,7 @@
 <?php
 //defined('BASEPATH') OR exit('No direct script access allowed');
 
+class deleteAccount extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -27,6 +28,7 @@
 	
 	public function index()
 	{   	
+		$this->Users_model->delete_user($this->session->userdata('userID'), $this->session->userdata('userPersonality'), $this->session->userdata('userPersonalityPref'));	
 		$this->session->sess_destroy();
 		header('Location: http://localhost/DatingSite/');
 	}
