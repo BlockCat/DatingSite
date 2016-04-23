@@ -196,6 +196,24 @@ class Users_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function get_user_personality($userId) {
+		$this->db->select('e,n,f,j,i,s,t,p');
+		$this->db->from('userprofile');
+		$this->db->join('personality', 'personalityId = userPersonality');
+		$this->db->where('userid', $userId);
+		$query = $this->db->get();
+		return $query->result_array()[0];
+	}
+
+	public function get_user_pref_personality($userId) {
+		$this->db->select('e,n,f,j,i,s,t,p');
+		$this->db->from('userprofile');
+		$this->db->join('personality', 'personalityId = userPersonalityPref');
+		$this->db->where('userid', $userId);
+		$query = $this->db->get();
+		return $query->result_array()[0];
+	}
+
 	public function search_users($page, $gender, $pref, $amin, $amax) {
 		//Gender of the one searching, the people displayed should like his gender too.
 		//where dates between today - minage and today - maxage
@@ -205,7 +223,7 @@ class Users_model extends CI_Model {
 		$datemin = $datemin->modify("-{$amin} year")->format('Y-m-d');
 		$datemax = $datemax->modify("-{$amax} year")->format('Y-m-d');
 
-		$this->db->select('userID, userNickname, userSex, userBirthdate, userPersonality, userDescription');
+		$this->db->select('userID, userNickname, userSex, userBirthdate, userPersonality, userDescription, userPersonalityPref');
 		$this->db->where('userBirthdate <', $datemin);
 		$this->db->where('userBirthdate >', $datemax);
 //		$this->db->where_in('userSexPref', array('b', $gender));

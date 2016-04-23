@@ -103,7 +103,7 @@ class Register extends CI_Controller {
 
     public function is_unique_email($email) {
         $this->load->model('Users_model');
-        return true;
+        //return true;
         return !$this->Users_model->email_exists($email);
     }
 

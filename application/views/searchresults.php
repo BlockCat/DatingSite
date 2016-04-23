@@ -30,8 +30,13 @@
         });
 
         $("#more").click(function nextpage() {
-            $("#form #page").val(page++);
-            loadpage(page);
+            <?php if ($this->session->userdata('loggedIn')) {?>
+                $("#form #page").val(page++);
+                loadpage(page);
+            <?php } else {?>
+                alert('Please sign up to view more of our members!');
+
+            <?php }?>
         });
 
         var page = 1;
@@ -66,13 +71,25 @@
                 class: "profileinfo"
             });
 
-            info.append($("<p>" + data.userNickname + "</p>"));
-            info.append($("<p>" + data.userSex + "</p>"));
-            info.append($("<p>" + data.userBirthdate + "</p>"));
-            info.append($("<p>" + data.personality + "</p>"));
-            info.append($("<p>" + data.userDescription.slice(0, 50) + "</p>"));
-            info.append($("<p>" + data.personality + "</p>"));
+            info.append($("<p><b>" + data.userNickname + "</b></p>"));
+            info.append($("<p>Sex: " + data.userSex + "</p>"));
+            info.append($("<p>Age: " + data.userBirthdate + "</p>"));
+            info.append($("<p>" + data.personality + "</p><hr>"));
+            info.append($("<p>" + data.userDescription.slice(0, 50) + "</p><hr>"));
+            var brands = $("<p></p>");
+
+            if (data.brands.length > 0) {
+                brands.html(data.brands[0]);
+                for (var i = 1; i < data.brands.length && i < 5; i++) {
+                    brands.html(brands.html() + ', ' + data.brands[i]);
+                }
+            } else {
+                brands.html('No brands');
+            }
+            info.append(brands);
             info.append($("<p>" + data.distance + "</p>"));
+
+            console.log(data);
 
             profile.append(info);
 

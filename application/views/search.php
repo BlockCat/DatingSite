@@ -10,10 +10,12 @@
                         <label for="preferencev">Females</label><input id="preferencev" type="checkbox" name="preference[]" value="v" <?php echo set_checkbox('preference', 'v', ($sexpref == 'f' || $sexpref=='b'))?>><br>
                 Minimum preferred age: <input type="number" name="minage" value="<?php echo set_value('minage', $minage)?>"></br>
                 Maximum preferred age: <input type="number" name="maxage" value="<?php echo set_value('maxage', $maxage)?>"></br>
+                <?php if(!$this->session->userdata('loggedIn')) {?>
                 Amount of extrovert: <input type="number" name="e" value="<?php echo set_value('e', $prefpersonality['e'] / 10)?>"></br>
                 Amount of intuitive: <input type="number" name="n" value="<?php echo set_value('n', $prefpersonality['n'] / 10)?>"></br>
                 Amount of thinking: <input type="number" name="t" value="<?php echo set_value('t', $prefpersonality['t'] / 10)?>"></br>
                 Amount of feeling : <input type="number" name="f" value="<?php echo set_value('f', $prefpersonality['f'] / 10)?>"></br>
+                <?php }?>
                 <table id="brandTable" cellspacing="0" cellpadding="0">
                     <?php loadBrands($brands, $selectedBrands);?>
                 </table>
@@ -32,8 +34,11 @@ function loadBrands($brands, $selectedBrands)
 {
     $index = 0;
     echo '<tr>';
-    foreach($selectedBrands as $k=>$v) {
-        $nsbrands[$k] = $v['brand'];
+    $nsbrands = array();
+    if (count($selectedBrands) > 0) {
+        foreach ($selectedBrands as $k => $v) {
+            $nsbrands[$k] = $v['brand'];
+        }
     }
     foreach ($brands as $entry) {
         $name = $entry['brandName'];
