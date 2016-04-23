@@ -28,7 +28,7 @@
 			$("#deletepic").click(function(){
 				var result = confirm("do you really want to delete your beautifull picture?");
 				if (result == true){
-					//delete picture
+					window.location.href = location.protocol + "//" + location.host + "/DatingSite/deletePicture";
 				}
 			});
 		});	

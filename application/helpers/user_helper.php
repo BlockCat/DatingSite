@@ -109,6 +109,16 @@ if(!function_exists('get_profile_image')) {
     }
 }
 
+if(!function_exists('delete_profile_image')) {
+    function delete_profile_image($userId) {
+		
+		if(unlink("images/profilepic/" . $userId   . ".jpg") &&  unlink("images/profilepic/" . $userId . "_thumb.jpg")){
+			return "file deleted";
+		}
+		return "file failed to delete";
+    }
+}
+
 if (!function_exists('get_pretty_personality')) {
     function get_pretty_personality($userId) {
         $controller = get_instance();

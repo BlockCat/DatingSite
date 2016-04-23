@@ -1,7 +1,7 @@
 <?php
 //defined('BASEPATH') OR exit('No direct script access allowed');
 
-class deleteAccount extends CI_Controller {
+class deletePicture extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -23,15 +23,16 @@ class deleteAccount extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('session');
-		$this->load->model('Users_model');
 		$this->load->helper('user');
+		$this->load->helper('url');
+
+
 	}
 	
 	public function index()
-	{   	
-		$this->Users_model->delete_user($this->session->userdata('userID'), $this->session->userdata('userPersonality'), $this->session->userdata('userPersonalityPref'));	
-		$result = delete_profile_image($this->session->userdata('userID'));		
-		$this->session->sess_destroy();
-		header('Location: http://localhost/DatingSite/');
+	{ 
+		$result = delete_profile_image($this->session->userdata('userID'));
+		$upload = base_url("/profilepage/upload");		
+		header("Location: $upload");
 	}
 }
