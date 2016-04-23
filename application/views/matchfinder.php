@@ -94,7 +94,7 @@
 <script>
 	
 	$(document).ready(function () {
-		setprofiles();
+		setprofiles();		
 	});
 	
 	document.getElementById("refresh").addEventListener("click", function(){
@@ -118,6 +118,26 @@
 						$("#personalityprofile" + String(nr)).html(getpersonality(personalitytype));
 						$("#brandsprofile" + String(nr)).html(getbrands(brands));
 						$("#descriptionprofile" + String(nr)).html(profiledata[nr].userDescription.substr(0,10) + '...' );
+						
+						//like feedback
+						<?php if(isset($_SESSION['loggedIn'])){ ?>
+							$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
+							'profileID':profiledata[nr].userID}, function (likeRelation){
+								console.log(likeRelation);
+								$("#profilepic"+ String(nr)).css('border-style', 'solid');
+								$("#profilepic"+ String(nr)).css('border-width', '0.3em');
+
+								if(likeRelation == "n"){
+									$("#profilepic"+ String(nr)).css('border-color', '#990000');				
+								}
+								else if(likeRelation == "r"){
+									$("#profilepic"+ String(nr)).css('border-color', '#009933');					
+								}
+								else if(likeRelation == "g"){
+									$("#profilepic"+ String(nr)).css('border-color', '#0033cc');					
+								}
+							});
+						<?php } ?>
 					});	
 				});
 			}

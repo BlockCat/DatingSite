@@ -87,7 +87,22 @@
 				}else{
 					$("#like").attr('id', 'liked');
 					$("#liked").html('Liked');
-				}					
+				}	
+				$("#like").attr('id', 'liked');
+				
+				$("#profilepic").css('border-style', 'solid');
+				$("#profilepic").css('border-width', '0.3em');
+
+				if(likeRelation == "n"){
+					$("#profilepic").css('border-color', '#990000');				
+				}
+				else if(likeRelation == "r"){
+					$("#profilepic").css('border-color', '#009933');					
+				}
+				else if(likeRelation == "g"){
+					$("#profilepic").css('border-color', '#0033cc');					
+				}
+				
 			});
 		//this is when we are not logged in
 		<?php }else{?>
