@@ -54,12 +54,12 @@
 						<tr>
 							<td>I like:</td>
 							<td>                                    
-								<input id="male" type="checkbox" name="attraction" value="m" <?php echo set_checkbox('attraction', 'm');?>>
+								<input id="male" class="extra" type="checkbox" name="attraction[]" value="m" <?php echo set_checkbox('attraction[]', 'm');?>>
 								<label for="male">Males </label>
 							   
 							</td>
 							<td>
-								<input id="female" type="checkbox" name="attraction" value="v" <?php echo set_checkbox('attraction', 'v');?>>
+								<input id="female" class="extra" type="checkbox" name="attraction[]" value="v" <?php echo set_checkbox('attraction[]', 'v');?>>
 								<label for="female">Females </label>
 							</td>
 							<td><label class="error"><?php echo form_error('attraction'); ?></label></td>
@@ -126,8 +126,7 @@
 							$radios.filter('[value=v]').prop('checked', true);
 						}
 						
-						var $radios2 = $('input:checkbox[name=attraction]');
-						$("#descriptionuser").html('<?php echo $userdata['userSexPref']?>');
+						var $radios2 = $('input:checkbox[class=extra]');
 
 						if("<?php echo $userdata['userSexPref']?>" === "m") {
 							$radios2.filter('[value=m]').prop('checked', true);

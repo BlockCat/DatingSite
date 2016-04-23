@@ -64,7 +64,7 @@ class Register extends CI_Controller {
         $this->form_validation->set_rules('description', 'min_length[100]');
         $this->form_validation->set_rules('profilepicture', 'Profile picture');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
-        $this->form_validation->set_rules('attraction', 'Attraction', 'required');
+        $this->form_validation->set_rules('attraction[]', 'Attraction', 'required');
         $this->form_validation->set_rules('brandslist[]', 'Brands', 'required');
         if ($this->load->form_validation->run() == FALSE) {
 
