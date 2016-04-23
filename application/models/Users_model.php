@@ -152,7 +152,7 @@ class Users_model extends CI_Model {
 			}
 		}
 		else{
-			if($received->num_rows() == 1){
+			if(count($received->result_array()) == 1){
 				return "r";
 			}
 			else{
