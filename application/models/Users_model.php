@@ -99,6 +99,17 @@ class Users_model extends CI_Model {
 		}
 	}
 	
+	public function delete_user($userID, $personalityID, $personalitypref){
+		
+		//deletes everything related to a certain user
+		$this->db->delete('BrandPref', array('user' => $userID));
+		$this->db->delete('Personality', array('personalityID' => $personalityID));
+		$this->db->delete('Personality', array('personalityID' => $personalitypref));
+		$this->db->delete('UserLikes', array('likes' => $userID));
+		$this->db->delete('UserLikes', array('liked' => $userID));
+		$this->db->delete('UserProfile', array('userID' => $userID));	
+	}
+	
 	public function set_liked($user, $profile){
 		$like = array(
 			'likes' =>	$user,

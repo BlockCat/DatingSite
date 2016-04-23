@@ -172,6 +172,21 @@ p {
     font-size: 1em;
 }
 
+.profilebutton{
+	margin-bottom: 1em;
+    font-size: 1.3em;   
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #ae3551;
+    border: none;    
+    height: 100%; 
+}
+
+.profilebutton:hover{        
+    background-color: #9B0343;
+    color: #ffffff;
+}
+
 #like {
 	margin-bottom: 1em;
     font-size: 1.3em;   

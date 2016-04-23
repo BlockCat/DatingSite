@@ -2,6 +2,8 @@
 	<div id="main"> 
 		<div class="wrapper">
 			<div class="text_wrapper">
+					<button class="profilebutton" id="picture">edit pic</button>
+					<button class="profilebutton" id="deletion">Delete account</button>
 					<?php echo form_open('ownprofilepage', array('id' => 'form'));?>
 					<table>
 						<tr>
@@ -151,7 +153,19 @@
 					});
 				});
 			<?php } ?>
-		<?php } ?>			
+		<?php } ?>	
+
+		//userdeletion
+		$("#deletion").click(function(){
+			var result = confirm("do you really want to delete this account?");
+			if (result == true){
+				window.location.href = location.protocol + "//" + location.host + "/DatingSite/deleteAccount";
+			}
+		});
+		
+		$("#picture").click(function(){
+				window.location.href = location.protocol + "//" + location.host + "/DatingSite/profilepage/upload";
+		});
 	});	
 
 	
