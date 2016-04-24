@@ -48,9 +48,10 @@
             $.get("<?php echo base_url('search/get_profiles') ?>", formarray, function(data) {
                 console.log('response');
                 for (var i = 0; i < 12 && i < data.length; i++) {
-                    create_profile(data[i], i);				
-					
+                    create_profile(data[i], i, page);
                 }
+				set_feedback(data, page - 1);					
+				console.log("herherherherherh");
                 if (data.length == 0) {
                     alert('There are no more matches');
                     $("#more").hide();
@@ -58,19 +59,15 @@
             });
         }
 
-        function create_profile(data, i) {
-
-
-            var profile = $("<div/>", {
-               class: 'profile'
-            });
-
-
-            var img = $("<div class=\"profilethumbnail\"><a><img src=\""+ data.image +"\"  id=\"profilepic" +i+ "\" alt=\"profilepicture\" height=\"150\" width=\"150\"></a></div>");
-            profile.append(img);
-			//----------
+		function set_feedback(data, page){
+			if(page < 0){
+				page=0;
+			}
+			//---------- moet veranderd worden voor 6 personen....
+			end = (page * 12)+12;
+			for (let i= page * 12; i < end; i++) {
 					$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
-					'profileID':data.userID}, function (likeRelation){
+					'profileID':data[i - (page * 12)].userID}, function (likeRelation){
 						console.log("#profilepic" + String(i));
 						$("#profilepic" + String(i)).css('border-style', 'solid');
 						$("#profilepic" + String(i)).css('border-width', '0.3em');
@@ -85,7 +82,28 @@
 							$("#profilepic" + String(i)).css('border-color', '#0033cc');					
 						}
 					});	
-					//-------------
+					//-------------	
+				
+			}					
+		}
+		
+        function create_profile(data, i, page) {
+
+
+            var profile = $("<div/>", {
+               class: 'profile'
+            });
+			
+			if(page - 1 < 0){
+				normal = 0
+			}
+			else{
+				normal = page -1;
+			}
+
+            var img = $("<div class=\"profilethumbnail\"><a><img src=\""+ data.image +"\"  id=\"profilepic" + (i+ normal *12 ) + "\" alt=\"profilepicture\" height=\"150\" width=\"150\"></a></div>");
+            profile.append(img);
+			
 
             var info = $("<div/>", {
                 class: "profileinfo"
