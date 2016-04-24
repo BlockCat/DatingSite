@@ -35,7 +35,16 @@ class admin extends CI_Controller {
 
 		$this->load->view('header');
 		
-		$this->form_validation->set_rules('alpha', "alphavar", 'required|greater_than[0]');
+        $this->form_validation->set_message('greater_than', 'The %s should be greater than %d');
+        $this->form_validation->set_message('less_than', 'The %s should be less than %d');
+        $this->form_validation->set_message('required', '%s is required.');
+
+		
+		$this->form_validation->set_rules('alpha', "alphavar", 'required|greater_than[0]|less_than[1]');
+		$this->form_validation->set_rules('xfactor', "xvar", 'required|greater_than[0]|less_than[1]');
+		$this->form_validation->set_rules('distance', "dvar", 'required');
+
+
 
 
         if ($this->load->form_validation->run() == FALSE) {
@@ -47,7 +56,9 @@ class admin extends CI_Controller {
 			$alpha = $this->input->post('alpha');
 			$x = $this->input->post('xfactor');
 			$d = $this->input->post('distance');
-            set_dating_variables($alpha, $x, $d);
+			if($this->session->userdata('userAdmin') == 1){
+				set_dating_variables($alpha, $x, $d);
+			}
 			redirect(base_url('/'));
 		}
 	}
