@@ -32,7 +32,7 @@ class liker extends CI_Controller {
 		//set like in databse
 		$liker = $this->input->get('userID');
 		$liked = $this->input->get('profileID');
-		//$result = $this->Users_model->set_liked($liker, $liked);
+		$result = $this->Users_model->set_liked($liker, $liked);
 		
 		//adjust personality preference of user
 		$datevars = get_dating_variables();
