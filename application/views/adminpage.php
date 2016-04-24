@@ -13,24 +13,25 @@
 							<td><label class="forlabel">X-factor:</label></td>
 							<td colspan="2"><input id="xfactor" type="text" name="xfactor" value="<?php echo $datevars["x"];?>"></td>
 							<td><div class="error"><?php echo form_error('xfactor'); ?></div></td>
-						</tr>						
+						</tr>
+						<tr></tr>						
 						<tr>
 							<td>Distance:</td>
-							<td>
+							<td class="admin">
 								<input id="overlap" type="radio" name="distance" value="o" <?php echo set_radio('distance', 'o');?> >
-								<label for="overlap">Overlap</label>
+								<label>Overlap</label>
 							</td>							
-							<td>
+							<td class="admin">
 								<input id="jacard" type="radio" name="distance" value="j" <?php echo set_radio('distance', 'j');?> >
-								<label for="jacard">Jaccard</label>
+								<label>Jaccard</label>
 							</td>
-							<td>
+							<td class="admin">
 								<input id="cosine" type="radio" name="distance" value="c" <?php echo set_radio('distance', 'c');?> >
-								<label for="cosine">Cosine</label>
+								<label>Cosine</label>
 							</td>
-							<td>                                    
+							<td class="admin">                                    
 								<input id="dice" type="radio" name="distance" value="d" <?php echo set_radio('distance', 'd');?>>
-								<label for="dice">Dice</label>							   
+								<label>Dice</label>							   
 							</td>							
 						</tr> 
 					</table>
