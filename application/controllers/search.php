@@ -181,6 +181,8 @@
                 $age = $datenow->diff($birthday)->y;
 
                 $result[$key]['userBirthdate'] = $age;
+                $result[$key]['userID'] = $value['userID'];
+
             }
 
             if (count($result) < ($page * 12)) {

@@ -26,9 +26,10 @@
 
     <script>
         $(document).ready(function () {
-            loadpage(0);
-        });
-
+            loadpage(0);			
+        });		
+				
+				
         $("#more").click(function nextpage() {
             <?php if ($this->session->userdata('loggedIn')) {?>
                 $("#form #page").val(page++);
@@ -47,7 +48,8 @@
             $.get("<?php echo base_url('search/get_profiles') ?>", formarray, function(data) {
                 console.log('response');
                 for (var i = 0; i < 12 && i < data.length; i++) {
-                    create_profile(data[i]);
+                    create_profile(data[i], i);				
+					
                 }
                 if (data.length == 0) {
                     alert('There are no more matches');
@@ -56,7 +58,7 @@
             });
         }
 
-        function create_profile(data) {
+        function create_profile(data, i) {
 
 
             var profile = $("<div/>", {
@@ -64,8 +66,26 @@
             });
 
 
-            var img = $("<div class=\"profilethumbnail\"><a><img src=\""+ data.image +"\" alt=\"profilepicture\" height=\"150\" width=\"150\"></a></div>");
+            var img = $("<div class=\"profilethumbnail\"><a><img src=\""+ data.image +"\"  id=\"profilepic" +i+ "\" alt=\"profilepicture\" height=\"150\" width=\"150\"></a></div>");
             profile.append(img);
+			//----------
+					$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
+					'profileID':data.userID}, function (likeRelation){
+						console.log("#profilepic" + String(i));
+						$("#profilepic" + String(i)).css('border-style', 'solid');
+						$("#profilepic" + String(i)).css('border-width', '0.3em');
+
+						if(likeRelation == "n"){
+							$("#profilepic" + String(i)).css('border-color', '#990000');				
+						}
+						else if(likeRelation == "r"){
+							$("#profilepic" + String(i)).css('border-color', '#009933');					
+						}
+						else if(likeRelation == "g"){
+							$("#profilepic" + String(i)).css('border-color', '#0033cc');					
+						}
+					});	
+					//-------------
 
             var info = $("<div/>", {
                 class: "profileinfo"
@@ -96,6 +116,10 @@
             var linked = $("<a target='_blank' href=./profilepage?ID=" + data.userID +"></a>");
             linked.append(profile);
             $("#profileviewer").append(linked);
+			
+			
+			
+			
         }
 
     </script>
