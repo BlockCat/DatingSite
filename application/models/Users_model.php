@@ -213,6 +213,29 @@ class Users_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array()[0];
 	}
+	
+	public function edit_user_pref_personality($userId, $newpersonality) {
+		
+		$this->db->from('UserProfile');
+		$this->db->where('userID', $userId);
+		$query = $this->db->get();
+		$query_array = $query->result_array()[0];
+		
+		$persID = $query_array["userPersonalityPref"];
+		$data = array(
+				'personalityID' =>	$persID,
+				'e' => $newpersonality["e"],
+				'n' => $newpersonality["n"],
+				'f' => $newpersonality["f"],
+				'j' => $newpersonality["j"],
+				'i' => $newpersonality["i"],
+				's' => $newpersonality["s"],
+				't' => $newpersonality["t"],
+				'p' => $newpersonality["p"]
+		);
+		
+		$this->db->replace('Personality', $data);		
+	}
 
 	public function search_users($page, $gender, $pref, $amin, $amax, $user = false, $likeduser = false, $userLikedThem = false) {
 		//Gender of the one searching, the people displayed should like his gender too.
