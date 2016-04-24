@@ -13,66 +13,17 @@
         }
 
         public function index() {
-
-
             $data = array();
             $data['brands'] = $this->Brand_Model->get_all_brands();
             if(!$this->session->userdata('loggedIn')) {
-                $data['brands'] = $this->Brand_Model->get_all_brands();
-                $data['gender'] = 'm';
-                $data['sexpref'] = 'v';
-                $data['minage'] = '20';
-                $data['maxage'] = '40';
-                $data['prefpersonality'] = array(
-                    'e' => 500,
-                    'i' => 500,
-                    'n' => 500,
-                    's' => 500,
-                    't' => 500,
-                    'f' => 500,
-                    'j' => 500,
-                    'p' => 500,
-                    );
-                $data['selectedBrands'] = array();
+                $data = $this->get_anon_viewdata($data);
             } else {
-
-                $userdata = $this->Users_model->get_certain_profile($this->session->userdata("userID"))[0];
-
-                $data['selectedBrands'] = $this->Brand_Model->get_brands($this->session->userdata("userID"));
-
-                $data['gender'] = $userdata['userSex'];
-                $data['sexpref'] = $userdata['userSexPref'];
-                $data['minage'] = $userdata['userMinAgePref'];
-                $data['maxage'] = $userdata['userMaxAgePref'];
-                $data['prefpersonality'] = $this->Users_model->get_personality($userdata['userPersonalityPref'])[0];
+                $data = $this->get_user_viewdata($data);
 
                 if (!isset($_POST['gender'])) $_POST['gender'] = $data['gender'];
                 if (!isset($_POST['preference'])) $_POST['preference'] = $data['sexpref'];
                 if (!isset($_POST['minage'])) $_POST['minage'] = $data['minage'];
                 if (!isset($_POST['maxage'])) $_POST['maxage'] = $data['maxage'];
-
-                foreach($data['selectedBrands'] as $k=>$v) {
-                    $b[$k] = $v['brand'];
-                }
-                if (!isset($_POST['brands'])) $_POST['brands'] = $b;
-
-                $modus = $this->input->get('mode');
-
-                if ($modus == 1) {
-                    $data['wholikedme'] = false;
-                    $data['whoiliked'] = true;
-                } elseif ($modus == 2) {
-                    $data['wholikedme'] = true;
-                    $data['whoiliked'] = false;
-                } elseif ($modus == 3) {
-                    $data['wholikedme'] = true;
-                    $data['whoiliked'] = true;
-                } else {
-                    $data['wholikedme'] = false;
-                    $data['whoiliked'] = false;
-                }
-                //echo print_r($this->input->post());
-
             }
 
             $this->load->view('header');
@@ -89,7 +40,7 @@
                     $this->search_profiles();
                 }
             } else {
-                $this->load->view('search', $data);
+                $this->load->view('matching', $data);
                 $this->search_profiles();
             }
             $this->load->view('footer');
@@ -110,13 +61,17 @@
         }
 
         public function get_profiles() {
-            $this->form_validation->set_rules('gender', 'Gender', 'required|regex_match[/^[mv]$/]');
-            $this->form_validation->set_rules('preference[]', 'Preference', 'required');
-            $this->form_validation->set_rules('minage', 'Minimum age', 'required|greater_than[17]');
-            $this->form_validation->set_rules('maxage', 'Minimum age', 'required|greater_than[17]');
-            if($this->form_validation->run() == false){
-                echo 'error:';
-                echo validation_errors();
+            if (!$this->session->userdata('loggedIn')) {
+                $this->form_validation->set_rules('gender', 'Gender', 'required|regex_match[/^[mv]$/]');
+                $this->form_validation->set_rules('preference[]', 'Preference', 'required');
+                $this->form_validation->set_rules('minage', 'Minimum age', 'required|greater_than[17]');
+                $this->form_validation->set_rules('maxage', 'Minimum age', 'required|greater_than[17]');
+                if ($this->form_validation->run() == false) {
+                    echo validation_errors();
+                } else {
+                    header('Content-Type: application/json');
+                    echo $this->find_profiles();
+                }
             } else {
                 header('Content-Type: application/json');
                 echo $this->find_profiles();
@@ -170,6 +125,12 @@
                 //Get data if user is logged in
                 $searchPersonality = $this->Users_model->get_user_pref_personality($this->session->userdata('userID'));
                 $myPersonality = $this->Users_model->get_user_personality($this->session->userdata('userID'));
+                $user = $this->Users_model->get_certain_profile($this->session->userdata('userID'))[0];
+                $gender = $user['userSex'];
+                $pref = $user['userSexPref'];
+                $amin = $user['userMinAgePref'];
+                $amax = $user['userMaxAgePref'];
+
                 $page = $this->input->post('page');
                 if (!$page) $page = 0;
             }
@@ -184,7 +145,6 @@
             $memo_array = array();
 
             foreach($result as $key => $value) {
-
                 $kpers = $this->Users_model->get_personality($value['userPersonality'])[0]; //His personality
                 $targetPref = $this->Users_model->get_personality($value['userPersonalityPref'])[0]; //His preference
                 $brandresults = $this->Brand_Model->get_brands($value['userID']); //The brands of this user
@@ -295,4 +255,72 @@
             $result[$pivot] = $temp;
             return array('pivot' => $i, 'result' => $result);
         }
-}
+
+        /**
+         * @param $data
+         * @return mixed
+         */
+        public function get_anon_viewdata($data)
+        {
+            $data['brands'] = $this->Brand_Model->get_all_brands();
+            $data['gender'] = 'm';
+            $data['sexpref'] = 'v';
+            $data['minage'] = '20';
+            $data['maxage'] = '40';
+            $data['prefpersonality'] = array(
+                'e' => 500,
+                'i' => 500,
+                'n' => 500,
+                's' => 500,
+                't' => 500,
+                'f' => 500,
+                'j' => 500,
+                'p' => 500,
+            );
+            $data['selectedBrands'] = array();
+            return $data;
+        }
+
+        /**
+         * @param $data
+         * @param $b
+         * @return mixed
+         */
+        private function get_user_viewdata($data)
+        {
+            $userdata = $this->Users_model->get_certain_profile($this->session->userdata("userID"))[0];
+
+            $data['selectedBrands'] = $this->Brand_Model->get_brands($this->session->userdata("userID"));
+
+            $data['gender'] = $userdata['userSex'];
+            $data['sexpref'] = $userdata['userSexPref'];
+            $data['minage'] = $userdata['userMinAgePref'];
+            $data['maxage'] = $userdata['userMaxAgePref'];
+            $data['prefpersonality'] = $this->Users_model->get_personality($userdata['userPersonalityPref'])[0];
+
+            foreach ($data['selectedBrands'] as $k => $v) {
+                $b[$k] = $v['brand'];
+            }
+            if (!isset($_POST['brands'])) $_POST['brands'] = $b;
+
+            $modus = $this->input->get('mode');
+
+            if ($modus == 1) {
+                $data['wholikedme'] = false;
+                $data['whoiliked'] = true;
+                return $data;
+            } elseif ($modus == 2) {
+                $data['wholikedme'] = true;
+                $data['whoiliked'] = false;
+                return $data;
+            } elseif ($modus == 3) {
+                $data['wholikedme'] = true;
+                $data['whoiliked'] = true;
+                return $data;
+            } else {
+                $data['wholikedme'] = false;
+                $data['whoiliked'] = false;
+                return $data;
+            }
+        }
+    }

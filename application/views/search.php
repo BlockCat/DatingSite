@@ -3,6 +3,7 @@
         <div class="flashy_wrapper">
                 <?php echo validation_errors(); ?>
             <form id="form" method='post' action="<?php base_url('search');?>">
+                <?php if(!$this->session->userdata('loggedIn')) {?>
                 Gender: <label for="genderm">Male</label> <input id="genderm" type="radio" name="gender" value="m" <?php echo set_radio('gender', 'm', $gender == 'm')?>>,
                         <label for="genderv">Female</label><input id="genderv" type="radio" name="gender" value="v"<?php echo set_radio('gender', 'v', $gender == 'v')?>><br>
                 Preference:
@@ -10,20 +11,17 @@
                         <label for="preferencev">Females</label><input id="preferencev" type="checkbox" name="preference[]" value="v" <?php echo set_checkbox('preference[]', 'v', ($sexpref == 'v' || $sexpref=='b'))?>><br>
                 Minimum preferred age: <input type="number" name="minage" value="<?php echo set_value('minage', $minage)?>"></br>
                 Maximum preferred age: <input type="number" name="maxage" value="<?php echo set_value('maxage', $maxage)?>"></br>
-                <?php if(!$this->session->userdata('loggedIn')) {?>
+
                     Amount of extrovert: <input type="number" name="e" value="<?php echo set_value('e', $prefpersonality['e'] / 10)?>"></br>
                     Amount of intuitive: <input type="number" name="n" value="<?php echo set_value('n', $prefpersonality['n'] / 10)?>"></br>
                     Amount of thinking: <input type="number" name="t" value="<?php echo set_value('t', $prefpersonality['t'] / 10)?>"></br>
                     Amount of feeling : <input type="number" name="f" value="<?php echo set_value('f', $prefpersonality['f'] / 10)?>"></br>
-                <?php }?>
+
                 <table id="brandTable" cellspacing="0" cellpadding="0">
                     <?php loadBrands($brands, $selectedBrands);?>
                 </table>
-                <input type="hidden" value="0" name="page" id="page">
-                <?php if($this->session->userdata('loggedIn')) {?>
-                    Who liked me: <input type="checkbox" value="1" name="wholikedme" <?php echo set_checkbox('wholikedme', '1', $wholikedme)?>>
-                    Who did I like: <input type="checkbox" value="1" name="whoiliked" <?php echo set_checkbox('whoiliked', '1', $whoiliked)?>>
                 <?php } ?>
+                <input type="hidden" value="0" name="page" id="page">
                 <input type="submit">
 
             </form>

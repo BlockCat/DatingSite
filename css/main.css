@@ -48,15 +48,13 @@ p {
     margin: 0.9em 0.7em 0px 0em;
     border: none;    
     height: 100%;    
-    float: center;
+
 }
 
 .header button:hover{        
     background-color: #9B0343;
     color: #ffffff;
 }
-
-
 
 .wrapper {
     min-height: 720px;
@@ -263,8 +261,13 @@ p {
 }
 
 #brandTable label {
-
     width: 100%;
+}
+
+#matching {
+    min-height: 0;
+    margin-top: 2em;
+    padding: 0;
 }
 
 #brandTable td {
