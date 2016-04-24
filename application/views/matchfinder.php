@@ -1,84 +1,95 @@
 <div id="main"> 
 	<div class="wrapper">
 		<div class="flashy_wrapper">
+
 			<h1>Find your perfect partner!</h1>
-			<div id="profileviewer">
-				<div class="profile">
-					<div class="profilethumbnail">
-						<a id="link0"><img id="profilepic0" alt="profilepicture" height="150" width="150"></a>
-					</div>
-					<div class="profileinfo">
-					<a id="nicknameprofile0"></a>
-					<p id="sexprofile0"></p>
-					<p id="ageprofile0"></p>
-					<p id="personalityprofile0"></p>
-					<p id="brandsprofile0"></p>
-					<p id="descriptionprofile0"></p>
-					</div>
+			<?php if ($this->session->userdata('loggedIn')) { ?>
+				<div id="mylinks">
+					<a href="<?php echo base_url('search?mode=1')?>"><button>My likes</button></a>
+					<a href="<?php echo base_url('search?mode=2')?>"><button>Who likes me</button></a>
+					<a href="<?php echo base_url('search?mode=3')?>"><button>Mutual likes</button></a>
 				</div>
-				<div class="profile">
-					<div class="profilethumbnail">
-						<a id="link1"><img id="profilepic1" alt="profilepicture" height="150" width="150"></a>
+			<?php }?>
+			<div>
+
+				<div id="profileviewer">
+					<div class="profile">
+						<div class="profilethumbnail">
+							<a id="link0"><img id="profilepic0" alt="profilepicture" height="150" width="150"></a>
+						</div>
+						<div class="profileinfo">
+						<a id="nicknameprofile0"></a>
+						<p id="sexprofile0"></p>
+						<p id="ageprofile0"></p>
+						<p id="personalityprofile0"></p>
+						<p id="brandsprofile0"></p>
+						<p id="descriptionprofile0"></p>
+						</div>
 					</div>
-					<div class="profileinfo">
-					<a id="nicknameprofile1"></a>
-					<p id="sexprofile1"></p>
-					<p id="ageprofile1"></p>
-					<p id="personalityprofile1"></p>
-					<p id="brandsprofile1"></p>
-					<p id="descriptionprofile1"></p>
+					<div class="profile">
+						<div class="profilethumbnail">
+							<a id="link1"><img id="profilepic1" alt="profilepicture" height="150" width="150"></a>
+						</div>
+						<div class="profileinfo">
+						<a id="nicknameprofile1"></a>
+						<p id="sexprofile1"></p>
+						<p id="ageprofile1"></p>
+						<p id="personalityprofile1"></p>
+						<p id="brandsprofile1"></p>
+						<p id="descriptionprofile1"></p>
+						</div>
 					</div>
-				</div>
-				<div class="profile">
-					<div class="profilethumbnail">
-						<a id="link2"><img id="profilepic2" alt="profilepicture" height="150" width="150"></a>
+					<div class="profile">
+						<div class="profilethumbnail">
+							<a id="link2"><img id="profilepic2" alt="profilepicture" height="150" width="150"></a>
+						</div>
+						<div class="profileinfo">
+						<a id="nicknameprofile2"></a>
+						<p id="sexprofile2"></p>
+						<p id="ageprofile2"></p>
+						<p id="personalityprofile2"></p>
+						<p id="brandsprofile2"></p>
+						<p id="descriptionprofile2"></p>
+						</div>
 					</div>
-					<div class="profileinfo">
-					<a id="nicknameprofile2"></a>
-					<p id="sexprofile2"></p>
-					<p id="ageprofile2"></p>
-					<p id="personalityprofile2"></p>
-					<p id="brandsprofile2"></p>
-					<p id="descriptionprofile2"></p>
+					<div class="profile">
+						<div class="profilethumbnail">
+							<a id="link3"><img id="profilepic3" alt="profilepicture" height="150" width="150"></a>
+						</div>
+						<div class="profileinfo">
+						<a id="nicknameprofile3"></a>
+						<p id="sexprofile3"></p>
+						<p id="ageprofile3"></p>
+						<p id="personalityprofile3"></p>
+						<p id="brandsprofile3"></p>
+						<p id="descriptionprofile3"></p>
+						</div>
 					</div>
-				</div>
-				<div class="profile">
-					<div class="profilethumbnail">
-						<a id="link3"><img id="profilepic3" alt="profilepicture" height="150" width="150"></a>
+					<div class="profile">
+						<div class="profilethumbnail">
+							<a id="link4"><img id="profilepic4" alt="profilepicture" height="150" width="150"></a>
+						</div>
+						<div class="profileinfo">
+						<a id="nicknameprofile4"></a>
+						<p id="sexprofile4"></p>
+						<p id="ageprofile4"></p>
+						<p id="personalityprofile4"></p>
+						<p id="brandsprofile4"></p>
+						<p id="descriptionprofile4"></p>
+						</div>
 					</div>
-					<div class="profileinfo">
-					<a id="nicknameprofile3"></a>
-					<p id="sexprofile3"></p>
-					<p id="ageprofile3"></p>
-					<p id="personalityprofile3"></p>
-					<p id="brandsprofile3"></p>
-					<p id="descriptionprofile3"></p>
-					</div>
-				</div>
-				<div class="profile">
-					<div class="profilethumbnail">
-						<a id="link4"><img id="profilepic4" alt="profilepicture" height="150" width="150"></a>
-					</div>
-					<div class="profileinfo">
-					<a id="nicknameprofile4"></a>
-					<p id="sexprofile4"></p>
-					<p id="ageprofile4"></p>
-					<p id="personalityprofile4"></p>
-					<p id="brandsprofile4"></p>
-					<p id="descriptionprofile4"></p>
-					</div>
-				</div>
-				<div class="profile">
-					<div class="profilethumbnail">
-						<a id="link5"><img id="profilepic5" alt="profilepicture" height="150" width="150"></a>
-					</div>
-					<div class="profileinfo">
-					<a id="nicknameprofile5"></a>
-					<p id="sexprofile5"></p>
-					<p id="ageprofile5"></p>
-					<p id="personalityprofile5"></p>
-					<p id="brandsprofile5"></p>
-					<p id="descriptionprofile5"></p>
+					<div class="profile">
+						<div class="profilethumbnail">
+							<a id="link5"><img id="profilepic5" alt="profilepicture" height="150" width="150"></a>
+						</div>
+						<div class="profileinfo">
+						<a id="nicknameprofile5"></a>
+						<p id="sexprofile5"></p>
+						<p id="ageprofile5"></p>
+						<p id="personalityprofile5"></p>
+						<p id="brandsprofile5"></p>
+						<p id="descriptionprofile5"></p>
+						</div>
 					</div>
 				</div>
 			</div>
