@@ -29,14 +29,16 @@
 		else{
             $signoutUrl = base_url('signout');
             $profileUrl = base_url('ownprofilepage');
-            $searchUrl = base_url('matching');
+            $matchUrl = base_url('matching');
+            $searchUrl = base_url('search');
 			$adminUrl = base_url('admin');
             $homeUrl = base_url('/');
 			echo "<a href='$signoutUrl'><button>Sign out</button></a>";
 			if($_SESSION['userAdmin'] == 1){
 				echo "<a href='$adminUrl'><button>admin</button></a>";
 			}
-			echo "<a href='$searchUrl'><button>Matching</button></a>";
+			echo "<a href='$matchUrl'><button>Matching</button></a>";
+            echo "<a href='$searchUrl'><button>Search</button></a>";
             echo  "<a href='$profileUrl'><button>My profile</button></a>";
             echo "<a href='$homeUrl'><button>Home</button></a>";
 		}

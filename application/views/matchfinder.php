@@ -5,9 +5,9 @@
 			<h1>Find your perfect partner!</h1>
 			<?php if ($this->session->userdata('loggedIn')) { ?>
 				<div id="mylinks">
-					<a href="<?php echo base_url('search?mode=1')?>"><button>My likes</button></a>
-					<a href="<?php echo base_url('search?mode=2')?>"><button>Who likes me</button></a>
-					<a href="<?php echo base_url('search?mode=3')?>"><button>Mutual likes</button></a>
+					<a href="<?php echo base_url('matching?mode=1')?>"><button>My likes</button></a>
+					<a href="<?php echo base_url('matching?mode=2')?>"><button>Who likes me</button></a>
+					<a href="<?php echo base_url('matching?mode=3')?>"><button>Mutual likes</button></a>
 				</div>
 			<?php }?>
 			<div>

@@ -28,21 +28,37 @@
 
             $this->load->view('header');
 
-            if (!$this->session->userdata('loggedIn')) {
-                $this->form_validation->set_rules('gender', 'Gender', 'required|regex_match[/^[mv]$/]');
-                $this->form_validation->set_rules('preference[]', 'Preference', 'required');
-                $this->form_validation->set_rules('minage', 'Minimum age', 'required|greater_than[17]');
-                $this->form_validation->set_rules('maxage', 'Minimum age', 'required|greater_than[17]');
-                if ($this->form_validation->run() == false) {
-                    $this->load->view('search', $data);
-                } else {
-                    $this->load->view('search', $data);
-                    $this->search_profiles();
-                }
+
+            $this->form_validation->set_rules('gender', 'Gender', 'required|regex_match[/^[mv]$/]');
+            $this->form_validation->set_rules('preference[]', 'Preference', 'required');
+            $this->form_validation->set_rules('minage', 'Minimum age', 'required|greater_than[17]');
+            $this->form_validation->set_rules('maxage', 'Minimum age', 'required|greater_than[17]');
+            if ($this->form_validation->run() == false) {
+                $this->load->view('search', $data);
             } else {
-                $this->load->view('matching', $data);
+                $this->load->view('search', $data);
                 $this->search_profiles();
             }
+            $this->load->view('footer');
+        }
+
+        public function match() {
+            if(!$this->session->userdata('loggedIn')) {
+                redirect(base_url('search'));
+            } else {
+                $data = array();
+                $data['brands'] = $this->Brand_Model->get_all_brands();
+                $data = $this->get_user_viewdata($data);
+
+                if (!isset($_POST['gender'])) $_POST['gender'] = $data['gender'];
+                if (!isset($_POST['preference'])) $_POST['preference'] = $data['sexpref'];
+                if (!isset($_POST['minage'])) $_POST['minage'] = $data['minage'];
+                if (!isset($_POST['maxage'])) $_POST['maxage'] = $data['maxage'];
+            }
+
+            $this->load->view('header');
+            $this->load->view('matching', $data);
+            $this->search_profiles();
             $this->load->view('footer');
         }
 
@@ -121,8 +137,32 @@
                     'f' => $t,
                     'p' => $j);
                     $page = 0;
-            } else {
-                //Get data if user is logged in
+
+            } else if($this->input->post('search')){
+                $e = $this->input->post('e') * 10;
+                $e = ($e ? $e : 500);
+                $n = $this->input->post('n') * 10;
+                $n = ($n ? $n : 500);
+                $t = $this->input->post('t') * 10;
+                $t = ($t ? $t : 500);
+                $j = $this->input->post('j') * 10;
+                $j = ($j ? $j : 500);
+
+                $searchPersonality = array(
+                    'e' => $e,
+                    'n' => $n,
+                    't' => $t,
+                    'j' => $j,
+                    'i' => 1000 - $e,
+                    's' => 1000 - $n,
+                    'f' => 1000 - $t,
+                    'p' => 1000 - $j);
+                $myPersonality = $this->Users_model->get_user_personality($this->session->userdata('userID'));
+                $user = $this->Users_model->get_certain_profile($this->session->userdata('userID'))[0];
+                $page = $this->input->post('page');
+                if (!$page) $page = 0;
+            }else{
+                //Get data if user is logged in, and it's not a search
                 $searchPersonality = $this->Users_model->get_user_pref_personality($this->session->userdata('userID'));
                 $myPersonality = $this->Users_model->get_user_personality($this->session->userdata('userID'));
                 $user = $this->Users_model->get_certain_profile($this->session->userdata('userID'))[0];
