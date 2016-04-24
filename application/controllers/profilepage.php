@@ -1,5 +1,5 @@
 <?php
-//defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class profilepage extends CI_Controller {
 
@@ -33,10 +33,10 @@ class profilepage extends CI_Controller {
 	{
 		if (!$this->input->get('ID')) //If the user is not logged in and no input is given... 404?
 		{
-			redirect(base_url('404'));
+			redirect(site_url('404'));
 		}
 		if ($this->input->get('ID') == $this->session->userdata('userID')) {
-			redirect(base_url('ownprofilepage'));
+			redirect(site_url('ownprofilepage'));
 		}
 
 		//Check if user exists.
@@ -63,7 +63,7 @@ class profilepage extends CI_Controller {
 			$this->load->view('profile', $data);
 			
 		} else { //If there is no user with this id.
-			redirect(base_url('404'));
+			redirect(site_url('404'));
 		}
 	}
 
@@ -89,10 +89,10 @@ class profilepage extends CI_Controller {
 				$this->load->view('upload', $data);
 			} else {
 				//Successfull upload...
-				redirect(base_url());
+				redirect(site_url());
 			}
 		} else {
-			redirect(base_url());
+			redirect(site_url());
 		}
 	}
 
@@ -115,7 +115,7 @@ class profilepage extends CI_Controller {
 				//Failure
 				$errors = $this->upload->display_errors();
 				return false;
-				//redirect(base_url('profilepage/upload'));
+				//redirect(site_url('profilepage/upload'));
 			} else {
 				//Success?
 

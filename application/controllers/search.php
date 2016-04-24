@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
     class search extends CI_Controller {
 
         public function __construct()
@@ -45,7 +46,7 @@
 
         public function match() {
             if(!$this->session->userdata('loggedIn')) {
-                redirect(base_url('search'));
+                redirect(site_url('search'));
             } else {
                 $data = array();
                 $data['brands'] = $this->Brand_Model->get_all_brands();

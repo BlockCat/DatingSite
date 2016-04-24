@@ -17,22 +17,22 @@
         <div id="header_content"> 
 		<?php
 		if(!isset($_SESSION['loggedIn'])){
-            $loginUrl = base_url('login');
-            $registerUrl = base_url('register');
-            $searchUrl = base_url('search');
-            $homeUrl = base_url('/');
+            $loginUrl = site_url('login');
+            $registerUrl = site_url('register');
+            $searchUrl = site_url('search');
+            $homeUrl = site_url('/');
             echo "<a href='$loginUrl'><button>Sign in</button></a>";
             echo "<a href='$registerUrl'><button>Create account</button></a>";
             echo "<a href='$searchUrl'><button>Search</button></a>";
             echo "<a href='$homeUrl'><button>Home</button></a>";
 		}
 		else{
-            $signoutUrl = base_url('signout');
-            $profileUrl = base_url('ownprofilepage');
-            $matchUrl = base_url('matching');
-            $searchUrl = base_url('search');
-			$adminUrl = base_url('admin');
-            $homeUrl = base_url('/');
+            $signoutUrl = site_url('signout');
+            $profileUrl = site_url('ownprofilepage');
+            $matchUrl = site_url('matching');
+            $searchUrl = site_url('search');
+			$adminUrl = site_url('admin');
+            $homeUrl = site_url('/');
 			echo "<a href='$signoutUrl'><button>Sign out</button></a>";
 			if($_SESSION['userAdmin'] == 1){
 				echo "<a href='$adminUrl'><button>admin</button></a>";

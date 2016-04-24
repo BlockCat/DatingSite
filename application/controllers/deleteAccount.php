@@ -1,5 +1,5 @@
 <?php
-//defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class deleteAccount extends CI_Controller {
 

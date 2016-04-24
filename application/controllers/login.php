@@ -1,5 +1,5 @@
 <?php
-//defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
@@ -56,7 +56,7 @@ class Login extends CI_Controller {
 			{
 				$this->load->view('login');
 			} else {
-				redirect(base_url('/')); //Redirect to the base_url(controller/function);
+				redirect(site_url('/')); //Redirect to the site_url(controller/function);
 			}
 		}
 

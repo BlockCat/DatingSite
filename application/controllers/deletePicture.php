@@ -1,5 +1,5 @@
 <?php
-//defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class deletePicture extends CI_Controller {
 
@@ -32,7 +32,7 @@ class deletePicture extends CI_Controller {
 	public function index()
 	{ 
 		$result = delete_profile_image($this->session->userdata('userID'));
-		$upload = base_url("/profilepage/upload");		
+		$upload = site_url("/profilepage/upload");		
 		header("Location: $upload");
 	}
 }

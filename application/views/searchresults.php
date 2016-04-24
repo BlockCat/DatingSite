@@ -46,7 +46,7 @@
         function loadpage(page) {
             var formarray = $("#form").serialize();
 
-            $.post("<?php echo base_url('search/get_profiles') ?>", formarray, function(data) {
+            $.post("<?php echo site_url('search/get_profiles') ?>", formarray, function(data) {
                 console.log('response');
                 console.log(data);
                 if (data.length > 0) {
@@ -144,7 +144,7 @@
 
             profile.append(info);
 
-            var linked = $("<a target='_blank' href='<?php echo base_url()?>profilepage?ID=" + data.userID +"'></a>");
+            var linked = $("<a target='_blank' href='<?php echo site_url()?>profilepage?ID=" + data.userID +"'></a>");
             linked.append(profile);
             $("#profileviewer").append(linked);
             return linked;

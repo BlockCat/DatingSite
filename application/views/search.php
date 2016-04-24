@@ -2,7 +2,7 @@
     <div class="wrapper">
         <div class="flashy_wrapper">
                 <?php echo validation_errors(); ?>
-            <form id="form" method='post' action="<?php base_url('search');?>">
+            <form id="form" method='post' action="<?php site_url('search');?>">
 
                 Gender: <label for="genderm">Male</label> <input id="genderm" type="radio" name="gender" value="m" <?php echo set_radio('gender', 'm', $gender == 'm')?>>,
                         <label for="genderv">Female</label><input id="genderv" type="radio" name="gender" value="v"<?php echo set_radio('gender', 'v', $gender == 'v')?>><br>
