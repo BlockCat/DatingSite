@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'sqlite:'.APPPATH.'db/datingwebsite.db',
+	'dsn'	=> 'sqlite:/home/students/4221095/www/DatingSite/application/db/datingwebsite.db',
 	'hostname' => '',
 	'username' => '',
 	'password' => '',
