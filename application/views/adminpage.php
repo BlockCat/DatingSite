@@ -45,7 +45,7 @@
 		var olddistance = '<?php echo $datevars['d'];?>';
 		var $radios = $('input:radio[name=distance]');
 		if(olddistance === "o") {
-			$radios.filter('[value=0]').prop('checked', true);
+			$radios.filter('[value=o]').prop('checked', true);
 		}else if (olddistance === "j"){
 			$radios.filter('[value=j]').prop('checked', true);
 		}else if (olddistance === "c"){
