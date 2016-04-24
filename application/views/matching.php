@@ -7,6 +7,7 @@
 
         </form>
         <div id="mylinks">
+            <a href="<?php echo base_url('matching?mode=0')?>"><button>Find a match</button></a>
             <a href="<?php echo base_url('matching?mode=1')?>"><button>My likes</button></a>
             <a href="<?php echo base_url('matching?mode=2')?>"><button>Who likes me</button></a>
             <a href="<?php echo base_url('matching?mode=3')?>"><button>Mutual likes</button></a>
