@@ -105,13 +105,13 @@ class ownprofilepage extends CI_Controller {
     }
 
     private function editUser() {
-        $username = $this->input->post('username');
-        $firstname = $this->input->post('firstname');
-        $lastname = $this->input->post('lastname');
+        $username = $this->input->post('username', true);
+        $firstname = $this->input->post('firstname', true);
+        $lastname = $this->input->post('lastname', true);
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         $birthdate = $this->input->post('date');
-        $description = $this->input->post('description');
+        $description = htmlentities($this->input->post('description'), ENT_QUOTES);
         $gender = $this->input->post('gender');
         $attraction = $this->input->post('attraction');
         $minAge = $this->input->post('minAge');

@@ -53,7 +53,10 @@
             $this->load->view('header');
 
 
-            $this->form_validation->set_rules('gender', 'Gender', 'required');
+            $this->form_validation->set_rules('gender', 'Gender', 'required|regex_match[/^[mv]$/]');
+            $this->form_validation->set_rules('preference[]', 'Preference', 'required');
+            $this->form_validation->set_rules('minage', 'Minimum age', 'required|greater_than[17]');
+            $this->form_validation->set_rules('maxage', 'Minimum age', 'required|greater_than[17]');
             if($this->form_validation->run() == false){
                 $this->load->view('search', $data);
             } else {
@@ -80,44 +83,41 @@
         }
 
         public function get_profiles() {
-            $gender = $this->input->get('gender');
-            $pref = $this->input->get('preference');
-
-            if (!preg_match('/^[vm]$/', $gender)) {
+            $this->form_validation->set_rules('gender', 'Gender', 'required|regex_match[/^[mv]$/]');
+            $this->form_validation->set_rules('preference[]', 'Preference', 'required');
+            $this->form_validation->set_rules('minage', 'Minimum age', 'required|greater_than[17]');
+            $this->form_validation->set_rules('maxage', 'Minimum age', 'required|greater_than[17]');
+            if($this->form_validation->run() == false){
+                echo 'error:';
+                echo validation_errors();
+            } else {
                 header('Content-Type: application/json');
-                echo '[]';
-                return;
+                echo $this->get_profiless();
             }
-            if (!preg_match('/^[vmb]$/', $pref))
+        }
+
+        public function get_profiless() {
+
+            $gender = $this->input->post('gender');
+            $pref = $this->input->post('preference');
+            $amin = $this->input->post('minage', true);//Get preferred minimum age
+            $amax = $this->input->post('maxage', true);//Get preferred maximum age
+
 
             if (!$pref || count($pref) > 1) //If there is no preference or there are 2 preferences....
                 $pref = 'b'; //The user prefers both
             else
                 $pref = $pref[0];
 
-            if (!preg_match('/^[vmb]$/', $pref)){
-                header('Content-Type: application/json');
-                echo '[]';
-                return;
-            }
-
-            $amin = $this->input->get('minage', true);//Get preferred minimum age
-            $amax = $this->input->get('maxage', true);//Get preferred maximum age
-
-            if (!preg_match('/^18|19|(2[0-9]+)$/', $amin)){
-                header('Content-Type: application/json');
-                echo '[]';
-                return;
-            }
-
+            //Get data if user is not logged in.
             if (!$this->session->userdata('loggedIn')) {
-                $e = $this->input->get('e') * 10;
+                $e = $this->input->post('e') * 10;
                 $e = ($e ? $e : 500);
-                $n = $this->input->get('n') * 10;
+                $n = $this->input->post('n') * 10;
                 $n = ($n ? $n : 500);
-                $t = $this->input->get('t') * 10;
+                $t = $this->input->post('t') * 10;
                 $t = ($t ? $t : 500);
-                $j = $this->input->get('j') * 10;
+                $j = $this->input->post('j') * 10;
                 $j = ($j ? $j : 500);
 
                 $searchPersonality = array(
@@ -140,66 +140,83 @@
                     'p' => $j);
                     $page = 0;
             } else {
+                //Get data if user is logged in
                 $searchPersonality = $this->Users_model->get_user_pref_personality($this->session->userdata('userID'));
                 $myPersonality = $this->Users_model->get_user_personality($this->session->userdata('userID'));
-                $page = $this->input->get('page');
+                $page = $this->input->post('page');
                 if (!$page) $page = 0;
             }
 
-            $brands = $this->input->get('brands');
+            $brands = $this->input->post('brands');
+
             if (!$amin) $amin = 0;
             if (!$amax) $amax = 99;
             if (!$page) $page = 0;
 
-            $result = $this->Users_model->search_users($page, $gender, $pref, $amin, $amax);
+            $result = $this->Users_model->search_users($page, $gender, $pref, $amin, $amax, $this->session->userdata('userID'), $this->input->post('wholikedme'), $this->input->post('whoiliked'));
             $memo_array = array();
 
             foreach($result as $key => $value) {
 
                 $kpers = $this->Users_model->get_personality($value['userPersonality'])[0]; //His personality
                 $targetPref = $this->Users_model->get_personality($value['userPersonalityPref'])[0]; //His preference
-                $brandresults = $this->Brand_Model->get_brands($value['userID']);
+                $brandresults = $this->Brand_Model->get_brands($value['userID']); //The brands of this user
 
+                //Create a pretty array of the brands.
                 $targetbrands = array();
                 foreach($brandresults as $k => $v) {
-
                     $targetbrands[$k] = $v['brand'];
                 }
+                //-----------------------------------
 
-
+                //How much do I prefer him.
                 $dist1 = array_sum(personality_difference($searchPersonality, $kpers)) / 8000;
+                //How much does he prefer me.
                 $dist2 = array_sum(personality_difference($myPersonality, $targetPref)) / 8000;
 
+                //Load in data for view
                 $result[$key]['image'] = get_profile_image_src($value['userID'], $this->session->userdata('loggedIn') == false, true);
                 $result[$key]['personality'] = get_pretty_personality($value['userID']);
-                $result[$key]['distance'] = max($dist1, $dist2);
+                $result[$key]['distance'] = max($dist1, $dist2); //Set the distance to be the max distance between the two.
                 $result[$key]['brands'] = $targetbrands;
-                $memo_array[$value['userID']] = $result[$key]['distance'];
+                $result[$key]['userID'] = $value['userID'];
 
+                //Calculate age.
                 $datenow = new DateTime();
                 $birthday = DateTime::createFromFormat('Y-m-d', $result[$key]['userBirthdate']);
                 $age = $datenow->diff($birthday)->y;
 
                 $result[$key]['userBirthdate'] = $age;
-                $result[$key]['userID'] = $value['userID'];
+                //------------
 
+                //Load the array with distances.
+                $memo_array[$value['userID']] = $result[$key]['distance'];
             }
 
-            if (count($result) < ($page * 12)) {
-                header('Content-Type: application/json');
-                echo '[]';
-                return;
+            $displayOnPage = 8;
+            if (count($result) < ($page * $displayOnPage)) {
+                return '[]';
             }
 
-            $array = $this->quickSortRange($result, $memo_array, 0, count($result) - 1, $page * 12, ($page + 1) * 12);
-            $result = $array['array'];
+            //Get the range we want
 
-            usort($result, $this->cmp($searchPersonality, $memo_array));
+            if (count($result) <= $displayOnPage && $page == 0) {
+                usort($result, $this->cmp($searchPersonality, $memo_array));
+                $result = array_slice($result, 0, $displayOnPage);
+                return json_encode($result);
+            } else if (count($result) < $displayOnPage) {
+                return '';
+            } else {
+                $array = $this->quickSortRange($result, $memo_array, 0, count($result) - 1, $page * $displayOnPage, ($page + 1) * $displayOnPage);
+                $result = $array['array'];
 
-            $result = array_slice($result, ($page * 12) - $array['low'], 12);
+                //Now we can sort it
+                usort($result, $this->cmp($searchPersonality, $memo_array));
 
-            header('Content-Type: application/json');
-            echo json_encode($result, JSON_PRETTY_PRINT);
+                //Get the actuall people we want.
+                $result = array_slice($result, ($page * $displayOnPage) - $array['low'], $displayOnPage);
+                return json_encode($result);
+            }
         }
 
         private function cmp($searchPersonality, $memo) {
@@ -226,7 +243,7 @@
                 } else if ($p < $findLow) { //We discard the left side
                     $low = $p;
                 } else { //Uh oh, the pivot is in the range of the ones we want...
-                    if ($high - $low <= 24) {
+                    if ($high - $low <= 16) {
                         return array('array' => array_slice($result, $low, $high - $low, true), 'low' => $low);
                     }
                 }

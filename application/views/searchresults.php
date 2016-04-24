@@ -1,5 +1,5 @@
 
-    <div >
+    <div id="Searchresults">
         <div class="text_wrapper">
             <div id="profileviewer">
                 <?php for ($i = 0; $i < 0; $i++) {?>
@@ -45,12 +45,12 @@
         function loadpage(page) {
             var formarray = $("#form").serialize();
 
-            $.get("<?php echo base_url('search/get_profiles') ?>", formarray, function(data) {
+            $.post("<?php echo base_url('search/get_profiles') ?>", formarray, function(data) {
                 console.log('response');
                 for (var i = 0; i < 12 && i < data.length; i++) {
                     create_profile(data[i], i, page);
                 }
-				set_feedback(data, page - 1);					
+				<?php if ($this->session->userdata('loggedIn')) {?>set_feedback(data, page - 1); <?php } ?>
 				console.log("herherherherherh");
                 if (data.length == 0) {
                     alert('There are no more matches');
@@ -59,6 +59,7 @@
             });
         }
 
+        <?php if ($this->session->userdata('loggedIn')) {?>
 		function set_feedback(data, page){
 			if(page < 0){
 				page=0;
@@ -86,6 +87,7 @@
 				
 			}					
 		}
+        <?php } ?>
 		
         function create_profile(data, i, page) {
 
@@ -131,7 +133,7 @@
 
             profile.append(info);
 
-            var linked = $("<a target='_blank' href=./profilepage?ID=" + data.userID +"></a>");
+            var linked = $("<a target='_blank' href='<?php echo base_url()?>profilepage?ID=" + data.userID +"'></a>");
             linked.append(profile);
             $("#profileviewer").append(linked);
 			

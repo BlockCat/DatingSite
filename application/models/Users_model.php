@@ -214,7 +214,7 @@ class Users_model extends CI_Model {
 		return $query->result_array()[0];
 	}
 
-	public function search_users($page, $gender, $pref, $amin, $amax) {
+	public function search_users($page, $gender, $pref, $amin, $amax, $user = false, $likeduser = false, $userLikedThem = false) {
 		//Gender of the one searching, the people displayed should like his gender too.
 		//where dates between today - minage and today - maxage
 
@@ -226,14 +226,32 @@ class Users_model extends CI_Model {
 		$this->db->select('userID, userNickname, userSex, userBirthdate, userPersonality, userDescription, userPersonalityPref');
 		$this->db->where('userBirthdate <', $datemin);
 		$this->db->where('userBirthdate >', $datemax);
-//		$this->db->where_in('userSexPref', array('b', $gender));
+		$this->db->where_in('userSexPref', array('b', $gender));
+
+		if ($user) $this->db->where('userId<>', $user);
+
+		if ($user && $likeduser) //Get people who liked the user
+		{
+			$sql = "userid in (select likes from userlikes where liked=$user)";
+			$this->db->where($sql);
+		}
+
+		if ($user && $userLikedThem) //Get the ones who the user likes.
+		{
+			$sql = "userid in (select liked from userlikes where likes=$user)";
+			$this->db->where($sql);
+		}
 
 		if ($pref == 'v') {
 			$this->db->where('userSex', 'v');
 		} else if ($pref == 'm') {
 			$this->db->where('userSex', 'm');
 		}
-		return $this->db->get('Userprofile')->result_array();
+
+
+		$result =$this->db->get('Userprofile');
+
+		return $result->result_array();
 
 	}
 }

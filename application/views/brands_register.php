@@ -1,8 +1,8 @@
 <hr>
 <h1>Select your favourite brands!</h1>
-<p>By selecting your favourite brvands we can match you with people with simmilar interests.</p>
+<p>By selecting your favourite brands we can match you with people with similar interests.</p>
 <p>Select your answers by clicking the corresponing text.</p>
-    <?php echo form_error('brandslist') ?>
+    <div class="error"><?php echo form_error('brandslist') ?></div>
     <table id="brandTable" cellspacing="0" cellpadding="0">
         <?php loadBrands($brands);?>
     </table>
