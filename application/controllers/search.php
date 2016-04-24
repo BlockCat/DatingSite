@@ -13,6 +13,8 @@
         }
 
         public function index() {
+
+
             $data = array();
             $data['brands'] = $this->Brand_Model->get_all_brands();
             if(!$this->session->userdata('loggedIn')) {
@@ -36,8 +38,6 @@
 
                 $userdata = $this->Users_model->get_certain_profile($this->session->userdata("userID"))[0];
 
-
-
                 $data['selectedBrands'] = $this->Brand_Model->get_brands($this->session->userdata("userID"));
 
                 $data['gender'] = $userdata['userSex'];
@@ -46,25 +46,52 @@
                 $data['maxage'] = $userdata['userMaxAgePref'];
                 $data['prefpersonality'] = $this->Users_model->get_personality($userdata['userPersonalityPref'])[0];
 
-                //echo print_r($userdata);
-                //echo print_r($data['prefpersonality']);
+                if (!isset($_POST['gender'])) $_POST['gender'] = $data['gender'];
+                if (!isset($_POST['preference'])) $_POST['preference'] = $data['sexpref'];
+                if (!isset($_POST['minage'])) $_POST['minage'] = $data['minage'];
+                if (!isset($_POST['maxage'])) $_POST['maxage'] = $data['maxage'];
+
+                foreach($data['selectedBrands'] as $k=>$v) {
+                    $b[$k] = $v['brand'];
+                }
+                if (!isset($_POST['brands'])) $_POST['brands'] = $b;
+
+                $modus = $this->input->get('mode');
+
+                if ($modus == 1) {
+                    $data['wholikedme'] = false;
+                    $data['whoiliked'] = true;
+                } elseif ($modus == 2) {
+                    $data['wholikedme'] = true;
+                    $data['whoiliked'] = false;
+                } elseif ($modus == 3) {
+                    $data['wholikedme'] = true;
+                    $data['whoiliked'] = true;
+                } else {
+                    $data['wholikedme'] = false;
+                    $data['whoiliked'] = false;
+                }
+                //echo print_r($this->input->post());
+
             }
 
             $this->load->view('header');
 
-
-            $this->form_validation->set_rules('gender', 'Gender', 'required|regex_match[/^[mv]$/]');
-            $this->form_validation->set_rules('preference[]', 'Preference', 'required');
-            $this->form_validation->set_rules('minage', 'Minimum age', 'required|greater_than[17]');
-            $this->form_validation->set_rules('maxage', 'Minimum age', 'required|greater_than[17]');
-            if($this->form_validation->run() == false){
-                $this->load->view('search', $data);
+            if (!$this->session->userdata('loggedIn')) {
+                $this->form_validation->set_rules('gender', 'Gender', 'required|regex_match[/^[mv]$/]');
+                $this->form_validation->set_rules('preference[]', 'Preference', 'required');
+                $this->form_validation->set_rules('minage', 'Minimum age', 'required|greater_than[17]');
+                $this->form_validation->set_rules('maxage', 'Minimum age', 'required|greater_than[17]');
+                if ($this->form_validation->run() == false) {
+                    $this->load->view('search', $data);
+                } else {
+                    $this->load->view('search', $data);
+                    $this->search_profiles();
+                }
             } else {
                 $this->load->view('search', $data);
                 $this->search_profiles();
             }
-
-
             $this->load->view('footer');
         }
 
@@ -92,11 +119,11 @@
                 echo validation_errors();
             } else {
                 header('Content-Type: application/json');
-                echo $this->get_profiless();
+                echo $this->find_profiles();
             }
         }
 
-        public function get_profiless() {
+        private function find_profiles() {
 
             $gender = $this->input->post('gender');
             $pref = $this->input->post('preference');
@@ -193,7 +220,7 @@
                 $memo_array[$value['userID']] = $result[$key]['distance'];
             }
 
-            $displayOnPage = 8;
+            $displayOnPage = 6;
             if (count($result) < ($page * $displayOnPage)) {
                 return '[]';
             }

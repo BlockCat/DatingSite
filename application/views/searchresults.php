@@ -1,5 +1,6 @@
 
-    <div id="Searchresults">
+    <div>
+
         <div class="text_wrapper">
             <div id="profileviewer">
                 <?php for ($i = 0; $i < 0; $i++) {?>
@@ -47,15 +48,25 @@
 
             $.post("<?php echo base_url('search/get_profiles') ?>", formarray, function(data) {
                 console.log('response');
-                for (var i = 0; i < 12 && i < data.length; i++) {
+                console.log(data);
+                if (data.length > 0) {
+
+                    var first = create_profile(data[0], 0, page);
+                    $("html, body").animate({
+                        scrollTop: first.offset().top
+                    }, 500);
+                }
+                for (var i = 1; i < 12 && i < data.length; i++) {
                     create_profile(data[i], i, page);
                 }
-				<?php if ($this->session->userdata('loggedIn')) {?>set_feedback(data, page - 1); <?php } ?>
-				console.log("herherherherherh");
                 if (data.length == 0) {
                     alert('There are no more matches');
                     $("#more").hide();
+                    return;
                 }
+				<?php if ($this->session->userdata('loggedIn')) {?>set_feedback(data, page - 1); <?php } ?>
+
+
             });
         }
 
@@ -136,10 +147,7 @@
             var linked = $("<a target='_blank' href='<?php echo base_url()?>profilepage?ID=" + data.userID +"'></a>");
             linked.append(profile);
             $("#profileviewer").append(linked);
-			
-			
-			
-			
+            return linked;
         }
 
     </script>

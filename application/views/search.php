@@ -21,8 +21,8 @@
                 </table>
                 <input type="hidden" value="0" name="page" id="page">
                 <?php if($this->session->userdata('loggedIn')) {?>
-                    Who liked me: <input type="checkbox" value="1" name="wholikedme" <?php echo set_checkbox('wholikedme', '1')?>>
-                    Who did I like: <input type="checkbox" value="1" name="whoiliked" <?php echo set_checkbox('whoiliked', '1')?>>
+                    Who liked me: <input type="checkbox" value="1" name="wholikedme" <?php echo set_checkbox('wholikedme', '1', $wholikedme)?>>
+                    Who did I like: <input type="checkbox" value="1" name="whoiliked" <?php echo set_checkbox('whoiliked', '1', $whoiliked)?>>
                 <?php } ?>
                 <input type="submit">
 
