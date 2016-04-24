@@ -6,6 +6,7 @@
             parent::__construct();
             $this->load->helper('url');
             $this->load->helper('user');
+            $this->load->helper('datevar');
             $this->load->model('Brand_Model');
             $this->load->model('Users_model');
             $this->load->library('session');
@@ -138,7 +139,8 @@
                     'p' => $j);
                     $page = 0;
 
-            } else if($this->input->post('search')){
+            }
+            else if($this->input->post('search')){
                 $e = $this->input->post('e') * 10;
                 $e = ($e ? $e : 500);
                 $n = $this->input->post('n') * 10;
@@ -201,10 +203,15 @@
                 //How much does he prefer me.
                 $dist2 = array_sum(personality_difference($myPersonality, $targetPref)) / 8000;
 
+                //Do brands distance
+                $vars = get_dating_variables();
+                $x_factor = $vars['x'];
+                $brandDistance = brand_array_difference($targetbrands, $brands, $vars['d']);
+
                 //Load in data for view
                 $result[$key]['image'] = get_profile_image_src($value['userID'], $this->session->userdata('loggedIn') == false, true);
                 $result[$key]['personality'] = get_pretty_personality($value['userID']);
-                $result[$key]['distance'] = max($dist1, $dist2); //Set the distance to be the max distance between the two.
+                $result[$key]['distance'] = ($x_factor * max($dist1, $dist2)) + (1-$x_factor) * $brandDistance; //Set the distance to be the max distance between the two.
                 $result[$key]['brands'] = $targetbrands;
                 $result[$key]['userID'] = $value['userID'];
 
@@ -218,6 +225,8 @@
 
                 //Load the array with distances.
                 $memo_array[$value['userID']] = $result[$key]['distance'];
+
+
             }
 
             $displayOnPage = 6;

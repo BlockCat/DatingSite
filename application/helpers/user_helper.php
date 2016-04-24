@@ -84,6 +84,29 @@ if(!function_exists('brand_difference')) {
     }
 }
 
+if (!function_exists('brand_array_difference')) {
+    function brand_array_difference($brands1, $brands2, $mode) {
+        $intersection = array_intersect($brands1, $brands2);
+        $xy =  count($intersection);
+        $x = count($brands1);
+        $y = count($brands2);
+
+        switch($mode) {
+            case 'o':
+                return $xy / min($x, $y);
+            case 'j':
+                return $xy / ($x + $y - $xy);
+            case 'c':
+                return $xy/(sqrt($x) * sqrt($y));
+            default:
+                return (2 * $xy) / ($x + $y);
+
+        }
+        //echo ($xy / ($x + $y))."<br>";
+        return ($xy / ($x + $y - $xy));
+    }
+}
+
 if(!function_exists('get_profile_image')) {
     function get_profile_image_src($userId, $hide = false, $thumb = false) {
 
