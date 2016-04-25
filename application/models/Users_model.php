@@ -9,7 +9,7 @@ class Users_model extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('UserProfile');
 		$this->db->where('userEmail', $email);
-		$this->db->where('userPassword', md5($password));
+		$this->db->where('userPassword', $password);
 		
 		$query = $this->db->get();
 		
@@ -22,6 +22,7 @@ class Users_model extends CI_Model {
 	}
 
 	public function register_user($userdata, $userpersonality, $prefPersonality, $brands) {
+
 		$this->db->trans_begin(); //Begin transaction, so if something goes wrong we can roll back.
 		$this->db->insert('UserProfile', $userdata);
 		$userId = $this->db->insert_id();
@@ -61,7 +62,7 @@ class Users_model extends CI_Model {
 		$data = array(
 				'userID' =>	$ID,
 				'userEmail' => $email,
-				'userPassword' => md5($pass),
+				'userPassword' => $pass,
 				'userNickname' => $nickname,
 				'userFirstName' => $firstname,
 				'userLastName' => $lastname,

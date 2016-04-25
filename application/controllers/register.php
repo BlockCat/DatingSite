@@ -127,7 +127,7 @@ class Register extends CI_Controller {
         $firstname = $this->input->post('firstname', true);
         $lastname = $this->input->post('lastname', true);
         $email = $this->input->post('email');
-        $password = md5($this->input->post('password'));
+        $password = $this->input->post('password');
         $birthdate = $this->input->post('date');
         $description = htmlentities($this->input->post('description'), ENT_QUOTES);
         $gender = $this->input->post('gender');
