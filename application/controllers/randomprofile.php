@@ -23,6 +23,7 @@ class randomprofile extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Users_model');
+		$this->load->model('Brand_Model');
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->helper('user');
@@ -41,6 +42,11 @@ class randomprofile extends CI_Controller {
 		}
 		foreach($profiles as $key => $value) {
 			$profiles[$key]['image'] = get_profile_image_src($value['userID'], $hide, true);
+			$profiles[$key]['personality'] = $this->Users_model->get_personality($value['userID']);
+			$profiles[$key]['brands'] = $this->Brand_Model->get_brands($value['userID']);
+			if ($this->session->userdata('loggedIn')) {
+				$profiles[$key]['userlikes'] = $this->Users_model->get_relation($this->session->userdata('userID'), $value['userID']);
+			}
 		}
 
 		header('Content-Type: application/json');

@@ -159,12 +159,12 @@
 		$("#deletion").click(function(){
 			var result = confirm("do you really want to delete this account?");
 			if (result == true){
-				window.location.href = location.protocol + "//" + location.host + "/DatingSite/deleteAccount";
+				window.location.href = "<?php echo site_url('deleteAccount')?>";
 			}
 		});
 		
 		$("#picture").click(function(){
-				window.location.href = location.protocol + "//" + location.host + "/DatingSite/profilepage/upload";
+			window.location.href = "<?php echo site_url('profilepage/upload')?>";
 		});
 	});	
 

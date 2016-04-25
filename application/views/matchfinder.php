@@ -113,51 +113,46 @@
 	});
 	
 	function setprofiles(){
-		$.get("./randomprofile", function (profiles){
+		$.get("<?php echo site_url()?>/randomprofile", function (profiles){
 			profiledata = profiles;//JSON.parse(profiles);
 			for (let nr = 0; nr < 6; nr++) {
-				$.get("./profilebrand", {'ID': profiledata[nr].userID}, function (brands){	
-					$.get("./profilepersonality", {'ID': profiledata[nr].userPersonality}, function (personalitytype){
-						//should be changed in thumbnail location
 
-						$("#profilepic"+ String(nr)).attr("src", profiledata[nr].image);
-						$("#link" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);
-						$("#nicknameprofile" + String(nr)).html(profiledata[nr].userNickname);
-						$("#nicknameprofile" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);
-						$("#sexprofile" + String(nr)).html(profiledata[nr].userSex);
-						$("#ageprofile" + String(nr)).html(getAge(profiledata[nr].userBirthdate));
-						$("#personalityprofile" + String(nr)).html(getpersonality(personalitytype));
-						$("#brandsprofile" + String(nr)).html(getbrands(brands));
-						$("#descriptionprofile" + String(nr)).html(profiledata[nr].userDescription.substr(0,10) + '...' );
-						
-						//like feedback
-						<?php if(isset($_SESSION['loggedIn'])){ ?>
-							$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
-							'profileID':profiledata[nr].userID}, function (likeRelation){
-								console.log(likeRelation);
-								$("#profilepic"+ String(nr)).css('border-style', 'solid');
-								$("#profilepic"+ String(nr)).css('border-width', '0.3em');
+				//should be changed in thumbnail location
+				console.log(profiledata[nr].brands[0]);
+				$("#profilepic"+ String(nr)).attr("src", profiledata[nr].image);
+				$("#link" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);
+				$("#nicknameprofile" + String(nr)).html(profiledata[nr].userNickname);
+				$("#nicknameprofile" + String(nr)).attr("href", "./profilepage?ID=" + profiledata[nr].userID);
+				$("#sexprofile" + String(nr)).html(profiledata[nr].userSex);
+				$("#ageprofile" + String(nr)).html(getAge(profiledata[nr].userBirthdate));
+				$("#personalityprofile" + String(nr)).html(getpersonality(profiledata[nr].personality[0]));
+				$("#brandsprofile" + String(nr)).html(getbrands(profiledata[nr].brands));
+				$("#descriptionprofile" + String(nr)).html(profiledata[nr].userDescription.substr(0,10) + '...' );
 
-								if(likeRelation == "n"){
-									$("#profilepic"+ String(nr)).css('border-color', '#990000');				
-								}
-								else if(likeRelation == "r"){
-									$("#profilepic"+ String(nr)).css('border-color', '#009933');					
-								}
-								else if(likeRelation == "g"){
-									$("#profilepic"+ String(nr)).css('border-color', '#0033cc');					
-								}
-							});
-						<?php } ?>
-					});	
-				});
+				//like feedback
+				<?php if(isset($_SESSION['loggedIn'])){ ?>
+						console.log(profiledata[nr].userlikes);
+						$("#profilepic"+ String(nr)).css('border-style', 'solid');
+						$("#profilepic"+ String(nr)).css('border-width', '0.3em');
+
+						if(profiledata[nr].userlikes == "n"){
+							$("#profilepic"+ String(nr)).css('border-color', '#990000');
+						}
+						else if(profiledata[nr].userlikes  == "r"){
+							$("#profilepic"+ String(nr)).css('border-color', '#009933');
+						}
+						else if(profiledata[nr].userlikes  == "g"){
+							$("#profilepic"+ String(nr)).css('border-color', '#0033cc');
+						}
+				<?php } ?>
 			}
 		});
 	}
 	
 	function getbrands(brands){
 		brandresult = '';
-		branddata = JSON.parse(brands);
+		branddata = brands;
+		console.log(brands);
 		for (index = 0; index < branddata.length; index++) {
 			brandresult += branddata[index].brand + ', ';
 		}
@@ -168,7 +163,7 @@
 	function getpersonality(personalitydata) {
 		//console.log(personalitydata);
 		result = '';
-		person = JSON.parse(personalitydata)[0];
+		person = personalitydata;
 		if(parseInt(person.e) >= parseInt(person.i)){
 			result += 'e';
 		}

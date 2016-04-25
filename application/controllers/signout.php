@@ -28,6 +28,6 @@ class signout extends CI_Controller {
 	public function index()
 	{   	
 		$this->session->sess_destroy();
-		header('Location: http://localhost/DatingSite/');
+		redirect(site_url());
 	}
 }

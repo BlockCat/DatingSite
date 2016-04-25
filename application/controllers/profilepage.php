@@ -82,7 +82,7 @@ class profilepage extends CI_Controller {
 			$this->load->view('header');
 
 			//Form validation.
-			$this->form_validation->set_message('do_upload', 'Your image is not the correct size or its type is not allowed');
+
 			$this->form_validation->set_rules('userfile', 'Image to upload', 'callback_do_upload');
 
 			if ($this->form_validation->run() == FALSE) {
@@ -102,7 +102,7 @@ class profilepage extends CI_Controller {
 			$userId = $this->session->userdata('userID');
 			//Upload configuration
 			$config['file_name'] = $userId . '.jpg';
-			$config['upload_path'] = './images/profilepic/';
+			$config['upload_path'] = base_url('/images/profilepic/');
 			$config['allowed_types'] = 'gif|jpg|png';
 			$config['max_size'] = 500;
 			$config['max_width'] = 513;
@@ -114,14 +114,14 @@ class profilepage extends CI_Controller {
 			if (!$this->upload->do_upload()) {
 				//Failure
 				$errors = $this->upload->display_errors();
+				$this->form_validation->set_message('do_upload', $errors);
 				return false;
-				//redirect(site_url('profilepage/upload'));
 			} else {
 				//Success?
 
 				$image['source_image'] = $this->upload->upload_path . $this->upload->file_name;
 				$image['create_thumb'] = true;
-				$image['new_image'] = './images/profilepic/';
+				$image['new_image'] = base_url('/images/profilepic/');
 				$image['quality'] = 50;
 				$image['width'] = 200;
 				$image['height'] = 200;

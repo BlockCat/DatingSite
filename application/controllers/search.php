@@ -180,6 +180,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             $brands = $this->input->post('brands');
 
+            if(!$brands) $brands = array();
             if (!$amin) $amin = 0;
             if (!$amax) $amax = 99;
             if (!$page) $page = 0;
@@ -196,6 +197,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $targetbrands = array();
                 foreach($brandresults as $k => $v) {
                     $targetbrands[$k] = $v['brand'];
+                }
+                $brandresults = $this->Brand_Model->get_brands($this->session->userdata('userID')); //The brands of this user
+                foreach($brandresults as $k => $v) {
+                    $brands[$k] = $v['brand'];
                 }
                 //-----------------------------------
 
@@ -226,8 +231,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 //Load the array with distances.
                 $memo_array[$value['userID']] = $result[$key]['distance'];
-
-
             }
 
             $displayOnPage = 6;
@@ -252,6 +255,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                 //Get the actuall people we want.
                 $result = array_slice($result, ($page * $displayOnPage) - $array['low'], $displayOnPage);
+
+                if ($this->session->userdata('loggedIn')) {
+                    foreach ($result as $key => $value) {
+                        $result[$key]['likerelation'] = $this->Users_model->get_relation($this->session->userdata('userID'), $value['userID']);
+                    }
+                }
                 return json_encode($result);
             }
         }

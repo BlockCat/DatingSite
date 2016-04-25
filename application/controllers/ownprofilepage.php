@@ -31,7 +31,7 @@ class ownprofilepage extends CI_Controller {
 	public function index()
 	{
         if (!$this->session->userdata('loggedIn')) {
-			header('Location: http://localhost/DatingSite/');           
+            redirect(site_url());
         }
 
         $this->load->database();
@@ -69,7 +69,7 @@ class ownprofilepage extends CI_Controller {
 		else 
 		{
             if ($this->editUser()) {
-                header('Location: http://localhost/DatingSite/ownprofilepage');                
+                redirect(site_url('ownprofilepage'));
             } else {
                 $brandView = $this->load->view('brands_register', array('brands' => $this->Brand_Model->get_all_brands()), true);
 				$userdata = $this->Users_model->get_sensitive_profile($this->session->userdata('userID'));

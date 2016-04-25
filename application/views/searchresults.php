@@ -64,41 +64,9 @@
                     $("#more").hide();
                     return;
                 }
-				<?php if ($this->session->userdata('loggedIn')) {?>set_feedback(data, page - 1); <?php } ?>
-
-
             });
         }
 
-        <?php if ($this->session->userdata('loggedIn')) {?>
-		function set_feedback(data, page){
-			if(page < 0){
-				page=0;
-			}
-			//---------- moet veranderd worden voor 6 personen....
-			end = (page * 12)+12;
-			for (let i= page * 12; i < end; i++) {
-					$.get("./likecheck", {'userID':<?php echo $_SESSION['userID']?>,
-					'profileID':data[i - (page * 12)].userID}, function (likeRelation){
-						console.log("#profilepic" + String(i));
-						$("#profilepic" + String(i)).css('border-style', 'solid');
-						$("#profilepic" + String(i)).css('border-width', '0.3em');
-
-						if(likeRelation == "n"){
-							$("#profilepic" + String(i)).css('border-color', '#990000');				
-						}
-						else if(likeRelation == "r"){
-							$("#profilepic" + String(i)).css('border-color', '#009933');					
-						}
-						else if(likeRelation == "g"){
-							$("#profilepic" + String(i)).css('border-color', '#0033cc');					
-						}
-					});	
-					//-------------	
-				
-			}					
-		}
-        <?php } ?>
 		
         function create_profile(data, i, page) {
 
@@ -113,8 +81,25 @@
 			else{
 				normal = page -1;
 			}
+            var imgs = $("<img src=\""+ data.image +"\"  id=\"profilepic" + (i+ normal *12 ) + "\" alt=\"profilepicture\" height=\"150\" width=\"150\">");
+            var img = $("<div class=\"profilethumbnail\"></div>");
+            <?php if($this->session->userdata('loggedIn')) {?>
 
-            var img = $("<div class=\"profilethumbnail\"><a><img src=\""+ data.image +"\"  id=\"profilepic" + (i+ normal *12 ) + "\" alt=\"profilepicture\" height=\"150\" width=\"150\"></a></div>");
+                if (data.likerelation == 'n') {
+                    imgs.css('border-color', '#990000');
+                    imgs.css('border-width', '0.3em');
+                    imgs.css('border-style', 'solid');
+                } else if (data.likerelation == 'r') {
+                    imgs.css('border-color', '#009933');
+                    imgs.css('border-width', '0.3em');
+                    imgs.css('border-style', 'solid');
+                } else if (data.likerelation == 'g') {
+                    imgs.css('border-color', '#0033cc');
+                    imgs.css('border-width', '0.3em');
+                    imgs.css('border-style', 'solid');
+                }
+            <?php } ?>
+            img.append(imgs);
             profile.append(img);
 			
 
@@ -140,11 +125,11 @@
             info.append(brands);
             info.append($("<p>" + data.distance + "</p>"));
 
-            console.log(data);
+
 
             profile.append(info);
 
-            var linked = $("<a target='_blank' href='<?php echo site_url()?>profilepage?ID=" + data.userID +"'></a>");
+            var linked = $("<a target='_blank' href='<?php echo site_url()?>/profilepage?ID=" + data.userID +"'></a>");
             linked.append(profile);
             $("#profileviewer").append(linked);
             return linked;
